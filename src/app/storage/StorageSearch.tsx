@@ -3,20 +3,55 @@
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import {
-  MOCK_LISTINGS,
-  STORAGE_TYPES,
-  STORAGE_TYPE_DETAILS,
-  type StorageListing,
-} from "./data";
+import { STORAGE_TYPES, STORAGE_TYPE_DETAILS, type StorageListing } from "./data";
 
 export default function StorageSearch() {
   const searchParams = useSearchParams();
+  const [allListings, setAllListings] = useState<StorageListing[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [location, setLocation] = useState("");
   const [storageType, setStorageType] = useState("");
   const [duration, setDuration] = useState<"day" | "week" | "month">("month");
   const [priceBand, setPriceBand] = useState("");
   const [parcelOnly, setParcelOnly] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadListings = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const res = await fetch("/api/listings");
+        if (!res.ok) {
+          throw new Error("Failed to load listings");
+        }
+        const data = (await res.json()) as StorageListing[];
+        if (!cancelled) {
+          setAllListings(data);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(
+            err instanceof Error
+              ? err.message
+              : "Something went wrong while loading listings",
+          );
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    };
+
+    void loadListings();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // Initialize filters from query string (e.g. /storage?type=residential&location=Nairobi)
   useEffect(() => {
@@ -55,7 +90,7 @@ export default function StorageSearch() {
   }, [searchParams]);
 
   const filtered = useMemo(() => {
-    let list = [...MOCK_LISTINGS];
+    let list = [...allListings];
     if (location.trim()) {
       const q = location.toLowerCase();
       list = list.filter(
@@ -82,7 +117,7 @@ export default function StorageSearch() {
       list = list.filter((l) => l.parcelDropOff);
     }
     return list;
-  }, [location, storageType]);
+  }, [allListings, location, storageType, priceBand, parcelOnly]);
 
   const formatPrice = (listing: StorageListing) => {
     const n =
@@ -184,6 +219,45 @@ export default function StorageSearch() {
             </div>
           </div>
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setLocation("Nairobi");
+                  setStorageType("Warehouse Storage");
+                  setPriceBand("20k-30k");
+                  setParcelOnly(false);
+                }}
+                className="rounded-full border border-[var(--border)] bg-[var(--background)] px-3 py-1 text-xs font-medium text-[var(--muted)] hover:border-[var(--primary)]/40 hover:text-[var(--primary)]"
+              >
+                Popular: Nairobi warehouse
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setLocation("Nairobi");
+                  setStorageType("Budget Units");
+                  setPriceBand("lt10k");
+                  setParcelOnly(false);
+                }}
+                className="rounded-full border border-[var(--border)] bg-[var(--background)] px-3 py-1 text-xs font-medium text-[var(--muted)] hover:border-[var(--primary)]/40 hover:text-[var(--primary)]"
+              >
+                Popular: Budget units in Nairobi
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setLocation("");
+                  setStorageType("");
+                  setDuration("month");
+                  setPriceBand("");
+                  setParcelOnly(false);
+                }}
+                className="rounded-full border border-[var(--border)] bg-[var(--background)] px-3 py-1 text-xs font-medium text-[var(--muted)] hover:border-[var(--primary)]/40 hover:text-[var(--primary)]"
+              >
+                Clear filters
+              </button>
+            </div>
             <label className="inline-flex items-center gap-2 text-xs font-medium text-[var(--muted)]">
               <input
                 type="checkbox"
@@ -211,11 +285,18 @@ export default function StorageSearch() {
         )}
 
         <p className="mt-4 text-sm text-[var(--muted)]">
-          {filtered.length} listing{filtered.length !== 1 ? "s" : ""} found
+          {loading
+            ? "Loading listings..."
+            : error
+              ? "We couldn’t load listings. Please try again."
+              : `${filtered.length} listing${
+                  filtered.length !== 1 ? "s" : ""
+                } found`}
         </p>
 
         {/* Listings grid */}
-        <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {!loading && !error && (
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((listing) => (
             <Link
               key={listing.id}
@@ -267,6 +348,7 @@ export default function StorageSearch() {
             </Link>
           ))}
         </div>
+        )}
 
         {filtered.length === 0 && (
           <div className="mt-12 rounded-xl border border-[var(--border)] bg-[var(--white)] p-12 text-center text-[var(--muted)]">

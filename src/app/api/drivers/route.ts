@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getSupabaseServerClient } from "@/lib/supabaseServer";
 
 export async function POST(request: Request) {
   try {
@@ -23,8 +24,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // In production: save to database, send confirmation email, etc.
-    // For now we just validate and return success.
     const application = {
       fullName,
       email,
@@ -39,8 +38,30 @@ export async function POST(request: Request) {
       submittedAt: new Date().toISOString(),
     };
 
-    // eslint-disable-next-line no-console
-    console.log("Driver application received:", application);
+    const supabase = getSupabaseServerClient();
+
+    if (supabase) {
+      const { error } = await supabase.from("driver_applications").insert({
+        full_name: application.fullName,
+        email: application.email,
+        phone: application.phone,
+        id_type: application.idType,
+        id_number: application.idNumber,
+        vehicle_type: application.vehicleType,
+        license_plate: application.licensePlate,
+        areas_served: application.areasServed,
+        availability: application.availability,
+        message: application.message,
+      });
+
+      if (error) {
+        // eslint-disable-next-line no-console
+        console.error("Error saving driver application to Supabase", error);
+      }
+    } else {
+      // eslint-disable-next-line no-console
+      console.log("Driver application received (no Supabase configured):", application);
+    }
 
     return NextResponse.json(
       { success: true, message: "Application received. We'll be in touch shortly." },

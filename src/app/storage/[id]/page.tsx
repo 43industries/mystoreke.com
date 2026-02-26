@@ -1,18 +1,25 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MOCK_LISTINGS } from "../data";
-
-export async function generateStaticParams() {
-  return MOCK_LISTINGS.map((l) => ({ id: l.id }));
-}
+import { type StorageListing } from "../data";
 
 export default async function StorageDetailPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
-  const { id } = await params;
-  const listing = MOCK_LISTINGS.find((l) => l.id === id);
+  const { id } = params;
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/api/listings`, {
+    // Always fetch fresh data on the server for now so newly added listings appear.
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    notFound();
+  }
+
+  const allListings = (await res.json()) as StorageListing[];
+  const listing = allListings.find((l) => l.id === id);
   if (!listing) notFound();
 
   return (

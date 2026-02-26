@@ -463,6 +463,14 @@ export default function Home() {
               <p className="mt-2 text-[var(--muted)]">
                 From small units to warehouses and parcel drop-off points.
               </p>
+              <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                <span className="inline-flex items-center rounded-full bg-[var(--background)] px-2.5 py-1 text-[var(--muted)]">
+                  Nairobi · Mombasa · Kisumu
+                </span>
+                <span className="inline-flex items-center rounded-full bg-[var(--background)] px-2.5 py-1 text-[var(--muted)]">
+                  Residential · Commercial · Warehouse
+                </span>
+              </div>
             </div>
             <p className="text-sm text-[var(--muted)]">
               Scroll to explore options tailored to renters, hosts, and e‑commerce.
