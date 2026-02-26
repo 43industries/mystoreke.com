@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import HeroSearchForm from "./HeroSearchForm";
 
 type Step = {
   step: number;
@@ -11,48 +12,116 @@ type FocusBox = {
   title: string;
   description: string;
   href: string;
+  tagline: string;
+  highlights: string[];
+  image: string;
 };
 
 const STORAGE_TYPES_NAV = [
-  { name: "Residential Storage", href: "/storage?type=residential" },
-  { name: "Commercial Storage", href: "/storage?type=commercial" },
-  { name: "Warehouse Storage", href: "/storage?type=warehouse" },
-  { name: "Open Yard Storage", href: "/storage?type=yard" },
-  { name: "Shelf Storage", href: "/storage?type=shelf" },
-  { name: "Budget Units", href: "/storage?type=budget" },
-  { name: "Parcel Drop-Off Points", href: "/parcel-drop-off" },
+  {
+    name: "Residential Storage",
+    href: "/storage?type=residential",
+    image: "/storage-residential.jpg",
+    description: "Spare rooms, garages, and lockable units near you.",
+  },
+  {
+    name: "Commercial Storage",
+    href: "/storage?type=commercial",
+    image: "/storage-commercial.jpg",
+    description: "Stock rooms and business storage for SMEs and shops.",
+  },
+  {
+    name: "Warehouse Storage",
+    href: "/storage?type=warehouse",
+    image: "/storage-warehouse.jpg",
+    description: "Pallet bays and industrial warehouse space.",
+  },
+  {
+    name: "Open Yard Storage",
+    href: "/storage?type=yard",
+    image: "/storage-yard.jpg",
+    description: "Gated yards for vehicles, containers, and materials.",
+  },
+  {
+    name: "Shelf Storage",
+    href: "/storage?type=shelf",
+    image: "/storage-shelf.jpg",
+    description: "Pay-per-shelf space for cartons and inventory.",
+  },
+  {
+    name: "Budget Units",
+    href: "/storage?type=budget",
+    image: "/storage-budget.jpg",
+    description: "Affordable units for boxes, luggage, and more.",
+  },
+  {
+    name: "Parcel Drop-Off Points",
+    href: "/parcel-drop-off",
+    image: "/storage-parcel.jpg",
+    description: "Verified parcel drop-off and pick-up locations.",
+  },
 ] as const;
 
 const FOCUS_BOXES: FocusBox[] = [
   {
     title: "Commercial Storage",
     description:
-      "Welcome to flexible space for shops and SMEs. Store stock, equipment, and documents in secure commercial locations close to your customers.",
+      "Dedicated back‑room and off‑site space for shops, SMEs, and offices that need extra room for stock, equipment, or records without paying for a full warehouse.",
     href: "/storage?type=commercial",
+    tagline: "For shops, SMEs, and businesses",
+    highlights: [
+      "Near business districts for faster restocking",
+      "Works well for retail, e‑commerce, and offices",
+    ],
+    image: "/storage-commercial.jpg",
   },
   {
     title: "Residential Storage",
     description:
-      "Welcome to clutter‑free living. Use nearby spare rooms and garages to safely keep furniture, boxes, and personal items for as long as you need.",
+      "Spare rooms, garages, and outbuildings in trusted homes where you can keep furniture, boxes, and personal items safely for weeks or months at a time.",
     href: "/storage?type=residential",
+    tagline: "For individuals and families",
+    highlights: [
+      "Ideal when moving, renovating, or decluttering",
+      "Lockable rooms and garages in trusted homes",
+    ],
+    image: "/storage-residential.jpg",
   },
   {
     title: "Open Yard Storage",
     description:
-      "Welcome to wide‑open space. Park vehicles, containers, and construction materials in gated outdoor yards designed for heavy‑duty storage.",
+      "Wide, gated outdoor yards where you can park trucks, containers, machinery, and construction materials that do not need an indoor unit.",
     href: "/storage?type=yard",
+    tagline: "For vehicles and heavy materials",
+    highlights: [
+      "Fenced and gated outdoor spaces",
+      "Truck‑friendly access for loading and off‑loading",
+    ],
+    image: "/storage-yard.jpg",
   },
   {
     title: "Shelf Storage",
     description:
-      "Welcome to pay‑per‑shelf storage. Rent only the shelf or rack space you need for cartons and e‑commerce inventory inside secure buildings.",
+      "Pay‑per‑shelf and rack space inside shops and warehouses, ideal for cartons, product samples, and fast‑moving e‑commerce inventory.",
     href: "/storage?type=shelf",
+    tagline: "For small merchants and e‑commerce",
+    highlights: [
+      "Pay only for the shelf space you actually use",
+      "Perfect for smaller boxes and fast‑moving stock",
+    ],
+    image: "/storage-shelf.jpg",
   },
   {
     title: "Drop‑Off Points",
     description:
-      "Welcome to drop‑off like Uber Eats for goods. Customers hand over parcels at verified points, and drivers handle pick‑up and delivery on‑demand.",
+      "Verified counters and kiosks where customers and business owners can leave or collect parcels and goods — from small packages to loads moved by lorries across the country.",
     href: "/storage?type=parcel",
+    tagline: "For nationwide parcel movement",
+    highlights: [
+      "Supports customer and business parcel drop‑off for delivery across Kenya",
+      "Works with riders, vans, and lorries for regional and national transport",
+    ],
+    image: "/storage-parcel.jpg",
   },
 ];
 
@@ -256,86 +325,65 @@ export default function Home() {
         </div>
 
         {/* Search bar */}
-        <div className="mx-auto mt-10 max-w-4xl rounded-2xl border border-[var(--border)] bg-[var(--white)] p-4 shadow-lg md:p-5">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-            <div>
-              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">
-                Location
-              </label>
-              <input
-                type="text"
-                placeholder="City or area"
-                className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
-              />
-            </div>
-            <div>
-              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">
-                Storage Type
-              </label>
-              <select className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]">
-                <option value="">Any type</option>
-                <option value="residential">Residential</option>
-                <option value="commercial">Commercial</option>
-                <option value="warehouse">Warehouse</option>
-                <option value="yard">Open Yard</option>
-                <option value="shelf">Shelf</option>
-                <option value="budget">Budget</option>
-                <option value="parcel">Parcel Drop-Off</option>
-              </select>
-            </div>
-            <div>
-              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">
-                Rental Duration
-              </label>
-              <select className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]">
-                <option value="">Any</option>
-                <option value="day">Per Day</option>
-                <option value="week">Per Week</option>
-                <option value="month">Per Month</option>
-              </select>
-            </div>
-            <div className="lg:col-span-2 flex items-end">
-              <button
-                type="button"
-                className="w-full rounded-lg bg-[var(--primary)] px-4 py-2.5 font-medium text-white transition-colors hover:bg-[var(--primary-hover)]"
-              >
-                Search Storage
-              </button>
-            </div>
-          </div>
-        </div>
+        <HeroSearchForm />
       </section>
 
       {/* Focused welcome boxes for main offerings */}
       <section className="bg-[var(--white)] px-4 py-14">
         <div className="mx-auto max-w-6xl">
-          <h2 className="text-center text-2xl font-semibold text-[var(--foreground)]">
-            Welcome to MyStoreKE Storage Network
-          </h2>
-          <p className="mx-auto mt-2 max-w-2xl text-center text-[var(--muted)]">
-            Five core services — each clearly structured so renters, hosts, and drivers know exactly
-            what to expect.
-          </p>
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {focusBoxes.map((box) => (
+          <div className="flex flex-col items-center gap-3 text-center md:flex-row md:items-end md:justify-between md:text-left">
+            <div>
+              <h2 className="text-2xl font-semibold text-[var(--foreground)]">
+                Welcome to MyStoreKE Storage Network
+              </h2>
+              <p className="mt-2 max-w-2xl text-[var(--muted)]">
+                Five core services — each clearly structured so renters, hosts, and drivers know
+                exactly what to expect from MyStoreKE before they book or list.
+              </p>
+            </div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--background)] px-3 py-1 text-xs text-[var(--muted)]">
+              <span className="h-2 w-2 rounded-full bg-[var(--accent)]" />
+              <span>Swipe to explore all services</span>
+            </div>
+          </div>
+          <div className="mt-8 flex gap-6 overflow-x-auto pb-3 pt-1 scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {FOCUS_BOXES.map((box) => (
               <Link
                 key={box.title}
                 href={box.href}
-                className="flex flex-col rounded-xl border border-[var(--border)] bg-[var(--background)] p-6 transition-shadow hover:shadow-md"
+                className="group flex min-w-[260px] max-w-xs flex-col rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5 shadow-sm ring-1 ring-transparent transition-all hover:-translate-y-1 hover:shadow-md hover:ring-[var(--accent)]/20 md:min-w-[280px] lg:min-w-[300px]"
               >
-                <div className="mb-4 h-24 w-full overflow-hidden rounded-lg bg-[var(--border)]">
+                <div className="mb-4 h-40 w-full overflow-hidden rounded-xl bg-[var(--border)] md:h-44 lg:h-48">
                   <Image
-                    src="/warehouse.svg"
+                    src={box.image}
                     alt={box.title}
-                    width={400}
-                    height={200}
-                    className="h-full w-full object-cover"
+                    width={640}
+                    height={360}
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                 </div>
                 <h3 className="text-lg font-semibold text-[var(--foreground)]">
                   {box.title}
                 </h3>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-[var(--accent)]">
+                  {box.tagline}
+                </p>
                 <p className="mt-3 text-sm text-[var(--muted)]">{box.description}</p>
+                <ul className="mt-3 space-y-1 text-sm text-[var(--muted)]">
+                  {box.highlights.map((item) => (
+                    <li key={item} className="flex items-start gap-2">
+                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <span className="mt-4 inline-flex items-center text-sm font-medium text-[var(--accent)] group-hover:text-[var(--accent-hover)]">
+                  View {box.title.toLowerCase()} options
+                  <span className="ml-1 transition-transform group-hover:translate-x-0.5">
+                    →
+                  </span>
+                </span>
               </Link>
             ))}
           </div>
@@ -355,7 +403,7 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-semibold text-[var(--primary)]">For Renters</h3>
               <ul className="mt-6 space-y-4">
-                {renterSteps.map(({ step, title, desc }) => (
+                {RENTER_STEPS.map(({ step, title, desc }) => (
                   <li key={step} className="flex gap-4">
                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-medium text-white">
                       {step}
@@ -371,7 +419,7 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-semibold text-[var(--accent)]">For Hosts</h3>
               <ul className="mt-6 space-y-4">
-                {hostSteps.map(({ step, title, desc }) => (
+                {HOST_STEPS.map(({ step, title, desc }) => (
                   <li key={step} className="flex gap-4">
                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-sm font-medium text-white">
                       {step}
@@ -387,7 +435,7 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-semibold text-[var(--foreground)]">For Drivers</h3>
               <ul className="mt-6 space-y-4">
-                {driverSteps.map(({ step, title, desc }) => (
+                {DRIVER_STEPS.map(({ step, title, desc }) => (
                   <li key={step} className="flex gap-4">
                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--foreground)] text-sm font-medium text-white">
                       {step}
@@ -407,20 +455,54 @@ export default function Home() {
       {/* Storage Types Grid */}
       <section className="px-4 py-16">
         <div className="mx-auto max-w-6xl">
-          <h2 className="text-2xl font-semibold text-[var(--foreground)]">
-            Storage Types
-          </h2>
-          <p className="mt-2 text-[var(--muted)]">
-            From small units to warehouses and parcel drop-off points
-          </p>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {STORAGE_TYPES_NAV.map(({ name, href }) => (
+          <div className="flex flex-col justify-between gap-3 md:flex-row md:items-end">
+            <div>
+              <h2 className="text-2xl font-semibold text-[var(--foreground)]">
+                Storage Types
+              </h2>
+              <p className="mt-2 text-[var(--muted)]">
+                From small units to warehouses and parcel drop-off points.
+              </p>
+            </div>
+            <p className="text-sm text-[var(--muted)]">
+              Scroll to explore options tailored to renters, hosts, and e‑commerce.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {STORAGE_TYPES_NAV.map(({ name, href, image, description }) => (
               <Link
                 key={name}
                 href={href}
-                className="rounded-xl border border-[var(--border)] bg-[var(--white)] p-6 transition-shadow hover:shadow-md hover:border-[var(--primary)]/30"
+                className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--white)] shadow-sm ring-1 ring-transparent transition-all hover:-translate-y-1 hover:border-[var(--primary)]/20 hover:shadow-lg hover:ring-[var(--primary)]/15"
               >
-                <h3 className="font-semibold text-[var(--foreground)]">{name}</h3>
+                <div className="relative h-32 w-full overflow-hidden bg-[var(--border)]">
+                  <Image
+                    src={image}
+                    alt={name}
+                    width={480}
+                    height={260}
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-black/5 to-transparent opacity-80" />
+                  <div className="pointer-events-none absolute left-3 top-3 inline-flex items-center gap-2 rounded-full bg-black/40 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.16em] text-white">
+                    <span className="flex h-4 w-4 items-center justify-center rounded-full bg-[var(--accent)] text-[9px]">
+                      {name.charAt(0)}
+                    </span>
+                    <span>Storage Type</span>
+                  </div>
+                </div>
+                <div className="flex flex-1 flex-col p-4">
+                  <h3 className="text-sm font-semibold text-[var(--foreground)] md:text-base">
+                    {name}
+                  </h3>
+                  <p className="mt-2 text-xs text-[var(--muted)] md:text-sm">{description}</p>
+                  <span className="mt-4 inline-flex items-center text-xs font-medium text-[var(--accent)] group-hover:text-[var(--accent-hover)] md:text-sm">
+                    View available spaces
+                    <span className="ml-1 transition-transform group-hover:translate-x-0.5">
+                      →
+                    </span>
+                  </span>
+                </div>
               </Link>
             ))}
           </div>
@@ -437,7 +519,7 @@ export default function Home() {
             Secure, modern, and built for trust
           </p>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {whyChoose.map(({ title, desc }) => (
+            {WHY_CHOOSE.map(({ title, desc }) => (
               <div
                 key={title}
                 className="rounded-xl border border-[var(--border)] p-6"

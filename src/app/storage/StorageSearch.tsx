@@ -15,14 +15,42 @@ export default function StorageSearch() {
   const [location, setLocation] = useState("");
   const [storageType, setStorageType] = useState("");
   const [duration, setDuration] = useState<"day" | "week" | "month">("month");
+  const [priceBand, setPriceBand] = useState("");
+  const [parcelOnly, setParcelOnly] = useState(false);
 
-  // Initialize storage type from query string (e.g. /storage?type=residential)
+  // Initialize filters from query string (e.g. /storage?type=residential&location=Nairobi)
   useEffect(() => {
     const slug = searchParams.get("type");
-    if (!slug) return;
-    const details = STORAGE_TYPE_DETAILS[slug];
-    if (details) {
-      setStorageType(details.label);
+    const initialLocation = searchParams.get("location");
+    const initialDuration = searchParams.get("duration") as
+      | "day"
+      | "week"
+      | "month"
+      | null;
+    const initialPriceBand = searchParams.get("priceBand");
+    const initialParcelOnly = searchParams.get("parcelOnly");
+
+    if (initialLocation) {
+      setLocation(initialLocation);
+    }
+
+    if (slug) {
+      const details = STORAGE_TYPE_DETAILS[slug];
+      if (details) {
+        setStorageType(details.label);
+      }
+    }
+
+    if (initialDuration && ["day", "week", "month"].includes(initialDuration)) {
+      setDuration(initialDuration);
+    }
+
+    if (initialPriceBand) {
+      setPriceBand(initialPriceBand);
+    }
+
+    if (initialParcelOnly === "true") {
+      setParcelOnly(true);
     }
   }, [searchParams]);
 
@@ -37,6 +65,21 @@ export default function StorageSearch() {
     }
     if (storageType) {
       list = list.filter((l) => l.storageType === storageType);
+    }
+
+    if (priceBand) {
+      list = list.filter((l) => {
+        const price = l.pricePerMonth;
+        if (priceBand === "lt10k") return price < 10000;
+        if (priceBand === "10k-20k") return price >= 10000 && price <= 20000;
+        if (priceBand === "20k-30k") return price > 20000 && price <= 30000;
+        if (priceBand === "gt30k") return price > 30000;
+        return true;
+      });
+    }
+
+    if (parcelOnly) {
+      list = list.filter((l) => l.parcelDropOff);
     }
     return list;
   }, [location, storageType]);
@@ -123,6 +166,33 @@ export default function StorageSearch() {
                 <option value="month">Month</option>
               </select>
             </div>
+            <div>
+              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">
+                Budget (per month)
+              </label>
+              <select
+                value={priceBand}
+                onChange={(e) => setPriceBand(e.target.value)}
+                className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+              >
+                <option value="">Any budget</option>
+                <option value="lt10k">Below KES 10,000</option>
+                <option value="10k-20k">KES 10,000 – 20,000</option>
+                <option value="20k-30k">KES 20,000 – 30,000</option>
+                <option value="gt30k">Above KES 30,000</option>
+              </select>
+            </div>
+          </div>
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+            <label className="inline-flex items-center gap-2 text-xs font-medium text-[var(--muted)]">
+              <input
+                type="checkbox"
+                checked={parcelOnly}
+                onChange={(e) => setParcelOnly(e.target.checked)}
+                className="h-4 w-4 rounded border-[var(--border)] text-[var(--accent)] focus:ring-[var(--accent)]"
+              />
+              <span>Only show locations that offer parcel drop-off</span>
+            </label>
           </div>
         </div>
 
@@ -150,35 +220,49 @@ export default function StorageSearch() {
             <Link
               key={listing.id}
               href={`/storage/${listing.id}`}
-              className="group overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--white)] transition-shadow hover:shadow-md"
+              className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--white)] shadow-sm ring-1 ring-transparent transition-all hover:-translate-y-1 hover:border-[var(--primary)]/25 hover:shadow-lg hover:ring-[var(--primary)]/15"
             >
-              <div className="flex aspect-[16/10] items-center justify-center bg-[var(--border)] text-sm text-[var(--muted)]">
-                Photo
+              <div className="relative aspect-[16/10] w-full bg-[var(--border)]">
+                <div className="absolute inset-0 flex items-center justify-center text-xs font-medium uppercase tracking-[0.18em] text-[var(--muted)]">
+                  Storage photo
+                </div>
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-80" />
+                <div className="pointer-events-none absolute left-3 top-3 inline-flex items-center gap-2 rounded-full bg-black/45 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.16em] text-white">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
+                  <span>{listing.storageType}</span>
+                </div>
               </div>
-              <div className="p-4">
-                <h2 className="font-semibold text-[var(--foreground)] group-hover:text-[var(--primary)]">
+              <div className="flex flex-1 flex-col p-4">
+                <h2 className="text-sm font-semibold text-[var(--foreground)] group-hover:text-[var(--primary)] md:text-base">
                   {listing.title}
                 </h2>
-                <p className="mt-1 text-sm text-[var(--muted)]">
+                <p className="mt-1 text-xs text-[var(--muted)] md:text-sm">
                   {listing.city}, {listing.county}
                 </p>
-                <p className="mt-2 text-sm text-[var(--foreground)]">
-                  {listing.storageType}
-                  {listing.size > 0 && ` · ${listing.size} ${listing.sizeUnit}`}
+                <p className="mt-2 text-xs text-[var(--foreground)] md:text-sm">
+                  {listing.size > 0 && `${listing.size} ${listing.sizeUnit} · `}
+                  <span className="text-[var(--muted)]">
+                    {listing.security.slice(0, 2).join(" · ")}
+                    {listing.security.length > 2 && " · + more"}
+                  </span>
                 </p>
                 <div className="mt-3 flex items-center justify-between">
-                  <span className="font-semibold text-[var(--primary)]">
+                  <span className="text-sm font-semibold text-[var(--primary)] md:text-base">
                     {formatPrice(listing)}
                   </span>
-                  <span className="text-sm text-[var(--muted)]">
-                    {listing.rating} ★ ({listing.reviewCount})
+                  <span className="inline-flex items-center gap-1 rounded-full bg-[var(--background)] px-2 py-0.5 text-xs text-[var(--muted)]">
+                    <span className="text-[var(--accent)]">★</span>
+                    {listing.rating} ({listing.reviewCount})
                   </span>
                 </div>
-                {listing.parcelDropOff && (
-                  <span className="mt-2 inline-block rounded bg-[var(--accent)]/10 px-2 py-0.5 text-xs font-medium text-[var(--accent)]">
-                    Parcel drop-off
-                  </span>
-                )}
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {listing.parcelDropOff && (
+                    <span className="inline-flex items-center gap-1 rounded-full bg-[var(--accent)]/10 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.16em] text-[var(--accent)]">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
+                      Parcel drop-off
+                    </span>
+                  )}
+                </div>
               </div>
             </Link>
           ))}

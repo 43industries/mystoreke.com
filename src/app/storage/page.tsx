@@ -1,3 +1,9 @@
+import StorageSearch from "./StorageSearch";
+
+export default function StoragePage() {
+  return <StorageSearch />;
+}
+
 import Link from "next/link";
 import { Suspense } from "react";
 import StorageSearch from "./StorageSearch";
