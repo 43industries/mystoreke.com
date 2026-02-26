@@ -1,0 +1,22 @@
+<svg width="800" height="480" viewBox="0 0 800 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="480" rx="24" fill="#0f172a"/>
+  <rect x="40" y="200" width="720" height="220" rx="16" fill="#020617"/>
+  <path d="M60 210L220 80L580 80L740 210" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="120" y="240" width="80" height="120" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="3"/>
+  <rect x="240" y="240" width="80" height="120" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="3"/>
+  <rect x="360" y="240" width="80" height="120" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="3"/>
+  <rect x="480" y="240" width="80" height="120" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="3"/>
+  <rect x="600" y="240" width="80" height="120" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="3"/>
+  <rect x="190" y="160" width="60" height="26" rx="6" fill="#10b981"/>
+  <rect x="270" y="160" width="60" height="26" rx="6" fill="#0ea5e9"/>
+  <rect x="350" y="160" width="60" height="26" rx="6" fill="#eab308"/>
+  <rect x="430" y="160" width="60" height="26" rx="6" fill="#6366f1"/>
+  <rect x="510" y="160" width="60" height="26" rx="6" fill="#f97316"/>
+  <text x="400" y="120" text-anchor="middle" fill="#e5e7eb" font-family="system-ui, -apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="600">
+    Modern Warehouse
+  </text>
+  <text x="400" y="150" text-anchor="middle" fill="#9ca3af" font-family="system-ui, -apple-system, BlinkMacSystemFont, sans-serif" font-size="16">
+    Secure bays · CCTV · Guarded access
+  </text>
+</svg>
+

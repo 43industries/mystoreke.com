@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   const storageTypes = [
@@ -135,25 +136,34 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          {/* Simple warehouse highlight card */}
-          <div className="w-full max-w-md rounded-2xl bg-gradient-to-br from-white/10 to-white/5 p-5 shadow-lg backdrop-blur md:self-stretch">
-            <div className="mb-3 inline-flex items-center rounded-full bg-black/20 px-3 py-1 text-xs font-semibold uppercase tracking-wide">
-              Warehouse spotlight
+          {/* Warehouse image card */}
+          <div className="w-full max-w-md rounded-2xl bg-black/20 p-4 shadow-lg backdrop-blur md:self-stretch">
+            <div className="overflow-hidden rounded-xl border border-white/10 bg-black/40">
+              <Image
+                src="/warehouse.svg"
+                alt="Modern warehouse storage with secure bays"
+                width={800}
+                height={480}
+                priority
+                className="h-56 w-full object-cover md:h-64"
+              />
             </div>
-            <p className="text-sm opacity-90">
-              Welcome to modern warehouse storage. Reserve secure bays with CCTV, guards, and gated
-              access for pallets, inventory, and bulk goods across Kenya.
-            </p>
-            <p className="mt-3 text-xs opacity-80">
-              From small warehouse corners to full industrial spaces — choose the capacity that fits
-              your business.
-            </p>
-            <Link
-              href="/storage?type=warehouse"
-              className="mt-5 inline-flex items-center text-sm font-medium text-[var(--accent)] hover:text-[var(--accent-hover)]"
-            >
-              Explore warehouse storage →
-            </Link>
+            <div className="mt-4">
+              <p className="text-sm opacity-90">
+                Welcome to modern warehouse storage. Reserve secure bays with CCTV, guards, and
+                gated access for pallets, inventory, and bulk goods.
+              </p>
+              <p className="mt-2 text-xs opacity-80">
+                From small warehouse corners to full industrial spaces — choose the capacity that fits
+                your business.
+              </p>
+              <Link
+                href="/storage?type=warehouse"
+                className="mt-4 inline-flex items-center text-sm font-medium text-[var(--accent)] hover:text-[var(--accent-hover)]"
+              >
+                Explore warehouse storage →
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -225,6 +235,15 @@ export default function Home() {
                 href={box.href}
                 className="flex flex-col rounded-xl border border-[var(--border)] bg-[var(--background)] p-6 transition-shadow hover:shadow-md"
               >
+                <div className="mb-4 h-24 w-full overflow-hidden rounded-lg bg-[var(--border)]">
+                  <Image
+                    src="/warehouse.svg"
+                    alt={box.title}
+                    width={400}
+                    height={200}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
                 <h3 className="text-lg font-semibold text-[var(--foreground)]">
                   {box.title}
                 </h3>
