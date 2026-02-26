@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import StorageSearch from "./StorageSearch";
 
 export const metadata = {
   title: "Find Storage — MyStoreKE",
-  description: "Search storage spaces and parcel drop-off points. Filter by location and type.",
+  description:
+    "Search storage spaces and parcel drop-off points. Filter by location and type.",
 };
 
 export default function StoragePage() {
@@ -15,12 +17,18 @@ export default function StoragePage() {
             MyStoreKE
           </Link>
           <nav className="flex gap-4 text-sm font-medium text-[var(--muted)]">
-            <Link href="/list-your-space" className="hover:text-[var(--foreground)]">List Your Space</Link>
-            <Link href="/become-a-driver" className="hover:text-[var(--foreground)]">Become a Driver</Link>
+            <Link href="/list-your-space" className="hover:text-[var(--foreground)]">
+              List Your Space
+            </Link>
+            <Link href="/become-a-driver" className="hover:text-[var(--foreground)]">
+              Become a Driver
+            </Link>
           </nav>
         </div>
       </header>
-      <StorageSearch />
+      <Suspense fallback={<div className="mx-auto max-w-6xl px-4 py-8 text-[var(--muted)]">Loading storage…</div>}>
+        <StorageSearch />
+      </Suspense>
     </div>
   );
 }

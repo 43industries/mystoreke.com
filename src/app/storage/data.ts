@@ -10,6 +10,59 @@ export const STORAGE_TYPES = [
 
 export type StorageType = (typeof STORAGE_TYPES)[number];
 
+// Simple in-memory "database" for storage type descriptions
+export const STORAGE_TYPE_DETAILS: Record<
+  string,
+  {
+    label: StorageType;
+    description: string;
+    idealUse: string;
+  }
+> = {
+  residential: {
+    label: "Residential Storage",
+    description:
+      "Secure spare rooms, garages, and home units suitable for boxes, furniture, and household items. Great when you are moving, renovating, or decluttering and need a clean, locked space close to home.",
+    idealUse: "Household items, seasonal items, personal belongings.",
+  },
+  commercial: {
+    label: "Commercial Storage",
+    description:
+      "Dedicated space for shops, SMEs, and businesses that need extra back‑room or off‑site storage for stock, equipment, or documents. Often closer to business districts with better loading access.",
+    idealUse: "Retail stock, documents, small equipment, business supplies.",
+  },
+  warehouse: {
+    label: "Warehouse Storage",
+    description:
+      "Larger spaces in industrial or logistics areas with better access for trucks and pallets. Ideal for businesses with pallets, bulk inventory, or frequent dispatch and delivery needs.",
+    idealUse: "Bulk inventory, pallets, long‑term business storage.",
+  },
+  yard: {
+    label: "Open Yard Storage",
+    description:
+      "Open, usually fenced outdoor areas for vehicles, containers, construction material, or other weather‑tolerant items. Often accessible for trucks with flexible access hours.",
+    idealUse: "Vehicles, containers, machinery, and construction materials.",
+  },
+  shelf: {
+    label: "Shelf Storage",
+    description:
+      "Smaller shelf or rack space inside shops or warehouses. Pay only for the shelf or pallet space you need instead of a whole unit. Great for small merchants and e‑commerce sellers.",
+    idealUse: "Small boxes, e‑commerce inventory, documents, light stock.",
+  },
+  budget: {
+    label: "Budget Units",
+    description:
+      "Lower‑priced units with basic features for cost‑conscious renters. May be slightly smaller or in less central locations but still secure and locked.",
+    idealUse: "Price‑sensitive storage, students, short‑term overflow.",
+  },
+  parcel: {
+    label: "Parcel Drop-Off Points",
+    description:
+      "Verified locations where customers can drop or pick up parcels. Hosts handle check‑in and short‑term holding of parcels, often integrated with local delivery routes.",
+    idealUse: "Short‑term parcel holding and pickup/drop‑off.",
+  },
+};
+
 export interface StorageListing {
   id: string;
   title: string;

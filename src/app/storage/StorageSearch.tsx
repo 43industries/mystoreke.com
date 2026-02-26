@@ -1,13 +1,30 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
-import { MOCK_LISTINGS, STORAGE_TYPES, type StorageListing } from "./data";
+import { useSearchParams } from "next/navigation";
+import {
+  MOCK_LISTINGS,
+  STORAGE_TYPES,
+  STORAGE_TYPE_DETAILS,
+  type StorageListing,
+} from "./data";
 
 export default function StorageSearch() {
+  const searchParams = useSearchParams();
   const [location, setLocation] = useState("");
   const [storageType, setStorageType] = useState("");
   const [duration, setDuration] = useState<"day" | "week" | "month">("month");
+
+  // Initialize storage type from query string (e.g. /storage?type=residential)
+  useEffect(() => {
+    const slug = searchParams.get("type");
+    if (!slug) return;
+    const details = STORAGE_TYPE_DETAILS[slug];
+    if (details) {
+      setStorageType(details.label);
+    }
+  }, [searchParams]);
 
   const filtered = useMemo(() => {
     let list = [...MOCK_LISTINGS];
@@ -31,13 +48,24 @@ export default function StorageSearch() {
         : duration === "week"
           ? listing.pricePerWeek
           : listing.pricePerMonth;
-    return `KES ${n.toLocaleString()}${duration === "day" ? "/day" : duration === "week" ? "/wk" : "/mo"}`;
+    return `KES ${n.toLocaleString()}${
+      duration === "day" ? "/day" : duration === "week" ? "/wk" : "/mo"
+    }`;
   };
+
+  const activeTypeDetails = storageType
+    ? Object.values(STORAGE_TYPE_DETAILS).find(
+        (d) => d.label === storageType,
+      )
+    : undefined;
 
   return (
     <div className="min-h-screen bg-[var(--background)]">
       <div className="mx-auto max-w-6xl px-4 py-8">
-        <Link href="/" className="text-sm font-medium text-[var(--primary)] hover:underline">
+        <Link
+          href="/"
+          className="text-sm font-medium text-[var(--primary)] hover:underline"
+        >
           ← Back to MyStoreKE
         </Link>
         <h1 className="mt-4 text-2xl font-bold text-[var(--foreground)]">
@@ -51,7 +79,9 @@ export default function StorageSearch() {
         <div className="mt-6 rounded-xl border border-[var(--border)] bg-[var(--white)] p-4">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <div>
-              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">Location (city or county)</label>
+              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">
+                Location (city or county)
+              </label>
               <input
                 type="text"
                 value={location}
@@ -61,7 +91,9 @@ export default function StorageSearch() {
               />
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">Storage type</label>
+              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">
+                Storage type
+              </label>
               <select
                 value={storageType}
                 onChange={(e) => setStorageType(e.target.value)}
@@ -69,15 +101,21 @@ export default function StorageSearch() {
               >
                 <option value="">All types</option>
                 {STORAGE_TYPES.map((t) => (
-                  <option key={t} value={t}>{t}</option>
+                  <option key={t} value={t}>
+                    {t}
+                  </option>
                 ))}
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">Show price per</label>
+              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">
+                Show price per
+              </label>
               <select
                 value={duration}
-                onChange={(e) => setDuration(e.target.value as "day" | "week" | "month")}
+                onChange={(e) =>
+                  setDuration(e.target.value as "day" | "week" | "month")
+                }
                 className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
               >
                 <option value="day">Day</option>
@@ -87,6 +125,20 @@ export default function StorageSearch() {
             </div>
           </div>
         </div>
+
+        {activeTypeDetails && (
+          <div className="mt-4 rounded-xl border border-[var(--border)] bg-[var(--white)] p-5">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--muted)]">
+              About {activeTypeDetails.label}
+            </h2>
+            <p className="mt-2 text-sm text-[var(--foreground)]">
+              {activeTypeDetails.description}
+            </p>
+            <p className="mt-2 text-xs text-[var(--muted)]">
+              Ideal for: {activeTypeDetails.idealUse}
+            </p>
+          </div>
+        )}
 
         <p className="mt-4 text-sm text-[var(--muted)]">
           {filtered.length} listing{filtered.length !== 1 ? "s" : ""} found
@@ -98,9 +150,9 @@ export default function StorageSearch() {
             <Link
               key={listing.id}
               href={`/storage/${listing.id}`}
-              className="group rounded-xl border border-[var(--border)] bg-[var(--white)] overflow-hidden transition-shadow hover:shadow-md"
+              className="group overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--white)] transition-shadow hover:shadow-md"
             >
-              <div className="aspect-[16/10] bg-[var(--border)] flex items-center justify-center text-[var(--muted)] text-sm">
+              <div className="flex aspect-[16/10] items-center justify-center bg-[var(--border)] text-sm text-[var(--muted)]">
                 Photo
               </div>
               <div className="p-4">
