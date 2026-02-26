@@ -1,83 +1,171 @@
 import Link from "next/link";
 import Image from "next/image";
 
+type Step = {
+  step: number;
+  title: string;
+  desc: string;
+};
+
+type FocusBox = {
+  title: string;
+  description: string;
+  href: string;
+};
+
+const STORAGE_TYPES_NAV = [
+  { name: "Residential Storage", href: "/storage?type=residential" },
+  { name: "Commercial Storage", href: "/storage?type=commercial" },
+  { name: "Warehouse Storage", href: "/storage?type=warehouse" },
+  { name: "Open Yard Storage", href: "/storage?type=yard" },
+  { name: "Shelf Storage", href: "/storage?type=shelf" },
+  { name: "Budget Units", href: "/storage?type=budget" },
+  { name: "Parcel Drop-Off Points", href: "/parcel-drop-off" },
+] as const;
+
+const FOCUS_BOXES: FocusBox[] = [
+  {
+    title: "Commercial Storage",
+    description:
+      "Welcome to flexible space for shops and SMEs. Store stock, equipment, and documents in secure commercial locations close to your customers.",
+    href: "/storage?type=commercial",
+  },
+  {
+    title: "Residential Storage",
+    description:
+      "Welcome to clutter‑free living. Use nearby spare rooms and garages to safely keep furniture, boxes, and personal items for as long as you need.",
+    href: "/storage?type=residential",
+  },
+  {
+    title: "Open Yard Storage",
+    description:
+      "Welcome to wide‑open space. Park vehicles, containers, and construction materials in gated outdoor yards designed for heavy‑duty storage.",
+    href: "/storage?type=yard",
+  },
+  {
+    title: "Shelf Storage",
+    description:
+      "Welcome to pay‑per‑shelf storage. Rent only the shelf or rack space you need for cartons and e‑commerce inventory inside secure buildings.",
+    href: "/storage?type=shelf",
+  },
+  {
+    title: "Drop‑Off Points",
+    description:
+      "Welcome to drop‑off like Uber Eats for goods. Customers hand over parcels at verified points, and drivers handle pick‑up and delivery on‑demand.",
+    href: "/storage?type=parcel",
+  },
+];
+
+const WHY_CHOOSE = [
+  {
+    title: "Secure & Verified",
+    desc: "All spaces and drivers are verified. Your items and parcels are safe.",
+  },
+  {
+    title: "Flexible Terms",
+    desc: "Rent by day, week, or month. Choose what works for you.",
+  },
+  {
+    title: "Transparent Pricing",
+    desc: "No hidden fees. See total cost before you book.",
+  },
+  {
+    title: "24/7 Support",
+    desc: "Round-the-clock customer support when you need it.",
+  },
+] as const;
+
+const RENTER_STEPS: Step[] = [
+  {
+    step: 1,
+    title: "Search",
+    desc: "Enter location, storage type, and rental duration",
+  },
+  {
+    step: 2,
+    title: "Compare",
+    desc: "Browse listings, photos, and reviews",
+  },
+  {
+    step: 3,
+    title: "Book & Pay",
+    desc: "Secure payment. Get confirmation instantly",
+  },
+  {
+    step: 4,
+    title: "Access",
+    desc: "Use your space or drop parcels as agreed",
+  },
+];
+
+const HOST_STEPS: Step[] = [
+  {
+    step: 1,
+    title: "List Your Space",
+    desc: "Add details, photos, and pricing",
+  },
+  {
+    step: 2,
+    title: "Get Verified",
+    desc: "Quick verification for trust and visibility",
+  },
+  {
+    step: 3,
+    title: "Receive Bookings",
+    desc: "Renters find you. You get notified",
+  },
+  {
+    step: 4,
+    title: "Earn",
+    desc: "Get paid securely. Optional parcel drop-off income",
+  },
+];
+
+const DRIVER_STEPS: Step[] = [
+  {
+    step: 1,
+    title: "Apply",
+    desc: "Submit details and documents",
+  },
+  {
+    step: 2,
+    title: "Get Verified",
+    desc: "Background check and approval",
+  },
+  {
+    step: 3,
+    title: "Accept Jobs",
+    desc: "Pick up and deliver parcels on your schedule",
+  },
+  {
+    step: 4,
+    title: "Get Paid",
+    desc: "Earn per delivery. Payouts on time",
+  },
+];
+
+const TESTIMONIALS = [
+  {
+    quote:
+      "Found a secure warehouse in Nairobi within a day. Pricing was clear and the process was smooth.",
+    author: "James K.",
+    role: "Renter",
+  },
+  {
+    quote:
+      "Listing my garage was easy. I earn extra every month and now offer parcel drop-off too.",
+    author: "Mary W.",
+    role: "Host",
+  },
+  {
+    quote:
+      "Flexible hours and fair pay. MyStoreKE handles the bookings; I just deliver.",
+    author: "Peter O.",
+    role: "Driver",
+  },
+] as const;
+
 export default function Home() {
-  const storageTypes = [
-    { name: "Residential Storage", href: "/storage?type=residential" },
-    { name: "Commercial Storage", href: "/storage?type=commercial" },
-    { name: "Warehouse Storage", href: "/storage?type=warehouse" },
-    { name: "Open Yard Storage", href: "/storage?type=yard" },
-    { name: "Shelf Storage", href: "/storage?type=shelf" },
-    { name: "Budget Units", href: "/storage?type=budget" },
-    { name: "Parcel Drop-Off Points", href: "/parcel-drop-off" },
-  ];
-
-  const focusBoxes = [
-    {
-      title: "Commercial Storage",
-      description:
-        "Welcome to flexible space for shops and SMEs. Store stock, equipment, and documents in secure commercial locations close to your customers.",
-      href: "/storage?type=commercial",
-    },
-    {
-      title: "Residential Storage",
-      description:
-        "Welcome to clutter‑free living. Use nearby spare rooms and garages to safely keep furniture, boxes, and personal items for as long as you need.",
-      href: "/storage?type=residential",
-    },
-    {
-      title: "Open Yard Storage",
-      description:
-        "Welcome to wide‑open space. Park vehicles, containers, and construction materials in gated outdoor yards designed for heavy‑duty storage.",
-      href: "/storage?type=yard",
-    },
-    {
-      title: "Shelf Storage",
-      description:
-        "Welcome to pay‑per‑shelf storage. Rent only the shelf or rack space you need for cartons and e‑commerce inventory inside secure buildings.",
-      href: "/storage?type=shelf",
-    },
-    {
-      title: "Drop‑Off Points",
-      description:
-        "Welcome to drop‑off like Uber Eats for goods. Customers hand over parcels at verified points, and drivers handle pick‑up and delivery on‑demand.",
-      href: "/storage?type=parcel",
-    },
-  ];
-
-  const whyChoose = [
-    { title: "Secure & Verified", desc: "All spaces and drivers are verified. Your items and parcels are safe." },
-    { title: "Flexible Terms", desc: "Rent by day, week, or month. Choose what works for you." },
-    { title: "Transparent Pricing", desc: "No hidden fees. See total cost before you book." },
-    { title: "24/7 Support", desc: "Round-the-clock customer support when you need it." },
-  ];
-
-  const renterSteps = [
-    { step: 1, title: "Search", desc: "Enter location, storage type, and rental duration" },
-    { step: 2, title: "Compare", desc: "Browse listings, photos, and reviews" },
-    { step: 3, title: "Book & Pay", desc: "Secure payment. Get confirmation instantly" },
-    { step: 4, title: "Access", desc: "Use your space or drop parcels as agreed" },
-  ];
-
-  const hostSteps = [
-    { step: 1, title: "List Your Space", desc: "Add details, photos, and pricing" },
-    { step: 2, title: "Get Verified", desc: "Quick verification for trust and visibility" },
-    { step: 3, title: "Receive Bookings", desc: "Renters find you. You get notified" },
-    { step: 4, title: "Earn", desc: "Get paid securely. Optional parcel drop-off income" },
-  ];
-
-  const driverSteps = [
-    { step: 1, title: "Apply", desc: "Submit details and documents" },
-    { step: 2, title: "Get Verified", desc: "Background check and approval" },
-    { step: 3, title: "Accept Jobs", desc: "Pick up and deliver parcels on your schedule" },
-    { step: 4, title: "Get Paid", desc: "Earn per delivery. Payouts on time" },
-  ];
-
-  const testimonials = [
-    { quote: "Found a secure warehouse in Nairobi within a day. Pricing was clear and the process was smooth.", author: "James K.", role: "Renter" },
-    { quote: "Listing my garage was easy. I earn extra every month and now offer parcel drop-off too.", author: "Mary W.", role: "Host" },
-    { quote: "Flexible hours and fair pay. MyStoreKE handles the bookings; I just deliver.", author: "Peter O.", role: "Driver" },
-  ];
 
   return (
     <div className="min-h-screen bg-[var(--background)]">
@@ -326,7 +414,7 @@ export default function Home() {
             From small units to warehouses and parcel drop-off points
           </p>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {storageTypes.map(({ name, href }) => (
+            {STORAGE_TYPES_NAV.map(({ name, href }) => (
               <Link
                 key={name}
                 href={href}
@@ -408,7 +496,7 @@ export default function Home() {
             Trusted by renters, hosts, and drivers across Kenya
           </p>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
-            {testimonials.map(({ quote, author, role }) => (
+            {TESTIMONIALS.map(({ quote, author, role }) => (
               <blockquote
                 key={author}
                 className="rounded-xl border border-[var(--border)] p-6"
