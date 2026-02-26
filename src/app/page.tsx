@@ -11,6 +11,39 @@ export default function Home() {
     { name: "Parcel Drop-Off Points", href: "/parcel-drop-off" },
   ];
 
+  const focusBoxes = [
+    {
+      title: "Commercial Storage",
+      description:
+        "Welcome to flexible space for shops and SMEs. Store stock, equipment, and documents in secure commercial locations close to your customers.",
+      href: "/storage?type=commercial",
+    },
+    {
+      title: "Residential Storage",
+      description:
+        "Welcome to clutter‑free living. Use nearby spare rooms and garages to safely keep furniture, boxes, and personal items for as long as you need.",
+      href: "/storage?type=residential",
+    },
+    {
+      title: "Open Yard Storage",
+      description:
+        "Welcome to wide‑open space. Park vehicles, containers, and construction materials in gated outdoor yards designed for heavy‑duty storage.",
+      href: "/storage?type=yard",
+    },
+    {
+      title: "Shelf Storage",
+      description:
+        "Welcome to pay‑per‑shelf storage. Rent only the shelf or rack space you need for cartons and e‑commerce inventory inside secure buildings.",
+      href: "/storage?type=shelf",
+    },
+    {
+      title: "Drop‑Off Points",
+      description:
+        "Welcome to drop‑off like Uber Eats for goods. Customers hand over parcels at verified points, and drivers handle pick‑up and delivery on‑demand.",
+      href: "/storage?type=parcel",
+    },
+  ];
+
   const whyChoose = [
     { title: "Secure & Verified", desc: "All spaces and drivers are verified. Your items and parcels are safe." },
     { title: "Flexible Terms", desc: "Rent by day, week, or month. Choose what works for you." },
@@ -72,31 +105,54 @@ export default function Home() {
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-[var(--primary)] px-4 pb-20 pt-16 text-[var(--white)] md:pt-24">
-        <div className="mx-auto max-w-4xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
-            Smart Storage & Parcel Drop-Off — All in One Platform.
-          </h1>
-          <p className="mt-5 text-lg opacity-95 md:text-xl">
-            Find secure storage spaces, drop parcels safely, or earn by delivering with MyStoreKE.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 md:flex-row md:items-start">
+          <div className="max-w-xl text-center md:text-left">
+            <h1 className="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
+              Warehouse & Smart Storage for Every Need.
+            </h1>
+            <p className="mt-5 text-lg opacity-95 md:text-xl">
+              Find secure warehouse bays, residential units, open yards, shelves, and parcel
+              drop‑off points — all in one MyStoreKE platform.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4 md:justify-start">
+              <Link
+                href="/storage"
+                className="rounded-lg bg-[var(--accent)] px-6 py-3 font-medium text-white transition-colors hover:bg-[var(--accent-hover)]"
+              >
+                Find Storage
+              </Link>
+              <Link
+                href="/list-your-space"
+                className="rounded-lg border-2 border-white/80 bg-transparent px-6 py-3 font-medium text-white transition-colors hover:bg-white/10"
+              >
+                List Your Space
+              </Link>
+              <Link
+                href="/become-a-driver"
+                className="rounded-lg border-2 border-white/80 bg-transparent px-6 py-3 font-medium text-white transition-colors hover:bg-white/10"
+              >
+                Become a Driver
+              </Link>
+            </div>
+          </div>
+          {/* Simple warehouse highlight card */}
+          <div className="w-full max-w-md rounded-2xl bg-gradient-to-br from-white/10 to-white/5 p-5 shadow-lg backdrop-blur md:self-stretch">
+            <div className="mb-3 inline-flex items-center rounded-full bg-black/20 px-3 py-1 text-xs font-semibold uppercase tracking-wide">
+              Warehouse spotlight
+            </div>
+            <p className="text-sm opacity-90">
+              Welcome to modern warehouse storage. Reserve secure bays with CCTV, guards, and gated
+              access for pallets, inventory, and bulk goods across Kenya.
+            </p>
+            <p className="mt-3 text-xs opacity-80">
+              From small warehouse corners to full industrial spaces — choose the capacity that fits
+              your business.
+            </p>
             <Link
-              href="/storage"
-              className="rounded-lg bg-[var(--accent)] px-6 py-3 font-medium text-white transition-colors hover:bg-[var(--accent-hover)]"
+              href="/storage?type=warehouse"
+              className="mt-5 inline-flex items-center text-sm font-medium text-[var(--accent)] hover:text-[var(--accent-hover)]"
             >
-              Find Storage
-            </Link>
-            <Link
-              href="/list-your-space"
-              className="rounded-lg border-2 border-white/80 bg-transparent px-6 py-3 font-medium text-white transition-colors hover:bg-white/10"
-            >
-              List Your Space
-            </Link>
-            <Link
-              href="/become-a-driver"
-              className="rounded-lg border-2 border-white/80 bg-transparent px-6 py-3 font-medium text-white transition-colors hover:bg-white/10"
-            >
-              Become a Driver
+              Explore warehouse storage →
             </Link>
           </div>
         </div>
@@ -105,7 +161,9 @@ export default function Home() {
         <div className="mx-auto mt-10 max-w-4xl rounded-2xl border border-[var(--border)] bg-[var(--white)] p-4 shadow-lg md:p-5">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
             <div>
-              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">Location</label>
+              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">
+                Location
+              </label>
               <input
                 type="text"
                 placeholder="City or area"
@@ -113,7 +171,9 @@ export default function Home() {
               />
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">Storage Type</label>
+              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">
+                Storage Type
+              </label>
               <select className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]">
                 <option value="">Any type</option>
                 <option value="residential">Residential</option>
@@ -126,7 +186,9 @@ export default function Home() {
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">Rental Duration</label>
+              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">
+                Rental Duration
+              </label>
               <select className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]">
                 <option value="">Any</option>
                 <option value="day">Per Day</option>
@@ -142,6 +204,33 @@ export default function Home() {
                 Search Storage
               </button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Focused welcome boxes for main offerings */}
+      <section className="bg-[var(--white)] px-4 py-14">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="text-center text-2xl font-semibold text-[var(--foreground)]">
+            Welcome to MyStoreKE Storage Network
+          </h2>
+          <p className="mx-auto mt-2 max-w-2xl text-center text-[var(--muted)]">
+            Five core services — each clearly structured so renters, hosts, and drivers know exactly
+            what to expect.
+          </p>
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {focusBoxes.map((box) => (
+              <Link
+                key={box.title}
+                href={box.href}
+                className="flex flex-col rounded-xl border border-[var(--border)] bg-[var(--background)] p-6 transition-shadow hover:shadow-md"
+              >
+                <h3 className="text-lg font-semibold text-[var(--foreground)]">
+                  {box.title}
+                </h3>
+                <p className="mt-3 text-sm text-[var(--muted)]">{box.description}</p>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
