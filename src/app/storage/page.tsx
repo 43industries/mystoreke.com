@@ -1,0 +1,30 @@
+import Link from "next/link";
+import { Suspense } from "react";
+import StorageSearch from "./StorageSearch";
+
+export const metadata = {
+  title: "Find Storage — MyStoreKE",
+  description:
+    "Search storage spaces and parcel drop-off points. Filter by location and type.",
+};
+
+export default function StoragePage() {
+  return (
+    <div className="min-h-screen bg-[var(--background)]">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)]">
+        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
+          <Link href="/" className="text-lg font-bold text-[var(--accent)]">
+            MyStoreKE
+          </Link>
+          <nav className="flex gap-4 text-sm font-medium text-white/90">
+            <Link href="/list-your-space" className="hover:text-white">List Your Space</Link>
+            <Link href="/become-a-driver" className="hover:text-white">Become a Driver</Link>
+          </nav>
+        </div>
+      </header>
+      <Suspense fallback={<div className="mx-auto max-w-6xl px-4 py-8 text-[var(--muted)]">Loading storage…</div>}>
+        <StorageSearch />
+      </Suspense>
+    </div>
+  );
+}
