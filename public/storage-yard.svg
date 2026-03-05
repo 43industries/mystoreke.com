@@ -1,0 +1,10 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="360" fill="#00274c"/>
+  <rect x="40" y="40" width="560" height="200" rx="8" fill="none" stroke="#ffcb05" stroke-width="3" stroke-dasharray="8 4"/>
+  <rect x="100" y="100" width="140" height="80" rx="6" fill="#001a33"/>
+  <rect x="260" y="120" width="120" height="60" rx="6" fill="#001a33"/>
+  <rect x="400" y="100" width="140" height="80" rx="6" fill="#001a33"/>
+  <circle cx="320" cy="260" r="24" fill="#ffcb05"/>
+  <text x="320" y="318" text-anchor="middle" fill="#ffcb05" font-family="system-ui,sans-serif" font-size="24" font-weight="600">Open Yard Storage</text>
+  <text x="320" y="342" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="system-ui,sans-serif" font-size="14">Vehicles · Containers · Materials</text>
+</svg>

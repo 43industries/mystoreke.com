@@ -1,0 +1,10 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="360" fill="#00274c"/>
+  <path d="M320 80 L520 200 L520 300 L120 300 L120 200 Z" fill="#001a33" stroke="#ffcb05" stroke-width="2"/>
+  <rect x="260" y="220" width="120" height="80" rx="4" fill="#00274c"/>
+  <rect x="280" y="140" width="80" height="50" rx="4" fill="#ffcb05"/>
+  <rect x="200" y="260" width="60" height="40" rx="4" fill="#00274c"/>
+  <rect x="380" y="260" width="60" height="40" rx="4" fill="#00274c"/>
+  <text x="320" y="330" text-anchor="middle" fill="#ffcb05" font-family="system-ui,sans-serif" font-size="24" font-weight="600">Residential Storage</text>
+  <text x="320" y="352" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="system-ui,sans-serif" font-size="14">Rooms · Garages · Homes</text>
+</svg>

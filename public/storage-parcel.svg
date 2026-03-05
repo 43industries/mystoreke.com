@@ -1,0 +1,10 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="360" fill="#00274c"/>
+  <rect x="200" y="100" width="240" height="140" rx="12" fill="#001a33" stroke="#ffcb05" stroke-width="2"/>
+  <path d="M200 140 L320 100 L440 140 L440 240 L320 240 L200 240 Z" fill="#00274c"/>
+  <rect x="280" y="180" width="80" height="50" rx="4" fill="#ffcb05"/>
+  <circle cx="320" cy="260" r="20" fill="none" stroke="#ffcb05" stroke-width="2"/>
+  <path d="M310 260 L318 268 L332 252" stroke="#ffcb05" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <text x="320" y="318" text-anchor="middle" fill="#ffcb05" font-family="system-ui,sans-serif" font-size="24" font-weight="600">Parcel Drop-Off</text>
+  <text x="320" y="342" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="system-ui,sans-serif" font-size="14">Send & receive nationwide</text>
+</svg>

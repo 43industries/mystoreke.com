@@ -1,0 +1,13 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="360" fill="#00274c"/>
+  <rect x="120" y="80" width="400" height="180" rx="8" fill="#001a33" stroke="#ffcb05" stroke-width="2"/>
+  <line x1="120" y1="140" x2="520" y2="140" stroke="#ffcb05" stroke-width="2"/>
+  <line x1="120" y1="200" x2="520" y2="200" stroke="#ffcb05" stroke-width="2"/>
+  <line x1="120" y1="260" x2="520" y2="260" stroke="#ffcb05" stroke-width="2"/>
+  <rect x="150" y="155" width="70" height="35" rx="4" fill="#00274c"/>
+  <rect x="240" y="155" width="70" height="35" rx="4" fill="#00274c"/>
+  <rect x="330" y="155" width="70" height="35" rx="4" fill="#00274c"/>
+  <rect x="420" y="155" width="70" height="35" rx="4" fill="#ffcb05"/>
+  <text x="320" y="318" text-anchor="middle" fill="#ffcb05" font-family="system-ui,sans-serif" font-size="24" font-weight="600">Shelf Storage</text>
+  <text x="320" y="342" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="system-ui,sans-serif" font-size="14">Pay per shelf · Ecommerce</text>
+</svg>

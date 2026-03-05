@@ -28,7 +28,7 @@ const FOCUS_BOXES: FocusBox[] = [
       "Near business districts for faster restocking",
       "Works well for retail, e‑commerce, and offices",
     ],
-    image: "/storage-commercial.jpg",
+    image: "/storage-commercial.svg",
   },
   {
     title: "Residential Storage",
@@ -40,7 +40,7 @@ const FOCUS_BOXES: FocusBox[] = [
       "Ideal when moving, renovating, or decluttering",
       "Lockable rooms and garages in trusted homes",
     ],
-    image: "/storage-residential.jpg",
+    image: "/storage-residential.svg",
   },
   {
     title: "Open Yard Storage",
@@ -52,7 +52,7 @@ const FOCUS_BOXES: FocusBox[] = [
       "Fenced and gated outdoor spaces",
       "Truck‑friendly access for loading and off‑loading",
     ],
-    image: "/storage-yard.jpg",
+    image: "/storage-yard.svg",
   },
   {
     title: "Shelf Storage",
@@ -64,7 +64,7 @@ const FOCUS_BOXES: FocusBox[] = [
       "Pay only for the shelf space you actually use",
       "Perfect for smaller boxes and fast‑moving stock",
     ],
-    image: "/storage-shelf.jpg",
+    image: "/storage-shelf.svg",
   },
   {
     title: "Drop‑Off Points",
@@ -76,7 +76,7 @@ const FOCUS_BOXES: FocusBox[] = [
       "Supports customer and business parcel drop‑off for delivery across Kenya",
       "Works with riders, vans, and lorries for regional and national transport",
     ],
-    image: "/storage-parcel.jpg",
+    image: "/storage-parcel.svg",
   },
 ];
 
