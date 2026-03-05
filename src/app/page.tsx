@@ -242,8 +242,8 @@ export default function Home() {
           {/* Big warehouse photo */}
           <div className="relative mx-auto max-w-5xl overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
             <Image
-              src="/warehouse.svg"
-              alt="Warehouse storage"
+              src="/warehouse-hero.png"
+              alt="Modern warehouse — secure storage, shelving, and logistics"
               width={1200}
               height={520}
               priority
