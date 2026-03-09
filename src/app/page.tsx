@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import HeroSearchForm from "./HeroSearchForm";
 import Logo from "@/components/Logo";
+import { IMAGES } from "./images";
 
 type Step = {
   step: number;
@@ -29,7 +30,7 @@ const FOCUS_BOXES: FocusBox[] = [
       "Near business districts for faster restocking",
       "Works well for retail, e‑commerce, and offices",
     ],
-    image: "/storage-commercial.jpg",
+    image: IMAGES.storage.commercial,
   },
   {
     title: "Residential Storage",
@@ -41,7 +42,7 @@ const FOCUS_BOXES: FocusBox[] = [
       "Ideal when moving, renovating, or decluttering",
       "Lockable rooms and garages in trusted homes",
     ],
-    image: "/storage-residential.jpg",
+    image: IMAGES.storage.residential,
   },
   {
     title: "Open Yard Storage",
@@ -53,7 +54,7 @@ const FOCUS_BOXES: FocusBox[] = [
       "Fenced and gated outdoor spaces",
       "Truck‑friendly access for loading and off‑loading",
     ],
-    image: "/storage-yard.jpg",
+    image: IMAGES.storage.yard,
   },
   {
     title: "Shelf Storage",
@@ -65,7 +66,7 @@ const FOCUS_BOXES: FocusBox[] = [
       "Pay only for the shelf space you actually use",
       "Perfect for smaller boxes and fast‑moving stock",
     ],
-    image: "/storage-shelf.jpg",
+    image: IMAGES.storage.shelf,
   },
   {
     title: "Drop‑Off Points",
@@ -77,7 +78,7 @@ const FOCUS_BOXES: FocusBox[] = [
       "Supports customer and business parcel drop‑off for delivery across Kenya",
       "Works with riders, vans, and lorries for regional and national transport",
     ],
-    image: "/storage-parcel.jpg",
+    image: IMAGES.storage.parcel,
   },
 ];
 
@@ -241,7 +242,7 @@ export default function Home() {
           {/* Big warehouse photo */}
           <div className="relative mx-auto max-w-5xl overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
             <Image
-              src="/warehouse-hero.png"
+              src={IMAGES.hero}
               alt="Modern warehouse — secure storage, shelving, and logistics"
               width={1200}
               height={520}
