@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import HeroSearchForm from "./HeroSearchForm";
+import Logo from "@/components/Logo";
 
 type Step = {
   step: number;
@@ -216,9 +217,7 @@ export default function Home() {
       {/* Header - navy with gold logo, white nav */}
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)]">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-          <Link href="/" className="text-xl font-bold text-[var(--accent)]">
-            MyStoreKE
-          </Link>
+<Logo variant="header" width={200} height={60} />
           <nav className="flex gap-6 text-sm font-medium text-white/90">
             <Link href="/storage" className="hover:text-white">
               Find Storage
@@ -473,6 +472,9 @@ export default function Home() {
       {/* Footer - bottom blue section, all links populated */}
       <footer className="border-t border-[var(--border)] bg-[var(--primary)] px-4 py-14 text-white">
         <div className="mx-auto max-w-6xl">
+          <div className="mb-10">
+            <Logo variant="footer" width={200} height={60} />
+          </div>
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             <div>
               <h4 className="font-semibold">Renters</h4>
