@@ -23,7 +23,7 @@ export default async function StorageDetailPage({
 }) {
   const { id } = params;
 
-  const res = await fetch("https://mystoreke.com/api/listings", {
+  const res = await fetch("/api/listings", {
     // Always fetch fresh data on the server for now so newly added listings appear.
     cache: "no-store",
   });
