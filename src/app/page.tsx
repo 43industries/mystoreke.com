@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import HeroSearchForm from "./HeroSearchForm";
 import Logo from "@/components/Logo";
 import { IMAGES } from "./images";
@@ -241,13 +240,12 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           {/* Big warehouse photo */}
           <div className="relative mx-auto max-w-5xl overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={IMAGES.hero}
               alt="Modern warehouse — secure storage, shelving, and logistics"
-              width={1200}
-              height={520}
-              priority
               className="h-48 w-full object-cover md:h-64 lg:h-80"
+              fetchPriority="high"
             />
           </div>
           <div className="mt-8 text-center">
@@ -289,13 +287,11 @@ export default function Home() {
                 className="group flex min-w-[260px] max-w-xs flex-col rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5 shadow-sm ring-1 ring-transparent transition-all hover:-translate-y-1 hover:shadow-md hover:ring-[var(--accent)]/20 md:min-w-[280px] lg:min-w-[300px]"
               >
                 <div className="relative mb-4 h-40 w-full overflow-hidden rounded-xl bg-[var(--border)] md:h-44 lg:h-48">
-                  <Image
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                     src={box.image}
                     alt={box.title}
-                    fill
-                    sizes="(max-width: 768px) 260px, 300px"
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    unoptimized
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                 </div>

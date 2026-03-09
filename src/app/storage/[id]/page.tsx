@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { IMAGES } from "../../images";
@@ -57,13 +56,11 @@ export default async function StorageDetailPage({
         </Link>
         <div className="mt-6 rounded-xl border border-[var(--border)] bg-[var(--white)] overflow-hidden">
           <div className="relative aspect-[21/9] w-full overflow-hidden bg-[var(--border)]">
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={listingImage(listing.storageType)}
               alt={listing.title}
-              fill
-              sizes="(max-width: 896px) 100vw, 896px"
-              className="object-cover"
-              unoptimized
+              className="h-full w-full object-cover"
             />
           </div>
           <div className="p-6">

@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 type PageHeroProps = {
   title: string;
   subtitle?: string;
@@ -15,14 +13,12 @@ export default function PageHero({
 }: PageHeroProps) {
   return (
     <section className="relative h-48 w-full overflow-hidden bg-[var(--primary)] md:h-56 lg:h-64">
-      <Image
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src={imageSrc}
         alt={imageAlt || title}
-        fill
-        sizes="100vw"
-        className="object-cover opacity-90"
-        unoptimized
-        priority
+        className="absolute inset-0 h-full w-full object-cover opacity-90"
+        fetchPriority="high"
       />
       <div className="absolute inset-0 bg-[var(--primary)]/60" />
       <div className="absolute inset-0 flex flex-col justify-center px-4 text-center text-white">
