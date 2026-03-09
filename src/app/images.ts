@@ -11,9 +11,13 @@ const PARCEL_VAN =
 const RESIDENTIAL_GARAGE =
   "https://images.unsplash.com/photo-1704833414862-ee79382c146f?w=1200&q=80";
 
+/** Clear warehouse hero — landing page (Unsplash: Adrien Olichon) */
+const WAREHOUSE_HERO =
+  "https://images.unsplash.com/photo-1770910278198-eed8b040554b?w=1400&q=85";
+
 export const IMAGES = {
-  /** Hero section (first blue block) — big warehouse photo */
-  hero: "/warehouse-hero.png",
+  /** Hero section (first blue block) — clear warehouse photo */
+  hero: WAREHOUSE_HERO,
 
   /** Service cards on homepage */
   storage: {
@@ -26,10 +30,10 @@ export const IMAGES = {
 
   /** Page hero banners — used on Find Storage, List Your Space, etc. */
   pages: {
-    storage: "/warehouse-hero.png",
+    storage: WAREHOUSE_HERO,
     listYourSpace: RESIDENTIAL_GARAGE,
     becomeDriver: PARCEL_VAN,
-    about: "/warehouse-hero.png",
+    about: WAREHOUSE_HERO,
     howItWorks: "/storage-shelf.png",
     contact: "/storage-commercial.jpg",
     parcelDropOff: PARCEL_VAN,

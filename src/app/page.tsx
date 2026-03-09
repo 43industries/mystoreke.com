@@ -214,11 +214,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[var(--background)]">
-      {/* Header - navy with gold logo, white nav */}
+      {/* Header - navy with logo and nav */}
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)]">
-        <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-4 md:h-24">
-          <Logo variant="header" width={320} height={100} className="h-14 min-h-[44px] md:h-20" />
-          <nav className="flex gap-6 text-sm font-medium text-white/90">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-4">
+          <Logo variant="header" className="h-10 shrink-0 md:h-12" />
+          <nav className="flex shrink-0 gap-6 text-sm font-medium text-white/90">
             <Link href="/storage" className="hover:text-white">
               Find Storage
             </Link>
