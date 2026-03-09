@@ -29,7 +29,7 @@ const FOCUS_BOXES: FocusBox[] = [
       "Near business districts for faster restocking",
       "Works well for retail, e‑commerce, and offices",
     ],
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=640&q=80",
+    image: "/storage-commercial.jpg",
   },
   {
     title: "Residential Storage",
@@ -41,7 +41,7 @@ const FOCUS_BOXES: FocusBox[] = [
       "Ideal when moving, renovating, or decluttering",
       "Lockable rooms and garages in trusted homes",
     ],
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=640&q=80",
+    image: "/storage-residential.jpg",
   },
   {
     title: "Open Yard Storage",
@@ -53,7 +53,7 @@ const FOCUS_BOXES: FocusBox[] = [
       "Fenced and gated outdoor spaces",
       "Truck‑friendly access for loading and off‑loading",
     ],
-    image: "https://images.unsplash.com/photo-1605745341112-85968b19335b?w=640&q=80",
+    image: "/storage-yard.jpg",
   },
   {
     title: "Shelf Storage",
@@ -65,7 +65,7 @@ const FOCUS_BOXES: FocusBox[] = [
       "Pay only for the shelf space you actually use",
       "Perfect for smaller boxes and fast‑moving stock",
     ],
-    image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=640&q=80",
+    image: "/storage-shelf.jpg",
   },
   {
     title: "Drop‑Off Points",
@@ -77,7 +77,7 @@ const FOCUS_BOXES: FocusBox[] = [
       "Supports customer and business parcel drop‑off for delivery across Kenya",
       "Works with riders, vans, and lorries for regional and national transport",
     ],
-    image: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=640&q=80",
+    image: "/storage-parcel.jpg",
   },
 ];
 
