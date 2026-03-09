@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { supabaseBrowser } from "@/lib/supabaseBrowser";
 
 const STORAGE_TYPES = [
   "Residential Storage",
@@ -139,6 +140,12 @@ export default function HostListingForm() {
           }
           setLoading(true);
           try {
+            let hostId: string | undefined;
+            if (supabaseBrowser) {
+              const { data } = await supabaseBrowser.auth.getUser();
+              hostId = data.user?.id;
+            }
+
             const res = await fetch("/api/listings", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -175,6 +182,7 @@ export default function HostListingForm() {
                 parcelMaxPerDay: formData.parcelMaxPerDay || undefined,
                 parcelFeePerDay: formData.parcelFeePerDay || undefined,
                 photoCount: formData.photos.length,
+                hostId,
               }),
             });
             const data = await res.json().catch(() => ({}));

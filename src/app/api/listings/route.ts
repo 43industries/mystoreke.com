@@ -137,6 +137,7 @@ export async function POST(request: Request) {
 
     const {
       title,
+      hostId,
       storageType,
       description,
       size,
@@ -247,6 +248,7 @@ export async function POST(request: Request) {
       const { data, error } = await supabase
         .from("listings")
         .insert({
+          host_id: hostId ?? null,
           title: listing.title,
           storage_type: listing.storageType,
           description: listing.description,
