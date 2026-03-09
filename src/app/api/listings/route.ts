@@ -45,16 +45,25 @@ type HostListing = {
 
 const HOST_LISTINGS: HostListing[] = [];
 
-export async function GET() {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const hostId = searchParams.get("hostId");
+
   const supabase = getSupabaseServerClient();
 
   if (supabase) {
-    const { data, error } = await supabase
+    let query = supabase
       .from("listings")
       .select(
-        "id, title, storage_type, city, county, size, size_unit, price_per_day, price_per_week, price_per_month, rating, review_count, security, parcel_drop_off",
+        "id, title, storage_type, city, county, size, size_unit, price_per_day, price_per_week, price_per_month, rating, review_count, security, parcel_drop_off, host_id, created_at",
       )
       .order("created_at", { ascending: false });
+
+    if (hostId) {
+      query = query.eq("host_id", hostId);
+    }
+
+    const { data, error } = await query;
 
     if (error) {
       // eslint-disable-next-line no-console
