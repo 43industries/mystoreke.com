@@ -11,8 +11,8 @@ type LogoProps = {
 export default function Logo({
   variant = "header",
   className = "",
-  width = 180,
-  height = 56,
+  width = 280,
+  height = 88,
 }: LogoProps) {
   return (
     <Link
@@ -26,8 +26,8 @@ export default function Logo({
         width={width}
         height={height}
         priority
-        className="object-contain object-left"
-        style={{ height: "auto", maxHeight: "48px" }}
+        className="h-full w-auto object-contain object-left"
+        style={{ maxHeight: "120px" }}
       />
     </Link>
   );
