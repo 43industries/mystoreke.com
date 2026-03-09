@@ -11,23 +11,23 @@ type LogoProps = {
 export default function Logo({
   variant = "header",
   className = "",
-  width = 280,
-  height = 88,
+  width = 320,
+  height = 100,
 }: LogoProps) {
   return (
     <Link
       href="/"
       className={`inline-flex items-center focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 rounded ${className}`}
-      aria-label="Cornerstone – building dreams – Home"
+      aria-label="MyStoreKE — Home"
     >
       <Image
         src="/logo.png"
-        alt="Cornerstone building dreams"
+        alt="MyStoreKE"
         width={width}
         height={height}
         priority
-        className="h-full w-auto object-contain object-left"
-        style={{ maxHeight: "120px" }}
+        className="h-full w-auto min-h-[44px] object-contain object-left"
+        style={{ maxHeight: "180px" }}
       />
     </Link>
   );

@@ -216,8 +216,8 @@ export default function Home() {
     <div className="min-h-screen bg-[var(--background)]">
       {/* Header - navy with gold logo, white nav */}
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)]">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-<Logo variant="header" width={260} height={80} className="h-14 md:h-16" />
+        <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-4 md:h-24">
+          <Logo variant="header" width={320} height={100} className="h-14 min-h-[44px] md:h-20" />
           <nav className="flex gap-6 text-sm font-medium text-white/90">
             <Link href="/storage" className="hover:text-white">
               Find Storage
@@ -471,7 +471,7 @@ export default function Home() {
       <footer className="border-t border-[var(--border)] bg-[var(--primary)] px-4 py-14 text-white">
         <div className="mx-auto max-w-6xl">
           <div className="mb-10">
-            <Logo variant="footer" width={300} height={96} className="h-16 md:h-20" />
+            <Logo variant="footer" width={340} height={108} className="h-20 md:h-24" />
           </div>
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             <div>
