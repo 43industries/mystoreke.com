@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { IMAGES } from "../../images";
 import { MOCK_LISTINGS, type StorageListing } from "../data";
 
+export const dynamic = "force-dynamic";
+
 function listingImage(storageType: string): string {
   const map: Record<string, string> = {
     "Residential Storage": IMAGES.storage.residential,
