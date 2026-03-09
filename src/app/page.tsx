@@ -288,13 +288,14 @@ export default function Home() {
                 href={box.href}
                 className="group flex min-w-[260px] max-w-xs flex-col rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5 shadow-sm ring-1 ring-transparent transition-all hover:-translate-y-1 hover:shadow-md hover:ring-[var(--accent)]/20 md:min-w-[280px] lg:min-w-[300px]"
               >
-                <div className="mb-4 h-40 w-full overflow-hidden rounded-xl bg-[var(--border)] md:h-44 lg:h-48">
+                <div className="relative mb-4 h-40 w-full overflow-hidden rounded-xl bg-[var(--border)] md:h-44 lg:h-48">
                   <Image
                     src={box.image}
                     alt={box.title}
-                    width={640}
-                    height={360}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    fill
+                    sizes="(max-width: 768px) 260px, 300px"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    unoptimized
                   />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                 </div>

@@ -7,12 +7,12 @@ export const IMAGES = {
   /** Hero section (first blue block) — big warehouse photo */
   hero: "/warehouse-hero.png",
 
-  /** Service cards on homepage — real photos for yard & shelf; SVGs for the rest until you add more */
+  /** Service cards on homepage — paths under public/ */
   storage: {
-    commercial: "/storage-commercial.svg",
-    residential: "/storage-residential.svg",
+    commercial: "/storage-commercial.jpg",
+    residential: "/storage-residential.jpg",
     yard: "/storage-yard.png",
     shelf: "/storage-shelf.png",
-    parcel: "/storage-parcel.svg",
+    parcel: "/storage-parcel.jpg",
   },
 } as const;
