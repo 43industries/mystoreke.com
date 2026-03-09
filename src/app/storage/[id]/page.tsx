@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { IMAGES } from "../../images";
 import { MOCK_LISTINGS, type StorageListing } from "../data";
+import BookingButton from "../BookingButton";
 
 export const dynamic = "force-dynamic";
 
@@ -92,12 +93,10 @@ export default async function StorageDetailPage({
                 or {listing.pricePerDay.toLocaleString()}/day · {listing.pricePerWeek.toLocaleString()}/week
               </span>
             </div>
-            <button
-              type="button"
-              className="mt-6 rounded-lg bg-[var(--primary)] px-6 py-3 font-medium text-white hover:bg-[var(--primary-hover)]"
-            >
-              Request to book
-            </button>
+            <BookingButton
+              listingId={listing.id}
+              monthlyPrice={listing.pricePerMonth}
+            />
           </div>
         </div>
       </main>
