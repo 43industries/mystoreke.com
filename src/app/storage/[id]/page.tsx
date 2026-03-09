@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { IMAGES } from "../../images";
-import { type StorageListing } from "../data";
+import { MOCK_LISTINGS, type StorageListing } from "../data";
+import { getSupabaseServerClient } from "@/lib/supabaseServer";
 
 function listingImage(storageType: string): string {
   const map: Record<string, string> = {
@@ -23,17 +24,42 @@ export default async function StorageDetailPage({
 }) {
   const { id } = params;
 
-  const res = await fetch("/api/listings", {
-    // Always fetch fresh data on the server for now so newly added listings appear.
-    cache: "no-store",
-  });
+  const supabase = getSupabaseServerClient();
+  let listing: StorageListing | undefined;
 
-  if (!res.ok) {
-    notFound();
+  if (supabase) {
+    const { data, error } = await supabase
+      .from("listings")
+      .select(
+        "id, title, storage_type, city, county, size, size_unit, price_per_day, price_per_week, price_per_month, rating, review_count, security, parcel_drop_off",
+      )
+      .eq("id", id)
+      .maybeSingle();
+
+    if (!error && data) {
+      listing = {
+        id: data.id as string,
+        title: data.title as string,
+        storageType: data.storage_type as StorageListing["storageType"],
+        city: data.city as string,
+        county: data.county as string,
+        size: (data.size ?? 0) as number,
+        sizeUnit: data.size_unit as "sqft" | "sqm",
+        pricePerDay: (data.price_per_day ?? 0) as number,
+        pricePerWeek: (data.price_per_week ?? 0) as number,
+        pricePerMonth: (data.price_per_month ?? 0) as number,
+        rating: (data.rating ?? 4.8) as number,
+        reviewCount: (data.review_count ?? 1) as number,
+        security: (data.security ?? []) as string[],
+        parcelDropOff: !!data.parcel_drop_off,
+      };
+    }
   }
 
-  const allListings = (await res.json()) as StorageListing[];
-  const listing = allListings.find((l) => l.id === id);
+  if (!listing) {
+    listing = MOCK_LISTINGS.find((l) => l.id === id);
+  }
+
   if (!listing) notFound();
 
   return (
