@@ -15,4 +15,15 @@ export const IMAGES = {
     shelf: "/storage-shelf.png",
     parcel: "/storage-parcel.jpg",
   },
+
+  /** Page hero banners — used on Find Storage, List Your Space, etc. */
+  pages: {
+    storage: "/warehouse-hero.png",
+    listYourSpace: "/storage-residential.jpg",
+    becomeDriver: "/storage-parcel.jpg",
+    about: "/warehouse-hero.png",
+    howItWorks: "/storage-shelf.png",
+    contact: "/storage-commercial.jpg",
+    parcelDropOff: "/storage-parcel.jpg",
+  },
 } as const;

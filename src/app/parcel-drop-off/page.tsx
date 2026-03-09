@@ -1,4 +1,6 @@
 import Link from "next/link";
+import PageHero from "@/components/PageHero";
+import { IMAGES } from "../images";
 
 export const metadata = {
   title: "Parcel Drop-Off Points — MyStoreKE",
@@ -21,9 +23,14 @@ export default function ParcelDropOffPage() {
           </nav>
         </div>
       </header>
+      <PageHero
+        title="Parcel Drop-Off Points"
+        subtitle="Send and receive packages across Kenya."
+        imageSrc={IMAGES.pages.parcelDropOff}
+        imageAlt="Parcel drop-off and delivery"
+      />
 
       <main className="mx-auto max-w-4xl px-4 py-12">
-        <h1 className="text-3xl font-bold text-[var(--foreground)]">Parcel Drop-Off Points</h1>
         <p className="mt-4 text-[var(--muted)]">
           MyStoreKE supports hosts who run counters, kiosks, or shops that can safely accept parcels
           on behalf of customers and businesses.

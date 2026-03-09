@@ -1,6 +1,21 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { IMAGES } from "../../images";
 import { type StorageListing } from "../data";
+
+function listingImage(storageType: string): string {
+  const map: Record<string, string> = {
+    "Residential Storage": IMAGES.storage.residential,
+    "Commercial Storage": IMAGES.storage.commercial,
+    "Warehouse Storage": IMAGES.storage.commercial,
+    "Open Yard Storage": IMAGES.storage.yard,
+    "Shelf Storage": IMAGES.storage.shelf,
+    "Budget Units": IMAGES.storage.residential,
+    "Parcel Drop-Off Points": IMAGES.storage.parcel,
+  };
+  return map[storageType] ?? IMAGES.storage.commercial;
+}
 
 export default async function StorageDetailPage({
   params,
@@ -41,8 +56,15 @@ export default async function StorageDetailPage({
           ← Back to search
         </Link>
         <div className="mt-6 rounded-xl border border-[var(--border)] bg-[var(--white)] overflow-hidden">
-          <div className="aspect-[21/9] bg-[var(--border)] flex items-center justify-center text-[var(--muted)]">
-            Listing photo
+          <div className="relative aspect-[21/9] w-full overflow-hidden bg-[var(--border)]">
+            <Image
+              src={listingImage(listing.storageType)}
+              alt={listing.title}
+              fill
+              sizes="(max-width: 896px) 100vw, 896px"
+              className="object-cover"
+              unoptimized
+            />
           </div>
           <div className="p-6">
             <h1 className="text-2xl font-bold text-[var(--foreground)]">

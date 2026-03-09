@@ -1,4 +1,6 @@
 import Link from "next/link";
+import PageHero from "@/components/PageHero";
+import { IMAGES } from "../images";
 
 export const metadata = {
   title: "About MyStoreKE",
@@ -21,9 +23,14 @@ export default function AboutPage() {
           </nav>
         </div>
       </header>
+      <PageHero
+        title="About MyStoreKE"
+        subtitle="Connecting renters, hosts, and drivers across Kenya."
+        imageSrc={IMAGES.pages.about}
+        imageAlt="MyStoreKE storage and logistics"
+      />
 
       <main className="mx-auto max-w-3xl px-4 py-12">
-        <h1 className="text-3xl font-bold text-[var(--foreground)]">About MyStoreKE</h1>
         <p className="mt-4 text-[var(--muted)]">
           MyStoreKE is a marketplace for storage and parcel movement in Kenya. We bring together
           people who need extra space, businesses that run warehouses or yards, and drivers who

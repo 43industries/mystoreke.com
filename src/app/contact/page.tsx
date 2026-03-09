@@ -1,4 +1,6 @@
 import Link from "next/link";
+import PageHero from "@/components/PageHero";
+import { IMAGES } from "../images";
 
 export const metadata = {
   title: "Contact MyStoreKE",
@@ -20,9 +22,14 @@ export default function ContactPage() {
           </nav>
         </div>
       </header>
+      <PageHero
+        title="Contact Us"
+        subtitle="We're here to help with storage, hosting, or driving."
+        imageSrc={IMAGES.pages.contact}
+        imageAlt="MyStoreKE — get in touch"
+      />
 
       <main className="mx-auto max-w-3xl px-4 py-12">
-        <h1 className="text-3xl font-bold text-[var(--foreground)]">Contact Us</h1>
         <p className="mt-4 text-[var(--muted)]">
           Have a question about storage, hosting, or driving with MyStoreKE? Reach out and we’ll
           respond as soon as possible.

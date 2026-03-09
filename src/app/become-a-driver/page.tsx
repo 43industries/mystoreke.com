@@ -1,4 +1,6 @@
 import Link from "next/link";
+import PageHero from "@/components/PageHero";
+import { IMAGES } from "../images";
 import DriverApplicationForm from "./DriverApplicationForm";
 
 export const metadata = {
@@ -20,6 +22,12 @@ export default function BecomeADriverPage() {
           </nav>
         </div>
       </header>
+      <PageHero
+        title="Become a Driver"
+        subtitle="Join our network of verified delivery agents. Earn on your schedule."
+        imageSrc={IMAGES.pages.becomeDriver}
+        imageAlt="Parcel and delivery"
+      />
 
       <main className="mx-auto max-w-2xl px-4 py-12">
         <h1 className="text-3xl font-bold text-[var(--foreground)]">

@@ -1,4 +1,6 @@
 import Link from "next/link";
+import PageHero from "@/components/PageHero";
+import { IMAGES } from "../images";
 import HostListingForm from "./HostListingForm";
 
 export const metadata = {
@@ -20,6 +22,12 @@ export default function ListYourSpacePage() {
           </nav>
         </div>
       </header>
+      <PageHero
+        title="List Your Space"
+        subtitle="Earn by renting out your space or offering parcel drop-off."
+        imageSrc={IMAGES.pages.listYourSpace}
+        imageAlt="Residential storage and hosting"
+      />
       <HostListingForm />
     </div>
   );

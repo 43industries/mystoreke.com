@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Suspense } from "react";
+import PageHero from "@/components/PageHero";
+import { IMAGES } from "../images";
 import StorageSearch from "./StorageSearch";
 
 export const metadata = {
@@ -22,6 +24,12 @@ export default function StoragePage() {
           </nav>
         </div>
       </header>
+      <PageHero
+        title="Find Storage"
+        subtitle="Search by location and type. Compare options and book with confidence."
+        imageSrc={IMAGES.pages.storage}
+        imageAlt="Warehouse and storage space"
+      />
       <Suspense fallback={<div className="mx-auto max-w-6xl px-4 py-8 text-[var(--muted)]">Loading storage…</div>}>
         <StorageSearch />
       </Suspense>

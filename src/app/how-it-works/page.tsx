@@ -1,4 +1,6 @@
 import Link from "next/link";
+import PageHero from "@/components/PageHero";
+import { IMAGES } from "../images";
 
 export const metadata = {
   title: "How MyStoreKE Works",
@@ -21,9 +23,14 @@ export default function HowItWorksPage() {
           </nav>
         </div>
       </header>
+      <PageHero
+        title="How MyStoreKE Works"
+        subtitle="Renters, hosts, and drivers — one platform."
+        imageSrc={IMAGES.pages.howItWorks}
+        imageAlt="Organized storage and operations"
+      />
 
       <main className="mx-auto max-w-4xl px-4 py-12">
-        <h1 className="text-3xl font-bold text-[var(--foreground)]">How MyStoreKE Works</h1>
         <p className="mt-4 text-[var(--muted)]">
           MyStoreKE connects three sides of the marketplace: renters who need space, hosts with
           available storage, and drivers who move parcels between locations.

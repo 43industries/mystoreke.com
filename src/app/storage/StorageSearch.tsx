@@ -1,9 +1,24 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { IMAGES } from "../images";
 import { STORAGE_TYPES, STORAGE_TYPE_DETAILS, type StorageListing } from "./data";
+
+function listingImage(storageType: string): string {
+  const map: Record<string, string> = {
+    "Residential Storage": IMAGES.storage.residential,
+    "Commercial Storage": IMAGES.storage.commercial,
+    "Warehouse Storage": IMAGES.storage.commercial,
+    "Open Yard Storage": IMAGES.storage.yard,
+    "Shelf Storage": IMAGES.storage.shelf,
+    "Budget Units": IMAGES.storage.residential,
+    "Parcel Drop-Off Points": IMAGES.storage.parcel,
+  };
+  return map[storageType] ?? IMAGES.storage.commercial;
+}
 
 export default function StorageSearch() {
   const searchParams = useSearchParams();
@@ -303,10 +318,15 @@ export default function StorageSearch() {
               href={`/storage/${listing.id}`}
               className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--white)] shadow-sm ring-1 ring-transparent transition-all hover:-translate-y-1 hover:border-[var(--primary)]/25 hover:shadow-lg hover:ring-[var(--primary)]/15"
             >
-              <div className="relative aspect-[16/10] w-full bg-[var(--border)]">
-                <div className="absolute inset-0 flex items-center justify-center text-xs font-medium uppercase tracking-[0.18em] text-[var(--muted)]">
-                  Storage photo
-                </div>
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-[var(--border)]">
+                <Image
+                  src={listingImage(listing.storageType)}
+                  alt={listing.title}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  unoptimized
+                />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-80" />
                 <div className="pointer-events-none absolute left-3 top-3 inline-flex items-center gap-2 rounded-full bg-black/45 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.16em] text-white">
                   <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
