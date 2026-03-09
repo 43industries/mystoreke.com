@@ -29,6 +29,7 @@ export default function HostListingForm() {
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [roleError, setRoleError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     title: "",
     storageType: "",
@@ -70,6 +71,27 @@ export default function HostListingForm() {
   const totalSteps = offerParcelDropOff ? 6 : 5;
   const canNext = step < totalSteps;
   const canPrev = step > 1;
+
+  // Lightweight guard: check that the current user is a host.
+  // This runs once client-side when the component mounts.
+  if (typeof window !== "undefined" && supabaseBrowser && !roleError && !submitted) {
+    void (async () => {
+      const { data } = await supabaseBrowser.auth.getUser();
+      const userId = data.user?.id;
+      if (!userId) {
+        setRoleError("Please log in as a host to list your space.");
+        return;
+      }
+      const { data: profile } = await supabaseBrowser
+        .from("profiles")
+        .select("role")
+        .eq("id", userId)
+        .maybeSingle();
+      if (!profile || profile.role !== "host") {
+        setRoleError("Only host accounts can create listings. Sign up or update your role to Host.");
+      }
+    })();
+  }
 
   if (submitted) {
     return (
@@ -113,6 +135,16 @@ export default function HostListingForm() {
           ))}
         </div>
       </div>
+
+      {roleError && (
+        <div className="mb-6 rounded-lg bg-yellow-50 border border-yellow-200 px-4 py-3 text-sm text-yellow-900">
+          {roleError}{" "}
+          <Link href="/auth" className="font-medium text-[var(--primary)] hover:underline">
+            Go to account
+          </Link>
+          .
+        </div>
+      )}
 
       <form
         className="space-y-6"

@@ -50,6 +50,7 @@ export async function POST(request: Request) {
       endDate,
       durationUnit,
       totalPrice,
+      note,
     } = body;
 
     if (!renterId || !listingId || !startDate || !endDate || !durationUnit || !totalPrice) {
@@ -78,6 +79,7 @@ export async function POST(request: Request) {
       duration_unit: durationUnit,
       total_price: totalPrice,
       status: "pending",
+      note: note ?? null,
     });
 
     if (error) {
@@ -103,4 +105,55 @@ export async function POST(request: Request) {
     );
   }
 }
+
+export async function PATCH(request: Request) {
+  try {
+    const body = await request.json();
+    const { bookingId, status } = body;
+
+    if (!bookingId || !status) {
+      return NextResponse.json(
+        { message: "Missing bookingId or status" },
+        { status: 400 },
+      );
+    }
+
+    if (!["pending", "confirmed", "cancelled", "completed"].includes(status)) {
+      return NextResponse.json(
+        { message: "Invalid status" },
+        { status: 400 },
+      );
+    }
+
+    const supabase = getSupabaseServerClient();
+    if (!supabase) {
+      return NextResponse.json(
+        { message: "Database not configured" },
+        { status: 500 },
+      );
+    }
+
+    const { error } = await supabase
+      .from("bookings")
+      .update({ status })
+      .eq("id", bookingId);
+
+    if (error) {
+      // eslint-disable-next-line no-console
+      console.error("Error updating booking", error);
+      return NextResponse.json(
+        { message: "Failed to update booking" },
+        { status: 500 },
+      );
+    }
+
+    return NextResponse.json({ success: true }, { status: 200 });
+  } catch {
+    return NextResponse.json(
+      { message: "Invalid request body" },
+      { status: 400 },
+    );
+  }
+}
+
 

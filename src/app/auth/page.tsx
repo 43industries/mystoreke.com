@@ -8,6 +8,7 @@ export default function AuthPage() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState<"renter" | "host" | "driver">("renter");
   const [mode, setMode] = useState<"signup" | "login">("signup");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -32,6 +33,7 @@ export default function AuthPage() {
           options: {
             data: {
               full_name: fullName,
+              role,
             },
           },
         });
@@ -85,6 +87,24 @@ export default function AuthPage() {
                 className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
                 required
               />
+            </div>
+          )}
+          {mode === "signup" && (
+            <div>
+              <label className="mb-1 block text-sm font-medium text-[var(--foreground)]">
+                I am signing up as
+              </label>
+              <select
+                value={role}
+                onChange={(e) =>
+                  setRole(e.target.value as "renter" | "host" | "driver")
+                }
+                className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+              >
+                <option value="renter">Renter</option>
+                <option value="host">Host</option>
+                <option value="driver">Driver</option>
+              </select>
             </div>
           )}
           <div>
