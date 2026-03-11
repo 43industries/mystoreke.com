@@ -20,14 +20,33 @@ export default function Logo({
       className={`inline-flex items-center focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 rounded ${className}`}
       aria-label="MyStoreKE — Home"
     >
-      <Image
-        src="/logo.png"
-        alt="MyStoreKE"
-        width={width}
-        height={height}
-        priority
-        className="h-full w-auto object-contain object-left"
-      />
+      <div className="flex flex-col items-center">
+        <div
+          className={
+            variant === "header"
+              ? "h-8 overflow-hidden md:h-10"
+              : "h-12 overflow-hidden md:h-16"
+          }
+        >
+          <Image
+            src="/logo.png"
+            alt="MyStoreKE roof mark"
+            width={width}
+            height={height}
+            priority
+            className="h-full w-auto object-contain object-top"
+          />
+        </div>
+        <span
+          className={
+            variant === "header"
+              ? "mt-1 text-sm font-semibold tracking-wide text-white"
+              : "mt-2 text-lg font-semibold tracking-wide text-white"
+          }
+        >
+          MyStore
+        </span>
+      </div>
     </Link>
   );
 }

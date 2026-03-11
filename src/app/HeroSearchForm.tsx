@@ -30,9 +30,14 @@ export default function HeroSearchForm() {
       onSubmit={onSubmit}
       className="mx-auto mt-10 max-w-4xl rounded-2xl border border-[var(--border)] bg-[var(--white)] p-4 shadow-2xl shadow-[rgba(15,23,42,0.25)] md:p-6"
     >
-      <p className="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-[var(--muted)]">
-        Search storage near you
-      </p>
+      <div className="mb-4 text-center">
+        <p className="text-xs font-medium tracking-[0.12em] text-[var(--muted)]">
+          Search storage near you
+        </p>
+        <p className="mt-1 text-xs text-[var(--muted)]">
+          Choose location, type, duration and budget to see matching spaces.
+        </p>
+      </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-[2fr,1.5fr,1.5fr,1.5fr,auto]">
         <div>
           <label className="mb-1 block text-xs font-medium text-[var(--muted)]">

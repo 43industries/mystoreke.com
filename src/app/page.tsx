@@ -79,6 +79,18 @@ const FOCUS_BOXES: FocusBox[] = [
     ],
     image: IMAGES.storage.parcel,
   },
+  {
+    title: "Deliveries",
+    description:
+      "Door-to-door parcel pick-up and drop-at services coordinated with verified drivers on the MyStoreKE network.",
+    href: "/become-a-driver",
+    tagline: "For pick-up and drop-at",
+    highlights: [
+      "Request parcel pick-up from your location",
+      "Coordinate drop-at with trusted drivers and hosts",
+    ],
+    image: IMAGES.storage.parcel,
+  },
 ];
 
 const WHY_CHOOSE = [
