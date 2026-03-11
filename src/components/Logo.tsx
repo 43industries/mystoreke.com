@@ -24,8 +24,8 @@ export default function Logo({
         <div
           className={
             variant === "header"
-              ? "h-8 overflow-hidden md:h-10"
-              : "h-12 overflow-hidden md:h-16"
+              ? "h-8 overflow-hidden md:h-9"
+              : "h-12 overflow-hidden md:h-14"
           }
         >
           <Image
@@ -34,7 +34,7 @@ export default function Logo({
             width={width}
             height={height}
             priority
-            className="h-full w-auto object-contain object-top"
+            className="h-full w-auto object-cover object-top"
           />
         </div>
         <span

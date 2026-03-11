@@ -95,38 +95,43 @@ const FOCUS_BOXES: FocusBox[] = [
 
 const WHY_CHOOSE = [
   {
-    title: "Secure & Verified",
-    desc: "All spaces and drivers are verified. Your items and parcels are safe.",
+    label: "Properties",
+    value: "150+",
+    desc: "Storage spaces and parcel points across Kenya.",
     icon: (
-      <svg className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+      <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 9.75L12 4.5l9 5.25M4.5 10.5v9A1.5 1.5 0 006 21h12a1.5 1.5 0 001.5-1.5v-9" />
       </svg>
     ),
   },
   {
-    title: "Flexible Terms",
-    desc: "Rent by day, week, or month. Choose what works for you.",
+    label: "Customers",
+    value: "5,000+",
+    desc: "Renters and hosts who have used modern storage options.",
     icon: (
-      <svg className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+      <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.125A3.375 3.375 0 0018.375 15.75M12 14.25a3.375 3.375 0 10-3.375-3.375A3.375 3.375 0 0012 14.25zm0 0c-2.899 0-5.25 1.57-5.25 3.5V19.5h10.5v-1.75c0-1.93-2.351-3.5-5.25-3.5z" />
       </svg>
     ),
   },
   {
-    title: "Transparent Pricing",
-    desc: "No hidden fees. See total cost before you book.",
+    label: "Locations",
+    value: "20+",
+    desc: "Neighborhoods and towns with verified spaces and hosts.",
     icon: (
-      <svg className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75m15.75 0h.75a.75.75 0 01.75.75v.75m0 0h-3.375c-.621 0-1.125-.504-1.125-1.125" />
+      <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 10.5-7.5 10.5S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
       </svg>
     ),
   },
   {
-    title: "24/7 Support",
-    desc: "Round-the-clock customer support when you need it.",
+    label: "Average rating",
+    value: "4.8",
+    desc: "Hosts and drivers rated highly for reliability and service.",
     icon: (
-      <svg className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+      <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.5a.75.75 0 011.04 0l2.122 2.122a.75.75 0 00.53.22H18a.75.75 0 01.53 1.28l-1.592 1.592a.75.75 0 00-.22.53v2.828a.75.75 0 01-1.28.53L12 11.25l-3.438 3.437a.75.75 0 01-1.28-.53V11.33a.75.75 0 00-.22-.53L5.47 8.622A.75.75 0 016 7.342h2.828a.75.75 0 00.53-.22L11.48 3.5z" />
       </svg>
     ),
   },
@@ -396,26 +401,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose Mystore - with graphics */}
+      {/* Why Choose MyStoreKE - metrics row */}
       <section className="border-t border-[var(--border)] bg-[var(--white)] px-4 py-16">
         <div className="mx-auto max-w-6xl">
           <h2 className="text-center text-2xl font-semibold text-[var(--foreground)]">
             Why Choose MyStoreKE
           </h2>
           <p className="mt-2 text-center text-[var(--muted)]">
-            Secure, modern, and built for trust
+            Clear numbers behind our storage and parcel network.
           </p>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {WHY_CHOOSE.map(({ title, desc, icon }) => (
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {WHY_CHOOSE.map(({ label, value, desc, icon }) => (
               <div
-                key={title}
-                className="rounded-xl border border-[var(--border)] p-6"
+                key={label}
+                className="rounded-2xl border border-[var(--border)] bg-[#FFF9F5] p-5 text-center shadow-sm"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--primary)]/10 text-[var(--primary)]">
+                <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent)]/10 text-[var(--accent)]">
                   {icon}
                 </div>
-                <h3 className="mt-4 font-semibold text-[var(--foreground)]">{title}</h3>
-                <p className="mt-2 text-sm text-[var(--muted)]">{desc}</p>
+                <div className="text-xl font-semibold text-[var(--foreground)]">
+                  {value}
+                </div>
+                <div className="mt-1 text-xs font-medium uppercase tracking-[0.16em] text-[var(--muted)]">
+                  {label}
+                </div>
+                <p className="mt-2 text-xs text-[var(--muted)]">
+                  {desc}
+                </p>
               </div>
             ))}
           </div>
