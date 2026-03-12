@@ -293,18 +293,32 @@ export default function Home() {
     <div className="min-h-screen bg-[var(--background)]">
       <SiteHeader variant="home" />
 
-      {/* Hero - 1st Blue Page: big warehouse photo, headline, tagline, then search */}
+      {/* Hero - 1st Blue Page: photos, headline, tagline, then search */}
       <section className="relative overflow-hidden bg-[var(--primary)] px-4 pb-20 pt-12 text-[var(--white)] md:pt-16">
         <div className="mx-auto max-w-6xl">
           {/* Category slides — warehouse, commercial, residential, yard, shelf, parcel */}
           <HeroCarousel />
           <div className="mt-8 text-center">
-            <h1 className="text-lg font-bold tracking-tight md:text-xl lg:text-2xl">
+            <h1 className="text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
               Smart Storage for Every Need
             </h1>
             <p className="mt-4 max-w-2xl mx-auto text-base opacity-95 md:text-lg">
               Secure storage, parcel pickup and drop-off, and deliveries — all in one Mystore platform.
             </p>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <Link
+                href="/storage"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-6 py-2.5 text-sm font-semibold text-[var(--accent-foreground)] shadow-sm hover:bg-[var(--accent-hover)]"
+              >
+                Find storage near me
+              </Link>
+              <Link
+                href="/list-your-space"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/60 bg-white/5 px-6 py-2.5 text-sm font-semibold text-white hover:bg-white/10"
+              >
+                List your space
+              </Link>
+            </div>
           </div>
           {/* Search box */}
           <HeroSearchForm />
