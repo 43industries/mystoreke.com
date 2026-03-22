@@ -1,41 +1,37 @@
 /**
- * Site image paths — change these to switch photos.
- * Use paths like "/your-photo.jpg" for files in public/, or full URLs for external images.
+ * Site image paths — files in `public/` or Unsplash URLs.
  */
 
-/** Delivery van — parcel / drop-off (Unsplash: Autotrader UK) */
+/** Delivery van — parcel / deliveries */
 const PARCEL_VAN =
-  "https://images.unsplash.com/photo-1768393775846-6d0bd756a847?w=1200&q=80";
+  "https://images.unsplash.com/photo-1768393775846-6d0bd756a847?w=1200&q=85&auto=format&fit=crop";
 
-/** Home garage — residential storage (Unsplash: Parker Coffman) */
+/** Home garage — residential storage */
 const RESIDENTIAL_GARAGE =
-  "https://images.unsplash.com/photo-1704833414862-ee79382c146f?w=1200&q=80";
+  "https://images.unsplash.com/photo-1704833414862-ee79382c146f?w=1200&q=85&auto=format&fit=crop";
 
-/** Clear warehouse hero — landing page (Unsplash: Adrien Olichon) */
+/** Hero / warehouse — sharp, well-lit distribution-style photo */
 const WAREHOUSE_HERO =
-  "https://images.unsplash.com/photo-1770910278198-eed8b040554b?w=1400&q=85";
+  "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1600&q=90&auto=format&fit=crop";
 
 export const IMAGES = {
-  /** Hero section (first blue block) — clear warehouse photo */
   hero: WAREHOUSE_HERO,
 
-  /** Service cards on homepage */
   storage: {
-    commercial: "/storage-commercial.jpg",
+    commercial: "/storage-commercial.svg",
     residential: RESIDENTIAL_GARAGE,
-    yard: "/storage-yard.png",
-    shelf: "/storage-shelf.png",
+    yard: "/storage-yard.svg",
+    shelf: "/storage-shelf.svg",
     parcel: PARCEL_VAN,
   },
 
-  /** Page hero banners — used on Find Storage, List Your Space, etc. */
   pages: {
     storage: WAREHOUSE_HERO,
     listYourSpace: RESIDENTIAL_GARAGE,
     becomeDriver: PARCEL_VAN,
     about: WAREHOUSE_HERO,
-    howItWorks: "/storage-shelf.png",
-    contact: "/storage-commercial.jpg",
+    howItWorks: "/storage-shelf.svg",
+    contact: WAREHOUSE_HERO,
     parcelDropOff: PARCEL_VAN,
   },
 } as const;

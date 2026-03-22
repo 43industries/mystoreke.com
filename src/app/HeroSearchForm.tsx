@@ -31,10 +31,10 @@ export default function HeroSearchForm() {
       className="mx-auto mt-10 max-w-4xl rounded-2xl border border-[var(--border)] bg-[var(--white)] p-4 shadow-2xl shadow-[rgba(15,23,42,0.25)] md:p-6"
     >
       <div className="mb-4 text-center">
-        <p className="text-xs font-medium tracking-[0.12em] text-[var(--muted)]">
+        <p className="text-sm font-medium text-[var(--foreground)] normal-case">
           Search storage near you
         </p>
-        <p className="mt-1 text-xs text-[var(--muted)]">
+        <p className="mt-1 text-xs text-[var(--muted)] normal-case">
           Choose location, type, duration and budget to see matching spaces.
         </p>
       </div>
@@ -48,7 +48,7 @@ export default function HeroSearchForm() {
             placeholder="City or area"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+            className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-center text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
           />
         </div>
         <div className="flex flex-col justify-end">
@@ -69,7 +69,7 @@ export default function HeroSearchForm() {
           <select
             value={storageType}
             onChange={(e) => setStorageType(e.target.value)}
-            className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+            className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-center text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
           >
             <option value="">Any type</option>
             <option value="residential">Residential</option>
@@ -88,7 +88,7 @@ export default function HeroSearchForm() {
           <select
             value={duration}
             onChange={(e) => setDuration(e.target.value)}
-            className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+            className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-center text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
           >
             <option value="day">Per Day</option>
             <option value="week">Per Week</option>
@@ -102,7 +102,7 @@ export default function HeroSearchForm() {
           <select
             value={priceBand}
             onChange={(e) => setPriceBand(e.target.value)}
-            className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+            className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-center text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
           >
             <option value="">Any budget</option>
             <option value="lt10k">Below KES 10,000</option>
@@ -116,7 +116,7 @@ export default function HeroSearchForm() {
             type="submit"
             className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--accent-foreground)] shadow-sm transition-transform transition-colors hover:-translate-y-0.5 hover:bg-[var(--accent-hover)]"
           >
-            <span>Search Storage</span>
+            <span>Search storage</span>
             <span aria-hidden>🔍</span>
           </button>
         </div>

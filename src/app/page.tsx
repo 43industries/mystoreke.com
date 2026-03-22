@@ -1,4 +1,5 @@
 import Link from "next/link";
+import HeroCarousel from "./HeroCarousel";
 import HeroSearchForm from "./HeroSearchForm";
 import Logo from "@/components/Logo";
 import { IMAGES } from "./images";
@@ -86,8 +87,8 @@ const FOCUS_BOXES: FocusBox[] = [
     href: "/become-a-driver",
     tagline: "For drivers, riders, and senders",
     highlights: [
-      "Request pickup from your address or a nearby host",
-      "Deliver to a receiver address, host point, or courier handoff",
+      "Pick up and drop at: your address, a host point, or the receiver",
+      "Book pickup and drop-off in one flow as we roll out deliveries",
     ],
     image: IMAGES.storage.parcel,
   },
@@ -254,16 +255,8 @@ export default function Home() {
       {/* Hero - 1st Blue Page: big warehouse photo, headline, tagline, then search */}
       <section className="relative overflow-hidden bg-[var(--primary)] px-4 pb-20 pt-12 text-[var(--white)] md:pt-16">
         <div className="mx-auto max-w-6xl">
-          {/* Big warehouse photo */}
-          <div className="relative mx-auto max-w-5xl overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={IMAGES.hero}
-              alt="Modern warehouse — secure storage, shelving, and logistics"
-              className="h-48 w-full object-cover md:h-64 lg:h-80"
-              fetchPriority="high"
-            />
-          </div>
+          {/* Category slides — warehouse, commercial, residential, yard, shelf, parcel */}
+          <HeroCarousel />
           <div className="mt-8 text-center">
             <h1 className="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
               Smart Storage for Every Need
