@@ -15,6 +15,7 @@ export async function POST(request: Request) {
       areasServed,
       availability,
       message,
+      photoDataUrl,
     } = body;
 
     if (!fullName || !email || !phone || !idNumber || !vehicleType || !licensePlate || !areasServed || !availability) {
@@ -23,6 +24,16 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
+
+    if (!photoDataUrl || typeof photoDataUrl !== "string" || photoDataUrl.length < 100) {
+      return NextResponse.json(
+        { message: "A current photo is required (photoDataUrl)." },
+        { status: 400 }
+      );
+    }
+
+    const photoUrl =
+      photoDataUrl.length > 500_000 ? photoDataUrl.slice(0, 500_000) : photoDataUrl;
 
     const application = {
       fullName,
@@ -52,6 +63,7 @@ export async function POST(request: Request) {
         areas_served: application.areasServed,
         availability: application.availability,
         message: application.message,
+        photo_url: photoUrl,
       });
 
       if (error) {

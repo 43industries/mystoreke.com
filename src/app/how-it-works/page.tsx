@@ -3,9 +3,9 @@ import PageHero from "@/components/PageHero";
 import { IMAGES } from "../images";
 
 export const metadata = {
-  title: "How MyStoreKE Works",
+  title: "How Mystore Works",
   description:
-    "Understand how renters, hosts, and drivers use MyStoreKE to find storage and move parcels.",
+    "Understand how renters, hosts, and drivers use Mystore to find storage and move parcels.",
 };
 
 export default function HowItWorksPage() {
@@ -14,17 +14,17 @@ export default function HowItWorksPage() {
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)]">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
           <Link href="/" className="text-lg font-bold text-[var(--accent)]">
-            MyStoreKE
+            Mystore
           </Link>
           <nav className="flex gap-4 text-sm font-medium text-white/90">
             <Link href="/storage" className="hover:text-white">Find Storage</Link>
             <Link href="/list-your-space" className="hover:text-white">List Your Space</Link>
-            <Link href="/become-a-driver" className="hover:text-white">Become a Driver</Link>
+            <Link href="/become-a-driver" className="hover:text-white">Become Driver/Rider</Link>
           </nav>
         </div>
       </header>
       <PageHero
-        title="How MyStoreKE Works"
+        title="How Mystore Works"
         subtitle="Renters, hosts, and drivers — one platform."
         imageSrc={IMAGES.pages.howItWorks}
         imageAlt="Organized storage and operations"
@@ -32,7 +32,7 @@ export default function HowItWorksPage() {
 
       <main className="mx-auto max-w-4xl px-4 py-12">
         <p className="mt-4 text-[var(--muted)]">
-          MyStoreKE connects three sides of the marketplace: renters who need space, hosts with
+          Mystore connects three sides of the marketplace: renters who need space, hosts with
           available storage, and drivers who move parcels between locations.
         </p>
 
@@ -56,7 +56,7 @@ export default function HowItWorksPage() {
             <ol className="list-decimal space-y-2 pl-4 text-sm text-[var(--muted)]">
               <li>Describe your space and upload photos.</li>
               <li>Set pricing, access hours, and security options.</li>
-              <li>Optionally enable parcel drop-off to earn more.</li>
+              <li>Optionally enable parcel pickup &amp; drop-off so drivers and riders can coordinate handoffs.</li>
             </ol>
             <Link
               href="/list-your-space"
@@ -66,7 +66,7 @@ export default function HowItWorksPage() {
             </Link>
           </div>
           <div className="space-y-3 rounded-xl border border-[var(--border)] bg-[var(--white)] p-5">
-            <h2 className="text-lg font-semibold text-[var(--foreground)]">For deliveries</h2>
+            <h2 className="text-lg font-semibold text-[var(--foreground)]">Pickup & Deliveries</h2>
             <ol className="list-decimal space-y-2 pl-4 text-sm text-[var(--muted)]">
               <li>Apply once with your details and vehicle type.</li>
               <li>Get verified and receive parcel jobs.</li>
@@ -76,7 +76,7 @@ export default function HowItWorksPage() {
               href="/become-a-driver"
               className="mt-3 inline-block text-sm font-medium text-[var(--primary)] hover:underline"
             >
-              Become a driver →
+              Become Driver/Rider →
             </Link>
           </div>
         </section>
@@ -84,7 +84,7 @@ export default function HowItWorksPage() {
         <section className="mt-10 space-y-3">
           <h2 className="text-xl font-semibold text-[var(--foreground)]">Security & trust</h2>
           <p className="text-sm text-[var(--muted)]">
-            MyStoreKE encourages hosts to provide clear security features (CCTV, guards, locked
+            Mystore encourages hosts to provide clear security features (CCTV, guards, locked
             units, gated yards) and transparent terms. Renters should always review listings
             carefully and keep written agreements and inventories for long-term storage.
           </p>

@@ -4,7 +4,7 @@ import { IMAGES } from "../images";
 import DriverApplicationForm from "./DriverApplicationForm";
 
 export const metadata = {
-  title: "Become a Driver — MyStoreKE",
+  title: "Become Driver/Rider — Mystore",
   description: "Join as a verified delivery agent. Handle parcel pickup and drop-off. Earn on your schedule.",
 };
 
@@ -14,7 +14,7 @@ export default function BecomeADriverPage() {
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)]">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
           <Link href="/" className="text-lg font-bold text-[var(--accent)]">
-            MyStoreKE
+            Mystore
           </Link>
           <nav className="flex gap-4 text-sm font-medium text-white/90">
             <Link href="/storage" className="hover:text-white">Find Storage</Link>
@@ -23,7 +23,7 @@ export default function BecomeADriverPage() {
         </div>
       </header>
       <PageHero
-        title="Become a Driver"
+        title="Become Driver/Rider"
         subtitle="Join our network of verified delivery agents. Earn on your schedule."
         imageSrc={IMAGES.pages.becomeDriver}
         imageAlt="Parcel and delivery"
@@ -31,12 +31,16 @@ export default function BecomeADriverPage() {
 
       <main className="mx-auto max-w-2xl px-4 py-12">
         <h1 className="text-3xl font-bold text-[var(--foreground)]">
-          Become a Driver
+          Become Driver/Rider
         </h1>
         <p className="mt-4 text-[var(--muted)]">
           Join our network of verified delivery agents. Pick up and drop off parcels for renters and hosts. Set your availability and get paid per delivery.
         </p>
         <ul className="mt-8 space-y-3 text-[var(--foreground)]">
+          <li className="flex gap-3">
+            <span className="text-[var(--accent)]">✓</span>
+            Current photo required — take one live with your camera or upload
+          </li>
           <li className="flex gap-3">
             <span className="text-[var(--accent)]">✓</span>
             Flexible hours — work when you want
@@ -59,7 +63,7 @@ export default function BecomeADriverPage() {
           href="/"
           className="mt-8 inline-block text-sm font-medium text-[var(--primary)] hover:underline"
         >
-          ← Back to MyStoreKE
+          ← Back to Mystore
         </Link>
       </main>
     </div>

@@ -3,8 +3,8 @@ import PageHero from "@/components/PageHero";
 import { IMAGES } from "../images";
 
 export const metadata = {
-  title: "Contact MyStoreKE",
-  description: "Get in touch with the MyStoreKE team for support, partnerships, or questions.",
+  title: "Contact Mystore",
+  description: "Get in touch with the Mystore team for support, partnerships, or questions.",
 };
 
 export default function ContactPage() {
@@ -13,12 +13,12 @@ export default function ContactPage() {
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)]">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
           <Link href="/" className="text-lg font-bold text-[var(--accent)]">
-            MyStoreKE
+            Mystore
           </Link>
           <nav className="flex gap-4 text-sm font-medium text-white/90">
             <Link href="/storage" className="hover:text-white">Find Storage</Link>
             <Link href="/list-your-space" className="hover:text-white">List Your Space</Link>
-            <Link href="/become-a-driver" className="hover:text-white">Become a Driver</Link>
+            <Link href="/become-a-driver" className="hover:text-white">Become Driver/Rider</Link>
           </nav>
         </div>
       </header>
@@ -26,12 +26,12 @@ export default function ContactPage() {
         title="Contact Us"
         subtitle="We're here to help with storage, hosting, or driving."
         imageSrc={IMAGES.pages.contact}
-        imageAlt="MyStoreKE — get in touch"
+        imageAlt="Mystore — get in touch"
       />
 
       <main className="mx-auto max-w-3xl px-4 py-12">
         <p className="mt-4 text-[var(--muted)]">
-          Have a question about storage, hosting, or driving with MyStoreKE? Reach out and we’ll
+          Have a question about storage, hosting, or driving with Mystore? Reach out and we’ll
           respond as soon as possible.
         </p>
 

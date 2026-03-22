@@ -14,7 +14,7 @@ function listingImage(storageType: string): string {
     "Open Yard Storage": IMAGES.storage.yard,
     "Shelf Storage": IMAGES.storage.shelf,
     "Budget Units": IMAGES.storage.residential,
-    "Parcel Drop-Off Points": IMAGES.storage.parcel,
+    "Pickup & Drop-Off Point Vendor": IMAGES.storage.parcel,
   };
   return map[storageType] ?? IMAGES.storage.commercial;
 }
@@ -158,7 +158,7 @@ export default function StorageSearch() {
           href="/"
           className="text-sm font-medium text-[var(--primary)] hover:underline"
         >
-          ← Back to MyStoreKE
+          ← Back to Mystore
         </Link>
         <h1 className="mt-4 text-2xl font-bold text-[var(--foreground)]">
           Find Storage

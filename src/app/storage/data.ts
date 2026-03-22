@@ -5,7 +5,7 @@ export const STORAGE_TYPES = [
   "Open Yard Storage",
   "Shelf Storage",
   "Budget Units",
-  "Parcel Drop-Off Points",
+  "Pickup & Drop-Off Point Vendor",
 ] as const;
 
 export type StorageType = (typeof STORAGE_TYPES)[number];
@@ -56,10 +56,10 @@ export const STORAGE_TYPE_DETAILS: Record<
     idealUse: "Price‑sensitive storage, students, short‑term overflow.",
   },
   parcel: {
-    label: "Parcel Drop-Off Points",
+    label: "Pickup & Drop-Off Point Vendor",
     description:
-      "Verified locations where customers can drop or pick up parcels. Hosts handle check‑in and short‑term holding of parcels, often integrated with local delivery routes.",
-    idealUse: "Short‑term parcel holding and pickup/drop‑off.",
+      "Verified counters and shops that act as pickup and drop-off points for parcels — so senders, hosts, and drivers can hand over or collect packages with clear addresses and hours.",
+    idealUse: "Parcel holding, customer pickup, and handoff to drivers or third-party couriers.",
   },
 };
 
@@ -163,8 +163,8 @@ export const MOCK_LISTINGS: StorageListing[] = [
   },
   {
     id: "6",
-    title: "Parcel drop-off point — CBD",
-    storageType: "Parcel Drop-Off Points",
+    title: "Pickup & drop-off point — CBD",
+    storageType: "Pickup & Drop-Off Point Vendor",
     city: "Nairobi",
     county: "Nairobi",
     size: 0,

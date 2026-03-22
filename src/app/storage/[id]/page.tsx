@@ -14,7 +14,7 @@ function listingImage(storageType: string): string {
     "Open Yard Storage": IMAGES.storage.yard,
     "Shelf Storage": IMAGES.storage.shelf,
     "Budget Units": IMAGES.storage.residential,
-    "Parcel Drop-Off Points": IMAGES.storage.parcel,
+    "Pickup & Drop-Off Point Vendor": IMAGES.storage.parcel,
   };
   return map[storageType] ?? IMAGES.storage.commercial;
 }
@@ -37,7 +37,7 @@ export default async function StorageDetailPage({
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)]">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
           <Link href="/" className="text-lg font-bold text-[var(--accent)]">
-            MyStoreKE
+            Mystore
           </Link>
           <nav className="flex gap-4 text-sm font-medium text-white/90">
             <Link href="/storage" className="hover:text-white">Find Storage</Link>
@@ -81,11 +81,11 @@ export default async function StorageDetailPage({
               ))}
               {listing.parcelDropOff && (
                 <span className="rounded bg-[var(--accent)]/10 px-2 py-1 text-xs font-medium text-[var(--accent)]">
-                  Parcel drop-off
+                  Parcel pickup & drop-off
                 </span>
               )}
             </div>
-            <div className="mt-6 flex items-center gap-4">
+            <div className="mt-6 flex flex-wrap items-center gap-4">
               <span className="text-xl font-bold text-[var(--primary)]">
                 KES {listing.pricePerMonth.toLocaleString()}/month
               </span>
@@ -95,7 +95,9 @@ export default async function StorageDetailPage({
             </div>
             <BookingButton
               listingId={listing.id}
-              monthlyPrice={listing.pricePerMonth}
+              pricePerDay={listing.pricePerDay}
+              pricePerWeek={listing.pricePerWeek}
+              pricePerMonth={listing.pricePerMonth}
             />
           </div>
         </div>

@@ -5,6 +5,6 @@
   <rect x="280" y="180" width="80" height="50" rx="4" fill="#ffcb05"/>
   <circle cx="320" cy="260" r="20" fill="none" stroke="#ffcb05" stroke-width="2"/>
   <path d="M310 260 L318 268 L332 252" stroke="#ffcb05" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  <text x="320" y="318" text-anchor="middle" fill="#ffcb05" font-family="system-ui,sans-serif" font-size="24" font-weight="600">Parcel Drop-Off</text>
+  <text x="320" y="318" text-anchor="middle" fill="#ffcb05" font-family="system-ui,sans-serif" font-size="24" font-weight="600">Pickup &amp; Drop-Off</text>
   <text x="320" y="342" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="system-ui,sans-serif" font-size="14">Send & receive nationwide</text>
 </svg>

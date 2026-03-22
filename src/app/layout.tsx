@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MyStoreKE — Smart Storage & Parcel Drop-Off",
-  description: "Find secure storage spaces, drop parcels safely, or earn by delivering. Kenya's marketplace for storage rental and parcel delivery.",
+  title: "Mystore — Smart Storage & Parcel Pickup / Drop-Off",
+  description:
+    "Find secure storage, parcel pickup and drop-off points, and drivers or riders. Kenya's marketplace for storage and logistics.",
 };
 
 export default function RootLayout({

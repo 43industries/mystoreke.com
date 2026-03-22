@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Privacy Policy — MyStoreKE",
-  description: "Overview of how MyStoreKE handles data and privacy for renters, hosts, and drivers.",
+  title: "Privacy Policy — Mystore",
+  description: "Overview of how Mystore handles data and privacy for renters, hosts, and drivers.",
 };
 
 export default function PrivacyPage() {
@@ -11,12 +11,12 @@ export default function PrivacyPage() {
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)]">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
           <Link href="/" className="text-lg font-bold text-[var(--accent)]">
-            MyStoreKE
+            Mystore
           </Link>
           <nav className="flex gap-4 text-sm font-medium text-white/90">
             <Link href="/storage" className="hover:text-white">Find Storage</Link>
             <Link href="/list-your-space" className="hover:text-white">List Your Space</Link>
-            <Link href="/become-a-driver" className="hover:text-white">Become a Driver</Link>
+            <Link href="/become-a-driver" className="hover:text-white">Become Driver/Rider</Link>
           </nav>
         </div>
       </header>

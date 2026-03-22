@@ -3,9 +3,9 @@ import PageHero from "@/components/PageHero";
 import { IMAGES } from "../images";
 
 export const metadata = {
-  title: "About MyStoreKE",
+  title: "About Mystore",
   description:
-    "Learn how MyStoreKE connects renters, hosts, and drivers across Kenya for storage and parcel movement.",
+    "Learn how Mystore connects renters, hosts, and drivers across Kenya for storage and parcel movement.",
 };
 
 export default function AboutPage() {
@@ -14,25 +14,25 @@ export default function AboutPage() {
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)]">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
           <Link href="/" className="text-lg font-bold text-[var(--accent)]">
-            MyStoreKE
+            Mystore
           </Link>
           <nav className="flex gap-4 text-sm font-medium text-white/90">
             <Link href="/storage" className="hover:text-white">Find Storage</Link>
             <Link href="/list-your-space" className="hover:text-white">List Your Space</Link>
-            <Link href="/become-a-driver" className="hover:text-white">Become a Driver</Link>
+            <Link href="/become-a-driver" className="hover:text-white">Become Driver/Rider</Link>
           </nav>
         </div>
       </header>
       <PageHero
-        title="About MyStoreKE"
+        title="About Mystore"
         subtitle="Connecting renters, hosts, and drivers across Kenya."
         imageSrc={IMAGES.pages.about}
-        imageAlt="MyStoreKE storage and logistics"
+        imageAlt="Mystore storage and logistics"
       />
 
       <main className="mx-auto max-w-3xl px-4 py-12">
         <p className="mt-4 text-[var(--muted)]">
-          MyStoreKE is a marketplace for storage and parcel movement in Kenya. We bring together
+          Mystore is a marketplace for storage and parcel movement in Kenya. We bring together
           people who need extra space, businesses that run warehouses or yards, and drivers who
           move goods between cities and estates.
         </p>
@@ -61,7 +61,7 @@ export default function AboutPage() {
         </section>
 
         <section className="mt-10 space-y-4">
-          <h2 className="text-xl font-semibold text-[var(--foreground)]">How MyStoreKE works</h2>
+          <h2 className="text-xl font-semibold text-[var(--foreground)]">How Mystore works</h2>
           <p className="text-[var(--muted)]">
             We provide the digital infrastructure: listings, search, bookings, and communication.
             Hosts and drivers focus on offering reliable service on the ground, while renters enjoy

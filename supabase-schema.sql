@@ -1,4 +1,4 @@
--- Listings table for MyStoreKE
+-- Listings table for Mystore
 create table if not exists public.listings (
   id uuid primary key default gen_random_uuid(),
   title text not null,
@@ -46,6 +46,10 @@ create table if not exists public.driver_applications (
   areas_served text not null,
   availability text not null,
   message text,
+  photo_url text,
   submitted_at timestamptz not null default now()
 );
+
+-- If you created driver_applications before photo_url existed:
+-- alter table public.driver_applications add column if not exists photo_url text;
 

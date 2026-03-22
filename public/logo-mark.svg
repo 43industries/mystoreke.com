@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <title>Mystore mark</title>
+  <!-- Roof -->
+  <path
+    d="M24 4L6 16h6v26h24V16h6L24 4z"
+    fill="#ffcb05"
+  />
+  <!-- Door -->
+  <rect x="20" y="28" width="8" height="14" rx="1" fill="#00274c" />
+  <!-- Windows -->
+  <rect x="11" y="20" width="6" height="5" rx="0.5" fill="#00274c" />
+  <rect x="31" y="20" width="6" height="5" rx="0.5" fill="#00274c" />
+</svg>

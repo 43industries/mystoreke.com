@@ -11,7 +11,7 @@ const STORAGE_TYPES = [
   "Open Yard Storage",
   "Shelf Storage",
   "Budget Units",
-  "Parcel Drop-Off Points",
+  "Pickup & Drop-Off Point Vendor",
 ];
 
 const STEPS = [
@@ -20,7 +20,7 @@ const STEPS = [
   "Pricing",
   "Photos",
   "Location",
-  "Parcel Drop-Off (Optional)",
+  "Parcel Pickup & Drop-Off (Optional)",
 ];
 
 export default function HostListingForm() {
@@ -105,7 +105,7 @@ export default function HostListingForm() {
             href="/"
             className="mt-6 inline-block rounded-lg bg-[var(--primary)] px-5 py-2.5 text-sm font-medium text-white hover:bg-[var(--primary-hover)]"
           >
-            Back to MyStoreKE
+            Back to Mystore
           </Link>
         </div>
       </div>
@@ -116,7 +116,7 @@ export default function HostListingForm() {
     <div className="mx-auto max-w-2xl px-4 py-8">
       <div className="mb-8">
         <Link href="/" className="text-sm font-medium text-[var(--primary)] hover:underline">
-          ← Back to MyStoreKE
+          ← Back to Mystore
         </Link>
         <h1 className="mt-2 text-2xl font-semibold text-[var(--foreground)]">
           List Your Space
@@ -526,16 +526,21 @@ export default function HostListingForm() {
                   onChange={(e) => setOfferParcelDropOff(e.target.checked)}
                   className="rounded border-[var(--border)] text-[var(--primary)] focus:ring-[var(--primary)]"
                 />
-                <span className="text-sm font-medium text-[var(--foreground)]">I also want to offer parcel drop-off at this location</span>
+                <span className="text-sm font-medium text-[var(--foreground)]">
+                  Enable drivers and riders to coordinate parcel collection (pickup and drop-off) at this location
+                </span>
               </label>
             )}
           </div>
         )}
 
-        {/* Step 6: Parcel Drop-Off (Optional) */}
+        {/* Step 6: Parcel Pickup & Drop-Off (Optional) — host-side */}
         {step === 6 && (
           <div className="space-y-6 rounded-xl border border-[var(--border)] bg-[var(--white)] p-6">
-            <h2 className="text-lg font-semibold text-[var(--foreground)]">Parcel Drop-Off Details</h2>
+            <h2 className="text-lg font-semibold text-[var(--foreground)]">Parcel Pickup & Drop-Off (Host)</h2>
+            <p className="text-sm text-[var(--muted)]">
+              Offer a parcel box or counter so drivers and riders can coordinate pickup and drop-off with senders and receivers. Set limits and fees below.
+            </p>
             <div>
               <label className="mb-1 block text-sm font-medium text-[var(--foreground)]">Max parcel size</label>
               <input

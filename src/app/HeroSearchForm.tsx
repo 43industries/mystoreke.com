@@ -59,7 +59,7 @@ export default function HeroSearchForm() {
               onChange={(e) => setParcelOnly(e.target.checked)}
               className="h-4 w-4 rounded border-[var(--border)] text-[var(--accent)] focus:ring-[var(--accent)]"
             />
-            <span>Only show parcel drop-off locations</span>
+            <span>Only show parcel pickup &amp; drop-off locations</span>
           </label>
         </div>
         <div>
@@ -78,7 +78,7 @@ export default function HeroSearchForm() {
             <option value="yard">Open Yard</option>
             <option value="shelf">Shelf</option>
             <option value="budget">Budget</option>
-            <option value="parcel">Parcel Drop-Off</option>
+            <option value="parcel">Pickup &amp; Drop-Off Point Vendor</option>
           </select>
         </div>
         <div>

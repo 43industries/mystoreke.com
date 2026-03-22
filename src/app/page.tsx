@@ -68,26 +68,26 @@ const FOCUS_BOXES: FocusBox[] = [
     image: IMAGES.storage.shelf,
   },
   {
-    title: "Drop‑Off Points",
+    title: "Pickup & Drop-Off Point Vendor",
     description:
-      "Verified counters and kiosks where customers and business owners can leave or collect parcels and goods — from small packages to loads moved by lorries across the country.",
+      "Verified counters and shops that act as pickup and drop-off points — clear hours for handoffs between customers, hosts, drivers, and third-party couriers.",
     href: "/storage?type=parcel",
-    tagline: "For nationwide parcel movement",
+    tagline: "For parcel pickup & drop-off",
     highlights: [
-      "Supports customer and business parcel drop‑off for delivery across Kenya",
-      "Works with riders, vans, and lorries for regional and national transport",
+      "Nationwide parcel movement with riders, vans, and lorries",
+      "Hosts coordinate safely with drivers and senders",
     ],
     image: IMAGES.storage.parcel,
   },
   {
-    title: "Deliveries",
+    title: "Pickup & Deliveries",
     description:
-      "Door-to-door parcel pick-up and drop-at services coordinated with verified drivers on the MyStoreKE network.",
+      "Door-to-door pickup and delivery coordinated with verified drivers and riders on the Mystore network.",
     href: "/become-a-driver",
-    tagline: "For pick-up and drop-at",
+    tagline: "For drivers, riders, and senders",
     highlights: [
-      "Request parcel pick-up from your location",
-      "Coordinate drop-at with trusted drivers and hosts",
+      "Request pickup from your address or a nearby host",
+      "Deliver to a receiver address, host point, or courier handoff",
     ],
     image: IMAGES.storage.parcel,
   },
@@ -95,43 +95,42 @@ const FOCUS_BOXES: FocusBox[] = [
 
 const WHY_CHOOSE = [
   {
-    label: "Properties",
-    value: "150+",
-    desc: "Storage spaces and parcel points across Kenya.",
+    label: "Verified listings",
+    value: "Trust",
+    desc: "Hosts and drivers are reviewed so storage and deliveries stay safe and transparent.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 9.75L12 4.5l9 5.25M4.5 10.5v9A1.5 1.5 0 006 21h12a1.5 1.5 0 001.5-1.5v-9" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
       </svg>
     ),
   },
   {
-    label: "Customers",
-    value: "5,000+",
-    desc: "Renters and hosts who have used modern storage options.",
+    label: "Clear pricing",
+    value: "KES",
+    desc: "See storage and parcel fees before you book — no hidden charges on listed rates.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.125A3.375 3.375 0 0018.375 15.75M12 14.25a3.375 3.375 0 10-3.375-3.375A3.375 3.375 0 0012 14.25zm0 0c-2.899 0-5.25 1.57-5.25 3.5V19.5h10.5v-1.75c0-1.93-2.351-3.5-5.25-3.5z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m0-12.75H21" />
       </svg>
     ),
   },
   {
-    label: "Locations",
-    value: "20+",
-    desc: "Neighborhoods and towns with verified spaces and hosts.",
+    label: "All in one place",
+    value: "3-in-1",
+    desc: "Storage units, pickup & drop-off points, and driver/rider deliveries on a single platform.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 10.5-7.5 10.5S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
       </svg>
     ),
   },
   {
-    label: "Average rating",
-    value: "4.8",
-    desc: "Hosts and drivers rated highly for reliability and service.",
+    label: "Built for Kenya",
+    value: "24/7",
+    desc: "List, book, and track jobs from your phone — ready for M-Pesa and local logistics.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.5a.75.75 0 011.04 0l2.122 2.122a.75.75 0 00.53.22H18a.75.75 0 01.53 1.28l-1.592 1.592a.75.75 0 00-.22.53v2.828a.75.75 0 01-1.28.53L12 11.25l-3.438 3.437a.75.75 0 01-1.28-.53V11.33a.75.75 0 00-.22-.53L5.47 8.622A.75.75 0 016 7.342h2.828a.75.75 0 00.53-.22L11.48 3.5z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
       </svg>
     ),
   },
@@ -179,7 +178,7 @@ const HOST_STEPS: Step[] = [
   {
     step: 4,
     title: "Earn",
-    desc: "Get paid securely. Optional parcel drop-off income",
+    desc: "Get paid securely. Optional parcel pickup & drop-off income",
   },
 ];
 
@@ -187,7 +186,7 @@ const DRIVER_STEPS: Step[] = [
   {
     step: 1,
     title: "Apply",
-    desc: "Submit details and documents",
+    desc: "Submit details, ID, and a current photo (camera supported)",
   },
   {
     step: 2,
@@ -221,9 +220,9 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "Flexible hours and fair pay. MyStoreKE handles the bookings; I just deliver.",
+      "Flexible hours and fair pay. Mystore handles the bookings; I just deliver.",
     author: "Peter O.",
-    role: "Driver",
+    role: "Driver / Rider",
   },
 ] as const;
 
@@ -243,7 +242,7 @@ export default function Home() {
               List Your Space
             </Link>
             <Link href="/become-a-driver" className="hover:text-white">
-              Become a Driver
+              Become Driver/Rider
             </Link>
             <Link href="/contact" className="hover:text-white">
               Contact
@@ -270,7 +269,7 @@ export default function Home() {
               Smart Storage for Every Need
             </h1>
             <p className="mt-4 max-w-2xl mx-auto text-lg opacity-95 md:text-xl">
-              Find secure storage space, and your goods and parcels dropped all in one Mystore platform.
+              Secure storage, parcel pickup and drop-off, and deliveries — all in one Mystore platform.
             </p>
           </div>
           {/* Search box */}
@@ -284,11 +283,11 @@ export default function Home() {
           <div className="flex flex-col items-center gap-3 text-center md:flex-row md:items-end md:justify-between md:text-left">
             <div>
               <h2 className="text-2xl font-semibold text-[var(--foreground)]">
-                Welcome to MyStoreKE Storage Network
+                Welcome to Mystore Storage Network
               </h2>
               <p className="mt-2 max-w-2xl text-[var(--muted)]">
                 Five core services — each clearly structured so renters, hosts, and drivers know
-                exactly what to expect from MyStoreKE before they book or list.
+                exactly what to expect from Mystore before they book or list.
               </p>
             </div>
             <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--background)] px-3 py-1 text-xs text-[var(--muted)]">
@@ -382,7 +381,7 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-[var(--foreground)]">For Goods & Parcel Deliveries</h3>
+              <h3 className="text-lg font-semibold text-[var(--foreground)]">For Pickup & Deliveries</h3>
               <ul className="mt-6 space-y-4">
                 {DRIVER_STEPS.map(({ step, title, desc }) => (
                   <li key={step} className="flex gap-4">
@@ -401,14 +400,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose MyStoreKE - metrics row */}
+      {/* Why Choose Mystore - metrics row */}
       <section className="border-t border-[var(--border)] bg-[var(--white)] px-4 py-16">
         <div className="mx-auto max-w-6xl">
           <h2 className="text-center text-2xl font-semibold text-[var(--foreground)]">
-            Why Choose MyStoreKE
+            Why Choose Mystore
           </h2>
           <p className="mt-2 text-center text-[var(--muted)]">
-            Clear numbers behind our storage and parcel network.
+            Trust, transparent pricing, and a full logistics network in one place.
           </p>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {WHY_CHOOSE.map(({ label, value, desc, icon }) => (
@@ -441,7 +440,7 @@ export default function Home() {
             <div className="rounded-2xl bg-[var(--accent)] px-8 py-12 text-[var(--accent-foreground)] md:px-12">
               <h2 className="text-2xl font-semibold">For Hosts</h2>
               <p className="mt-3 max-w-xl opacity-90">
-                List your residential, commercial, warehouse, yard, shelf, or budget storage. Add parcel drop-off and earn more. Set your own pricing and availability.
+                List your residential, commercial, warehouse, yard, shelf, or budget storage. Enable drivers and riders to coordinate parcel pickup and drop-off, and earn more. Set your own pricing and availability.
               </p>
               <Link
                 href="/list-your-space"
@@ -451,15 +450,15 @@ export default function Home() {
               </Link>
             </div>
             <div className="rounded-2xl bg-[var(--primary)] px-8 py-12 text-[var(--white)] md:px-12">
-              <h2 className="text-2xl font-semibold">For Deliveries</h2>
+              <h2 className="text-2xl font-semibold">Pickup & Deliveries</h2>
               <p className="mt-3 max-w-xl opacity-95">
-                Become a verified delivery agent. Handle parcel pickup and drop-off on your schedule. Get paid per delivery with secure, on-time payouts.
+                Become a verified driver or rider: handle parcel pickup and drop-off on your schedule, with fair pay per trip. Every applicant submits a current photo — you can take one live from your phone when you apply.
               </p>
               <Link
                 href="/become-a-driver"
                 className="mt-6 inline-block rounded-lg bg-[var(--white)] px-6 py-3 font-medium text-[var(--primary)] transition-opacity hover:opacity-90"
               >
-                Become a Driver
+                Become Driver/Rider
               </Link>
             </div>
           </div>
@@ -473,7 +472,7 @@ export default function Home() {
             What People Say
           </h2>
           <p className="mt-2 text-center text-[var(--muted)]">
-            Trusted by renters, hosts, and drivers across Kenya
+            Trusted by renters, hosts, drivers, and riders across Kenya
           </p>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
             {TESTIMONIALS.map(({ quote, author, role }) => (
@@ -502,7 +501,7 @@ export default function Home() {
               <h4 className="font-semibold">Renters</h4>
               <ul className="mt-3 space-y-2 text-sm text-white/80">
                 <li><Link href="/storage" className="hover:text-white">Find Storage</Link></li>
-                <li><Link href="/parcel-drop-off" className="hover:text-white">Parcel Drop-Off</Link></li>
+                <li><Link href="/parcel-drop-off" className="hover:text-white">Parcel Pickup & Drop-Off</Link></li>
                 <li><Link href="/how-it-works" className="hover:text-white">How It Works</Link></li>
                 <li><Link href="/faq" className="hover:text-white">FAQs</Link></li>
               </ul>
@@ -517,10 +516,10 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold">Deliveries</h4>
+              <h4 className="font-semibold">Pickup & Deliveries</h4>
               <ul className="mt-3 space-y-2 text-sm text-white/80">
-                <li><Link href="/become-a-driver" className="hover:text-white">Become a Driver</Link></li>
-                <li><Link href="/parcel-drop-off" className="hover:text-white">Parcel Drop-Off</Link></li>
+                <li><Link href="/become-a-driver" className="hover:text-white">Become Driver/Rider</Link></li>
+                <li><Link href="/parcel-drop-off" className="hover:text-white">Parcel Pickup & Drop-Off</Link></li>
                 <li><Link href="/how-it-works" className="hover:text-white">How It Works</Link></li>
                 <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
               </ul>
@@ -537,7 +536,7 @@ export default function Home() {
             </div>
           </div>
           <p className="mt-12 border-t border-white/20 pt-8 text-center text-sm text-white/70">
-            © {new Date().getFullYear()} MyStoreKE. All rights reserved.
+            © {new Date().getFullYear()} Mystore. All rights reserved.
           </p>
         </div>
       </footer>

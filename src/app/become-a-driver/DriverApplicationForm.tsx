@@ -20,6 +20,7 @@ export default function DriverApplicationForm() {
     areasServed: "",
     availability: "",
     message: "",
+    photoDataUrl: "" as string,
   });
 
   const update = (key: string, value: string) => {
@@ -33,12 +34,19 @@ export default function DriverApplicationForm() {
       setError("Please enter a valid phone number (e.g. +254 7XX XXX XXX).");
       return;
     }
+    if (!formData.photoDataUrl || formData.photoDataUrl.length < 100) {
+      setError("Please add a current photo of yourself (use your camera or upload an image).");
+      return;
+    }
     setLoading(true);
     try {
       const res = await fetch("/api/drivers", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          photoDataUrl: formData.photoDataUrl,
+        }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
@@ -66,7 +74,7 @@ export default function DriverApplicationForm() {
           href="/"
           className="mt-6 inline-block rounded-lg bg-[var(--primary)] px-5 py-2.5 text-sm font-medium text-white hover:bg-[var(--primary-hover)]"
         >
-          Back to MyStoreKE
+          Back to Mystore
         </Link>
       </div>
     );
@@ -81,6 +89,45 @@ export default function DriverApplicationForm() {
       )}
       <div className="rounded-xl border border-[var(--border)] bg-[var(--white)] p-6 space-y-6">
         <h2 className="text-lg font-semibold text-[var(--foreground)]">Your details</h2>
+        <div>
+          <label className="mb-1 block text-sm font-medium text-[var(--foreground)]">
+            Current photo (required) *
+          </label>
+          <p className="mb-2 text-xs text-[var(--muted)]">
+            Clear face photo for verification. On a phone you can use your camera; on desktop, upload a recent image.
+          </p>
+          <input
+            type="file"
+            accept="image/*"
+            capture="user"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (!file) {
+                update("photoDataUrl", "");
+                return;
+              }
+              if (file.size > 500_000) {
+                setError("Photo must be under 500 KB. Try a smaller image.");
+                return;
+              }
+              setError("");
+              const reader = new FileReader();
+              reader.onload = () => {
+                const url = typeof reader.result === "string" ? reader.result : "";
+                update("photoDataUrl", url);
+              };
+              reader.readAsDataURL(file);
+            }}
+            className="w-full text-sm text-[var(--foreground)] file:mr-3 file:rounded-lg file:border-0 file:bg-[var(--primary)] file:px-3 file:py-2 file:text-sm file:font-medium file:text-white"
+          />
+          {formData.photoDataUrl ? (
+            <img
+              src={formData.photoDataUrl}
+              alt="Your preview"
+              className="mt-3 h-32 w-32 rounded-lg border border-[var(--border)] object-cover"
+            />
+          ) : null}
+        </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="sm:col-span-2">
             <label className="mb-1 block text-sm font-medium text-[var(--foreground)]">Full name *</label>

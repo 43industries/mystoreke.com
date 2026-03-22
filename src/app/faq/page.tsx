@@ -1,15 +1,15 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Frequently Asked Questions — MyStoreKE",
-  description: "Answers to common questions from renters, hosts, and drivers using MyStoreKE.",
+  title: "Frequently Asked Questions — Mystore",
+  description: "Answers to common questions from renters, hosts, and drivers using Mystore.",
 };
 
 const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
-    question: "What is MyStoreKE?",
+    question: "What is Mystore?",
     answer:
-      "MyStoreKE is a platform that connects people who need storage or parcel drop-off points with verified hosts and drivers across Kenya.",
+      "Mystore is a platform that connects people who need storage or parcel pickup and drop-off points with verified hosts, drivers, and riders across Kenya.",
   },
   {
     question: "How do I find storage?",
@@ -24,7 +24,7 @@ const FAQ_ITEMS: { question: string; answer: string }[] = [
   {
     question: "How do drivers get paid?",
     answer:
-      "Drivers receive payouts based on completed jobs. Payment terms are agreed in advance and can be settled via mobile money or bank transfer depending on your setup.",
+      "Drivers and riders receive payouts based on completed jobs. Payment terms are agreed in advance and can be settled via mobile money or bank transfer depending on your setup.",
   },
   {
     question: "Is my property or inventory safe?",
@@ -39,12 +39,12 @@ export default function FAQPage() {
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)]">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
           <Link href="/" className="text-lg font-bold text-[var(--accent)]">
-            MyStoreKE
+            Mystore
           </Link>
           <nav className="flex gap-4 text-sm font-medium text-white/90">
             <Link href="/storage" className="hover:text-white">Find Storage</Link>
             <Link href="/list-your-space" className="hover:text-white">List Your Space</Link>
-            <Link href="/become-a-driver" className="hover:text-white">Become a Driver</Link>
+            <Link href="/become-a-driver" className="hover:text-white">Become Driver/Rider</Link>
           </nav>
         </div>
       </header>
@@ -52,7 +52,7 @@ export default function FAQPage() {
       <main className="mx-auto max-w-3xl px-4 py-12">
         <h1 className="text-3xl font-bold text-[var(--foreground)]">Frequently Asked Questions</h1>
         <p className="mt-4 text-[var(--muted)]">
-          Quick answers to the most common questions about using MyStoreKE as a renter, host, or
+          Quick answers to the most common questions about using Mystore as a renter, host, or
           driver.
         </p>
 

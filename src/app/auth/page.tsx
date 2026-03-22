@@ -63,7 +63,7 @@ export default function AuthPage() {
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)]">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
           <Link href="/" className="text-lg font-bold text-[var(--accent)]">
-            MyStoreKE
+            Mystore
           </Link>
         </div>
       </header>
@@ -103,7 +103,7 @@ export default function AuthPage() {
               >
                 <option value="renter">Renter</option>
                 <option value="host">Host</option>
-                <option value="driver">Driver</option>
+                <option value="driver">Driver / Rider</option>
               </select>
             </div>
           )}
