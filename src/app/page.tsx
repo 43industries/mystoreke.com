@@ -1,8 +1,38 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import HeroCarousel from "./HeroCarousel";
 import HeroSearchForm from "./HeroSearchForm";
 import Logo from "@/components/Logo";
 import { IMAGES } from "./images";
+
+export const metadata: Metadata = {
+  title: "Mystore — Smart Storage & Parcel Pickup / Drop-Off",
+  description:
+    "Find secure storage, parcel pickup and drop-off points, and drivers or riders across Kenya.",
+  openGraph: {
+    title: "Mystore — Smart Storage & Parcel Pickup / Drop-Off",
+    description:
+      "Find secure storage, parcel pickup and drop-off points, and drivers or riders across Kenya.",
+    url: "https://mystoreke.com",
+    siteName: "Mystore",
+    type: "website",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Mystore",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mystore — Smart Storage & Parcel Pickup / Drop-Off",
+    description:
+      "Find secure storage, parcel pickup and drop-off points, and drivers or riders across Kenya.",
+    images: ["/logo.png"],
+  },
+};
 
 type Step = {
   step: number;

@@ -172,10 +172,11 @@ export default function StorageSearch() {
         <div className="mt-6 rounded-xl border border-[var(--border)] bg-[var(--white)] p-4">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <div>
-              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">
+              <label htmlFor="storage-filter-location" className="mb-1 block text-xs font-medium text-[var(--muted)]">
                 Location (city or county)
               </label>
               <input
+                id="storage-filter-location"
                 type="text"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
@@ -184,10 +185,11 @@ export default function StorageSearch() {
               />
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">
+              <label htmlFor="storage-filter-type" className="mb-1 block text-xs font-medium text-[var(--muted)]">
                 Storage type
               </label>
               <select
+                id="storage-filter-type"
                 value={storageType}
                 onChange={(e) => setStorageType(e.target.value)}
                 className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
@@ -201,10 +203,11 @@ export default function StorageSearch() {
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">
+              <label htmlFor="storage-filter-duration" className="mb-1 block text-xs font-medium text-[var(--muted)]">
                 Show price per
               </label>
               <select
+                id="storage-filter-duration"
                 value={duration}
                 onChange={(e) =>
                   setDuration(e.target.value as "day" | "week" | "month")
@@ -217,10 +220,11 @@ export default function StorageSearch() {
               </select>
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium text-[var(--muted)]">
+              <label htmlFor="storage-filter-budget" className="mb-1 block text-xs font-medium text-[var(--muted)]">
                 Budget (per month)
               </label>
               <select
+                id="storage-filter-budget"
                 value={priceBand}
                 onChange={(e) => setPriceBand(e.target.value)}
                 className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
@@ -273,8 +277,9 @@ export default function StorageSearch() {
                 Clear filters
               </button>
             </div>
-            <label className="inline-flex items-center gap-2 text-xs font-medium text-[var(--muted)]">
+            <label htmlFor="storage-filter-parcel" className="inline-flex items-center gap-2 text-xs font-medium text-[var(--muted)]">
               <input
+                id="storage-filter-parcel"
                 type="checkbox"
                 checked={parcelOnly}
                 onChange={(e) => setParcelOnly(e.target.checked)}

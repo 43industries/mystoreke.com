@@ -66,31 +66,36 @@ export default function ContactPage() {
           <form className="mt-4 space-y-4 rounded-xl border border-[var(--border)] bg-[var(--white)] p-6">
             <div className="grid gap-4 md:grid-cols-2">
               <div>
-                <label className="mb-1 block text-sm font-medium text-[var(--foreground)]">
+                <label htmlFor="contact-name" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
                   Name
                 </label>
                 <input
+                  id="contact-name"
                   type="text"
                   placeholder="Your name"
+                  autoComplete="name"
                   className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
                 />
               </div>
               <div>
-                <label className="mb-1 block text-sm font-medium text-[var(--foreground)]">
+                <label htmlFor="contact-reach" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
                   Email or phone
                 </label>
                 <input
+                  id="contact-reach"
                   type="text"
                   placeholder="How we can reach you"
+                  autoComplete="email"
                   className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
                 />
               </div>
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium text-[var(--foreground)]">
+              <label htmlFor="contact-message" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
                 Message
               </label>
               <textarea
+                id="contact-message"
                 rows={4}
                 placeholder="Tell us how we can help"
                 className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"

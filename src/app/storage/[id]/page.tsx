@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
@@ -21,30 +22,65 @@ function listingImage(storageType: string): string {
   return map[storageType] ?? IMAGES.storage.commercial;
 }
 
+async function getListingById(id: string): Promise<StorageListing | undefined> {
+  const requestHeaders = headers();
+  const host = requestHeaders.get("host");
+  const protocol = requestHeaders.get("x-forwarded-proto") ?? "http";
+  const origin = host ? `${protocol}://${host}` : "";
+  if (!origin) return undefined;
+
+  try {
+    const res = await fetch(`${origin}/api/listings`, { cache: "no-store" });
+    if (!res.ok) return undefined;
+    const data = (await res.json()) as StorageListing[];
+    return data.find((l) => l.id === id);
+  } catch {
+    return undefined;
+  }
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const listing = await getListingById(params.id);
+  if (!listing) {
+    return {
+      title: "Storage Listing Not Found — Mystore",
+      description: "The requested storage listing is not available.",
+    };
+  }
+
+  const title = `${listing.title} — Mystore`;
+  const description = `${listing.city}, ${listing.county} · ${listing.storageType} · KES ${listing.pricePerMonth.toLocaleString()}/month.`;
+  const image = listingImage(listing.storageType);
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      images: [{ url: image, alt: listing.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+  };
+}
+
 export default async function StorageDetailPage({
   params,
 }: {
   params: { id: string };
 }) {
   const { id } = params;
-
-  const requestHeaders = headers();
-  const host = requestHeaders.get("host");
-  const protocol = requestHeaders.get("x-forwarded-proto") ?? "http";
-  const origin = host ? `${protocol}://${host}` : "";
-
-  let listing: StorageListing | undefined;
-  if (origin) {
-    try {
-      const res = await fetch(`${origin}/api/listings`, { cache: "no-store" });
-      if (res.ok) {
-        const data = (await res.json()) as StorageListing[];
-        listing = data.find((l) => l.id === id);
-      }
-    } catch {
-      listing = undefined;
-    }
-  }
+  const listing = await getListingById(id);
 
   if (!listing) notFound();
 

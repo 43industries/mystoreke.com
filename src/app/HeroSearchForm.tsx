@@ -40,20 +40,23 @@ export default function HeroSearchForm() {
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-[2fr,1.5fr,1.5fr,1.5fr,auto]">
         <div>
-          <label className="mb-1 block text-xs font-medium text-[var(--muted)]">
+          <label htmlFor="hero-location" className="mb-1 block text-xs font-medium text-[var(--muted)]">
             Location
           </label>
           <input
+            id="hero-location"
             type="text"
             placeholder="City or area"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
+            autoComplete="address-level2"
             className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-center text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
           />
         </div>
         <div className="flex flex-col justify-end">
-          <label className="inline-flex items-center gap-2 text-xs font-medium text-[var(--muted)]">
+          <label htmlFor="hero-parcel-only" className="inline-flex items-center gap-2 text-xs font-medium text-[var(--muted)]">
             <input
+              id="hero-parcel-only"
               type="checkbox"
               checked={parcelOnly}
               onChange={(e) => setParcelOnly(e.target.checked)}
@@ -63,10 +66,11 @@ export default function HeroSearchForm() {
           </label>
         </div>
         <div>
-          <label className="mb-1 block text-xs font-medium text-[var(--muted)]">
+          <label htmlFor="hero-storage-type" className="mb-1 block text-xs font-medium text-[var(--muted)]">
             Storage Type
           </label>
           <select
+            id="hero-storage-type"
             value={storageType}
             onChange={(e) => setStorageType(e.target.value)}
             className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-center text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
@@ -82,10 +86,11 @@ export default function HeroSearchForm() {
           </select>
         </div>
         <div>
-          <label className="mb-1 block text-xs font-medium text-[var(--muted)]">
+          <label htmlFor="hero-duration" className="mb-1 block text-xs font-medium text-[var(--muted)]">
             Rental Duration
           </label>
           <select
+            id="hero-duration"
             value={duration}
             onChange={(e) => setDuration(e.target.value)}
             className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-center text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
@@ -96,10 +101,11 @@ export default function HeroSearchForm() {
           </select>
         </div>
         <div>
-          <label className="mb-1 block text-xs font-medium text-[var(--muted)]">
+          <label htmlFor="hero-price-band" className="mb-1 block text-xs font-medium text-[var(--muted)]">
             Budget (per month)
           </label>
           <select
+            id="hero-price-band"
             value={priceBand}
             onChange={(e) => setPriceBand(e.target.value)}
             className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-center text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
