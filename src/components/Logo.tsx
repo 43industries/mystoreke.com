@@ -13,17 +13,13 @@ type LogoProps = {
 export default function Logo({
   variant = "header",
   className = "",
-  width: _w = 200,
-  height: _h = 64,
+  width: _w = 220,
+  height: _h = 70,
 }: LogoProps) {
   const markClass =
     variant === "header"
-      ? "h-8 w-8 md:h-9 md:w-9"
-      : "h-14 w-14 md:h-16 md:w-16";
-  const textClass =
-    variant === "header"
-      ? "text-xs font-semibold tracking-normal text-white md:text-sm"
-      : "text-sm font-semibold tracking-normal text-white md:text-base";
+      ? "h-8 w-auto md:h-10"
+      : "h-14 w-auto md:h-16";
 
   return (
     <Link
@@ -33,14 +29,12 @@ export default function Logo({
     >
       <Image
         src={BRAND_LOGO_MARK_SRC}
-        alt=""
-        width={48}
-        height={48}
+        alt={BRAND_NAME}
+        width={_w}
+        height={_h}
         priority
         className={`${markClass} shrink-0 object-contain`}
-        aria-hidden
       />
-      <span className={textClass}>{BRAND_NAME}</span>
     </Link>
   );
 }

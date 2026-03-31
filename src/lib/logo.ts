@@ -1,4 +1,4 @@
 /**
- * Roof mark (SVG in `public/logo-mark.svg`) + word “Mystore” is rendered in `Logo.tsx`.
+ * Main brand logo image stored in `public/logo.png`.
  */
-export const BRAND_LOGO_MARK_SRC = "/logo-mark.svg";
+export const BRAND_LOGO_MARK_SRC = "/logo.png";
