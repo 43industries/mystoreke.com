@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { supabaseBrowser } from "@/lib/supabaseBrowser";
 
@@ -72,12 +72,15 @@ export default function HostListingForm() {
   const canNext = step < totalSteps;
   const canPrev = step > 1;
 
-  // Lightweight guard: check that the current user is a host.
-  // This runs once client-side when the component mounts.
-  if (typeof window !== "undefined" && supabaseBrowser && !roleError && !submitted) {
-    void (async () => {
+  useEffect(() => {
+    if (!supabaseBrowser || submitted) return;
+
+    let active = true;
+    const checkRole = async () => {
       const { data } = await supabaseBrowser.auth.getUser();
       const userId = data.user?.id;
+      if (!active) return;
+
       if (!userId) {
         setRoleError("Please log in as a host to list your space.");
         return;
@@ -87,11 +90,19 @@ export default function HostListingForm() {
         .select("role")
         .eq("id", userId)
         .maybeSingle();
+      if (!active) return;
       if (!profile || profile.role !== "host") {
         setRoleError("Only host accounts can create listings. Sign up or update your role to Host.");
+        return;
       }
-    })();
-  }
+      setRoleError(null);
+    };
+
+    void checkRole();
+    return () => {
+      active = false;
+    };
+  }, [submitted]);
 
   if (submitted) {
     return (
@@ -172,15 +183,24 @@ export default function HostListingForm() {
           }
           setLoading(true);
           try {
-            let hostId: string | undefined;
+            let accessToken: string | undefined;
             if (supabaseBrowser) {
-              const { data } = await supabaseBrowser.auth.getUser();
-              hostId = data.user?.id;
+              const {
+                data: { session },
+              } = await supabaseBrowser.auth.getSession();
+              accessToken = session?.access_token;
+            }
+            if (!accessToken) {
+              setSubmitError("Please log in again before submitting your listing.");
+              return;
             }
 
             const res = await fetch("/api/listings", {
               method: "POST",
-              headers: { "Content-Type": "application/json" },
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${accessToken}`,
+              },
               body: JSON.stringify({
                 title: formData.title,
                 storageType: formData.storageType,
@@ -214,7 +234,6 @@ export default function HostListingForm() {
                 parcelMaxPerDay: formData.parcelMaxPerDay || undefined,
                 parcelFeePerDay: formData.parcelFeePerDay || undefined,
                 photoCount: formData.photos.length,
-                hostId,
               }),
             });
             const data = await res.json().catch(() => ({}));

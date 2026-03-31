@@ -34,15 +34,28 @@ export default function MyBookingsPage() {
 
       const { data } = await supabaseBrowser.auth.getUser();
       const userId = data.user?.id;
+      const {
+        data: { session },
+      } = await supabaseBrowser.auth.getSession();
+      const accessToken = session?.access_token;
 
       if (!userId) {
         setError("Please log in to see your bookings.");
         setLoading(false);
         return;
       }
+      if (!accessToken) {
+        setError("Session expired. Please log in again.");
+        setLoading(false);
+        return;
+      }
 
       try {
-        const res = await fetch(`/api/bookings?renterId=${encodeURIComponent(userId)}`);
+        const res = await fetch(`/api/bookings?renterId=${encodeURIComponent(userId)}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
         const json = await res.json().catch(() => []);
         if (!res.ok) {
           setError(json.message || "Could not load bookings.");

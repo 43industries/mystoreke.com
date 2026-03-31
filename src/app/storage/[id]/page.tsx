@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
+import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { IMAGES } from "../../images";
-import { MOCK_LISTINGS, type StorageListing } from "../data";
+import { type StorageListing } from "../data";
 import BookingButton from "../BookingButton";
 
 export const dynamic = "force-dynamic";
@@ -26,9 +28,23 @@ export default async function StorageDetailPage({
 }) {
   const { id } = params;
 
-  const listing: StorageListing | undefined = MOCK_LISTINGS.find(
-    (l) => l.id === id,
-  );
+  const requestHeaders = headers();
+  const host = requestHeaders.get("host");
+  const protocol = requestHeaders.get("x-forwarded-proto") ?? "http";
+  const origin = host ? `${protocol}://${host}` : "";
+
+  let listing: StorageListing | undefined;
+  if (origin) {
+    try {
+      const res = await fetch(`${origin}/api/listings`, { cache: "no-store" });
+      if (res.ok) {
+        const data = (await res.json()) as StorageListing[];
+        listing = data.find((l) => l.id === id);
+      }
+    } catch {
+      listing = undefined;
+    }
+  }
 
   if (!listing) notFound();
 
@@ -52,11 +68,13 @@ export default async function StorageDetailPage({
         </Link>
         <div className="mt-6 rounded-xl border border-[var(--border)] bg-[var(--white)] overflow-hidden">
           <div className="relative aspect-[21/9] w-full overflow-hidden bg-[var(--border)]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={listingImage(listing.storageType)}
               alt={listing.title}
-              className="h-full w-full object-cover"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 896px"
+              className="object-cover"
             />
           </div>
           <div className="p-6">

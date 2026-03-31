@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
 import { MOCK_LISTINGS, type StorageListing } from "../../storage/data";
 import { getSupabaseServerClient } from "@/lib/supabaseServer";
 
@@ -45,9 +46,40 @@ type HostListing = {
 
 const HOST_LISTINGS: HostListing[] = [];
 
+async function getAuthenticatedUserId(request: Request): Promise<string | null> {
+  const authHeader = request.headers.get("authorization");
+  if (!authHeader?.startsWith("Bearer ")) return null;
+
+  const token = authHeader.slice("Bearer ".length).trim();
+  if (!token) return null;
+
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !anonKey) return null;
+
+  const supabase = createClient(url, anonKey, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
+  const { data, error } = await supabase.auth.getUser(token);
+  if (error || !data.user) return null;
+  return data.user.id;
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const hostId = searchParams.get("hostId");
+  if (hostId) {
+    const authUserId = await getAuthenticatedUserId(request);
+    if (!authUserId) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+    if (authUserId !== hostId) {
+      return NextResponse.json(
+        { message: "You can only view your own listings" },
+        { status: 403 },
+      );
+    }
+  }
 
   const supabase = getSupabaseServerClient();
 
@@ -142,11 +174,15 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
+    const authUserId = await getAuthenticatedUserId(request);
+    if (!authUserId) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+
     const body = await request.json();
 
     const {
       title,
-      hostId,
       storageType,
       description,
       size,
@@ -257,7 +293,7 @@ export async function POST(request: Request) {
       const { data, error } = await supabase
         .from("listings")
         .insert({
-          host_id: hostId ?? null,
+          host_id: authUserId,
           title: listing.title,
           storage_type: listing.storageType,
           description: listing.description,

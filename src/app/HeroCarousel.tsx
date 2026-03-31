@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { IMAGES } from "./images";
 
 const SLIDES: { src: string; alt: string }[] = [
@@ -44,15 +45,16 @@ export default function HeroCarousel() {
     <div className="relative mx-auto max-w-5xl overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
       <div className="relative aspect-[21/9] w-full min-h-[12rem] md:min-h-[16rem] lg:min-h-[18rem]">
         {SLIDES.map((slide, i) => (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             key={slide.src}
             src={slide.src}
             alt={slide.alt}
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+            fill
+            sizes="(max-width: 768px) 100vw, 960px"
+            priority={i === 0}
+            className={`absolute inset-0 object-cover transition-opacity duration-700 ${
               i === index ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
-            fetchPriority={i === 0 ? "high" : "low"}
           />
         ))}
       </div>

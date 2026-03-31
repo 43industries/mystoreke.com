@@ -59,8 +59,12 @@ export default function BookingButton({
 
     const { data } = await supabaseBrowser.auth.getUser();
     const userId = data.user?.id;
+    const {
+      data: { session },
+    } = await supabaseBrowser.auth.getSession();
+    const accessToken = session?.access_token;
 
-    if (!userId) {
+    if (!userId || !accessToken) {
       router.push("/auth");
       return;
     }
@@ -69,9 +73,11 @@ export default function BookingButton({
     try {
       const res = await fetch("/api/bookings", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
         body: JSON.stringify({
-          renterId: userId,
           listingId,
           startDate,
           endDate,
