@@ -2,6 +2,14 @@ import { NextResponse } from "next/server";
 import { getBearerUserId } from "@/lib/bearerAuth";
 import { getSupabaseServerClient } from "@/lib/supabaseServer";
 
+function listingHostIdFromNested(listings: unknown): string | null {
+  if (listings == null) return null;
+  const row = Array.isArray(listings) ? listings[0] : listings;
+  if (!row || typeof row !== "object") return null;
+  const id = (row as { host_id?: unknown }).host_id;
+  return typeof id === "string" ? id : null;
+}
+
 export async function GET(request: Request) {
   const authUserId = await getBearerUserId(request);
   if (!authUserId) {
@@ -172,8 +180,7 @@ export async function PATCH(request: Request) {
       );
     }
 
-    const listing = booking.listings as { host_id: string } | null;
-    const hostId = listing?.host_id ?? null;
+    const hostId = listingHostIdFromNested(booking.listings);
     const isRenter = booking.renter_id === authUserId;
     const isHost = hostId !== null && hostId === authUserId;
 
