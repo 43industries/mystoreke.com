@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { Suspense } from "react";
 import PageHero from "@/components/PageHero";
+import SiteHeader from "@/components/SiteHeader";
 import { IMAGES } from "../images";
 import StorageSearch from "./StorageSearch";
 
@@ -13,17 +13,7 @@ export const metadata = {
 export default function StoragePage() {
   return (
     <div className="min-h-screen bg-[var(--background)]">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)]">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
-          <Link href="/" className="text-lg font-bold text-[var(--accent)]">
-            Mystore
-          </Link>
-          <nav className="flex gap-4 text-sm font-medium text-white/90">
-            <Link href="/list-your-space" className="hover:text-white">List Your Space</Link>
-            <Link href="/become-a-driver" className="hover:text-white">Become Driver/Rider</Link>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader />
       <PageHero
         title="Find Storage"
         subtitle="Search by location and type. Compare options and book with confidence."

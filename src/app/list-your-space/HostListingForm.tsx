@@ -402,6 +402,11 @@ export default function HostListingForm() {
         {step === 3 && (
           <div className="space-y-6 rounded-xl border border-[var(--border)] bg-[var(--white)] p-6">
             <h2 className="text-lg font-semibold text-[var(--foreground)]">Pricing</h2>
+            <p className="text-sm text-[var(--muted)]">
+              Renters see your day, week, and month rates on the listing. Say clearly whether those
+              amounts already include any service charge; if not, uncheck below and add a separate
+              service charge so it appears alongside your security deposit in the review flow.
+            </p>
             <div className="grid gap-4 sm:grid-cols-3">
               <div>
                 <label className="mb-1 block text-sm font-medium text-[var(--foreground)]">Price per Day (KES)</label>
@@ -490,7 +495,11 @@ export default function HostListingForm() {
         {step === 4 && (
           <div className="space-y-6 rounded-xl border border-[var(--border)] bg-[var(--white)] p-6">
             <h2 className="text-lg font-semibold text-[var(--foreground)]">Photos</h2>
-            <p className="text-sm text-[var(--muted)]">Minimum 3 photos. First image = cover. Drag and drop or click to upload.</p>
+            <p className="text-sm text-[var(--muted)]">
+              Minimum 3 photos. First image = cover. Drag and drop or click to upload. On your phone
+              or tablet you can use your camera directly from this step (choose &ldquo;Take photo&rdquo;
+              when your device prompts you) or pick existing pictures from your gallery.
+            </p>
             <div
               className="rounded-lg border-2 border-dashed border-[var(--border)] bg-[var(--background)] p-8 text-center"
               onDragOver={(e) => e.preventDefault()}

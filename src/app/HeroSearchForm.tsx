@@ -25,22 +25,34 @@ export default function HeroSearchForm() {
     router.push(`/storage${qs ? `?${qs}` : ""}`);
   };
 
+  const fieldClass =
+    "w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-left text-base outline-none focus:ring-2 focus:ring-[var(--primary)]";
+
   return (
     <form
       onSubmit={onSubmit}
       className="mx-auto mt-10 max-w-4xl rounded-2xl border border-[var(--border)] bg-[var(--white)] p-4 shadow-2xl shadow-[rgba(15,23,42,0.25)] md:p-6"
     >
       <div className="mb-4 text-center">
-        <p className="text-base font-bold text-[var(--foreground)] normal-case">
+        <p className="text-xl font-bold text-[var(--foreground)] normal-case md:text-2xl">
           Search storage near you
         </p>
-        <p className="mt-1 text-sm font-semibold text-[var(--muted)] normal-case">
+        <p className="mt-2 text-base font-medium text-[var(--muted)] normal-case">
           Choose location, type, duration and budget to see matching spaces.
         </p>
+        <label className="mt-3 flex cursor-pointer items-center justify-center gap-2 text-sm font-medium text-[var(--muted)]">
+          <input
+            type="checkbox"
+            checked={parcelOnly}
+            onChange={(e) => setParcelOnly(e.target.checked)}
+            className="h-4 w-4 rounded border-[var(--border)] text-[var(--accent)] focus:ring-[var(--accent)]"
+          />
+          <span>Only show parcel pickup &amp; drop-off locations</span>
+        </label>
       </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-[2fr,1.5fr,1.5fr,1.5fr,auto]">
-        <div>
-          <label htmlFor="hero-location" className="mb-1 block text-center text-xs font-semibold text-[var(--muted)]">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-6">
+        <div className="lg:col-span-2">
+          <label htmlFor="hero-location" className="mb-1 block text-sm font-semibold text-[var(--muted)]">
             Location
           </label>
           <input
@@ -50,65 +62,53 @@ export default function HeroSearchForm() {
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             autoComplete="address-level2"
-            className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-center text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+            className={fieldClass}
           />
         </div>
-        <div className="flex flex-col justify-end">
-          <label htmlFor="hero-parcel-only" className="inline-flex items-center gap-2 text-xs font-medium text-[var(--muted)]">
-            <input
-              id="hero-parcel-only"
-              type="checkbox"
-              checked={parcelOnly}
-              onChange={(e) => setParcelOnly(e.target.checked)}
-              className="h-4 w-4 rounded border-[var(--border)] text-[var(--accent)] focus:ring-[var(--accent)]"
-            />
-            <span>Only show parcel pickup &amp; drop-off locations</span>
-          </label>
-        </div>
         <div>
-          <label htmlFor="hero-storage-type" className="mb-1 block text-center text-xs font-semibold text-[var(--muted)]">
-            Storage Type
+          <label htmlFor="hero-storage-type" className="mb-1 block text-sm font-semibold text-[var(--muted)]">
+            Storage type
           </label>
           <select
             id="hero-storage-type"
             value={storageType}
             onChange={(e) => setStorageType(e.target.value)}
-            className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-center text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+            className={fieldClass}
           >
             <option value="">Any type</option>
-            <option value="residential">Residential</option>
-            <option value="commercial">Commercial</option>
-            <option value="warehouse">Warehouse</option>
-            <option value="yard">Open Yard</option>
+            <option value="residential">Residential Storage</option>
+            <option value="commercial">Commercial Storage</option>
+            <option value="warehouse">Warehouse Storage</option>
+            <option value="yard">Open Yard Storage</option>
             <option value="shelf">Shared Shop/Shelf Space</option>
-            <option value="budget">Budget</option>
+            <option value="budget">Budget Units</option>
             <option value="parcel">Pickup &amp; Drop-Off Point Vendor</option>
           </select>
         </div>
         <div>
-          <label htmlFor="hero-duration" className="mb-1 block text-center text-xs font-semibold text-[var(--muted)]">
-            Rental Duration
+          <label htmlFor="hero-duration" className="mb-1 block text-sm font-semibold text-[var(--muted)]">
+            Rental duration
           </label>
           <select
             id="hero-duration"
             value={duration}
             onChange={(e) => setDuration(e.target.value)}
-            className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-center text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+            className={fieldClass}
           >
-            <option value="day">Per Day</option>
-            <option value="week">Per Week</option>
-            <option value="month">Per Month</option>
+            <option value="day">Per day</option>
+            <option value="week">Per week</option>
+            <option value="month">Per month</option>
           </select>
         </div>
         <div>
-          <label htmlFor="hero-price-band" className="mb-1 block text-center text-xs font-semibold text-[var(--muted)]">
+          <label htmlFor="hero-price-band" className="mb-1 block text-sm font-semibold text-[var(--muted)]">
             Budget (per month)
           </label>
           <select
             id="hero-price-band"
             value={priceBand}
             onChange={(e) => setPriceBand(e.target.value)}
-            className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-center text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+            className={fieldClass}
           >
             <option value="">Any budget</option>
             <option value="lt10k">Below KES 10,000</option>
@@ -117,10 +117,10 @@ export default function HeroSearchForm() {
             <option value="gt30k">Above KES 30,000</option>
           </select>
         </div>
-        <div className="lg:col-span-2 flex items-end">
+        <div className="flex items-end">
           <button
             type="submit"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--accent-foreground)] shadow-sm transition-transform transition-colors hover:-translate-y-0.5 hover:bg-[var(--accent-hover)]"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-5 py-2.5 text-base font-semibold text-[var(--accent-foreground)] shadow-sm transition-transform transition-colors hover:-translate-y-0.5 hover:bg-[var(--accent-hover)]"
           >
             <span>Search storage</span>
             <span aria-hidden>🔍</span>

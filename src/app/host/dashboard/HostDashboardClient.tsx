@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import SiteHeader from "@/components/SiteHeader";
 import { supabaseBrowser } from "@/lib/supabaseBrowser";
 
 type HostListingRow = {
@@ -68,18 +69,7 @@ export default function HostDashboardClient() {
 
   return (
     <div className="min-h-screen bg-[var(--background)]">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)]">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
-          <Link href="/" className="text-lg font-bold text-[var(--accent)]">
-            Mystore
-          </Link>
-          <nav className="flex gap-4 text-sm font-medium text-white/90">
-            <Link href="/storage" className="hover:text-white">Find Storage</Link>
-            <Link href="/list-your-space" className="hover:text-white">List Your Space</Link>
-            <Link href="/become-a-driver" className="hover:text-white">Become Driver/Rider</Link>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main className="mx-auto max-w-5xl px-4 py-12">
         <h1 className="text-3xl font-bold text-[var(--foreground)]">Host Dashboard</h1>

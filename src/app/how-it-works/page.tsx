@@ -1,5 +1,6 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import SiteHeader from "@/components/SiteHeader";
 import { IMAGES } from "../images";
 
 export const metadata = {
@@ -11,18 +12,7 @@ export const metadata = {
 export default function HowItWorksPage() {
   return (
     <div className="min-h-screen bg-[var(--background)]">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)]">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
-          <Link href="/" className="text-lg font-bold text-[var(--accent)]">
-            Mystore
-          </Link>
-          <nav className="flex gap-4 text-sm font-medium text-white/90">
-            <Link href="/storage" className="hover:text-white">Find Storage</Link>
-            <Link href="/list-your-space" className="hover:text-white">List Your Space</Link>
-            <Link href="/become-a-driver" className="hover:text-white">Become Driver/Rider</Link>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader />
       <PageHero
         title="How Mystore Works"
         subtitle="Renters, hosts, and drivers — one platform."
@@ -65,16 +55,16 @@ export default function HowItWorksPage() {
               List your space →
             </Link>
           </div>
-          <div className="space-y-3 rounded-xl border border-[var(--border)] bg-[var(--white)] p-5">
-            <h2 className="text-lg font-semibold text-[var(--foreground)]">Pickup & Deliveries</h2>
-            <ol className="list-decimal space-y-2 pl-4 text-sm text-[var(--muted)]">
+          <div className="space-y-3 rounded-xl border border-[var(--primary)] bg-[var(--primary)] p-5 text-[var(--white)]">
+            <h2 className="text-lg font-semibold text-white">Pickup & Deliveries</h2>
+            <ol className="list-decimal space-y-2 pl-4 text-sm text-white/90">
               <li>Apply once with your details and vehicle type.</li>
               <li>Get verified and receive parcel jobs.</li>
               <li>Deliver on your schedule and get paid per trip.</li>
             </ol>
             <Link
               href="/become-a-driver"
-              className="mt-3 inline-block text-sm font-medium text-[var(--primary)] hover:underline"
+              className="mt-3 inline-block text-sm font-medium text-white underline-offset-2 hover:underline"
             >
               Become Driver/Rider →
             </Link>

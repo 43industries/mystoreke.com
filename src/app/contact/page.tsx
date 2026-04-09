@@ -1,5 +1,5 @@
-import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import SiteHeader from "@/components/SiteHeader";
 import { IMAGES } from "../images";
 
 export const metadata = {
@@ -10,18 +10,7 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-[var(--background)]">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)]">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
-          <Link href="/" className="text-lg font-bold text-[var(--accent)]">
-            Mystore
-          </Link>
-          <nav className="flex gap-4 text-sm font-medium text-white/90">
-            <Link href="/storage" className="hover:text-white">Find Storage</Link>
-            <Link href="/list-your-space" className="hover:text-white">List Your Space</Link>
-            <Link href="/become-a-driver" className="hover:text-white">Become Driver/Rider</Link>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader />
       <PageHero
         title="Contact Us"
         subtitle="We're here to help with storage, hosting, or driving."
@@ -48,11 +37,18 @@ export default function ContactPage() {
           </div>
           <div className="space-y-3 rounded-xl border border-[var(--border)] bg-[var(--white)] p-6">
             <h2 className="text-lg font-semibold text-[var(--foreground)]">Partnerships</h2>
-            <p className="text-sm text-[var(--muted)]">
-              We partner with commercial storage owners, residential storage owners, open-yard
-              owners, shared shop/shelf-space owners, pickup &amp; drop-off point vendors, drivers,
-              and riders.
+            <p className="text-sm font-medium text-[var(--foreground)]">
+              We partner with:
             </p>
+            <ul className="list-disc space-y-1.5 pl-5 text-sm text-[var(--muted)]">
+              <li>Commercial storage space owners</li>
+              <li>Residential storage space owners</li>
+              <li>Open yard space owners</li>
+              <li>Shared shop/shelf space owners</li>
+              <li>Pickup/drop-off point vendors</li>
+              <li>Drivers</li>
+              <li>Riders</li>
+            </ul>
             <p className="text-sm text-[var(--muted)]">
               <span className="font-medium text-[var(--foreground)]">Email:</span>{" "}
               partnerships@mystoreke.com

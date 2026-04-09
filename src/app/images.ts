@@ -13,8 +13,10 @@ export const IMAGES = {
   storage: {
     commercial: "/storage-commercial.jpg",
     residential: RESIDENTIAL_GARAGE,
+    warehouse: WAREHOUSE_HERO,
     yard: "/storage-yard.jpg",
     shelf: "/storage-shelf.jpg",
+    budget: RESIDENTIAL_GARAGE,
     parcel: PARCEL_VAN,
   },
 

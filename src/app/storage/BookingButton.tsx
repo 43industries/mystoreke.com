@@ -16,7 +16,8 @@ type Props = {
 };
 
 function formatKes(n: number) {
-  return `KES ${n.toLocaleString("en-KE", { maximumFractionDigits: 0 })}`;
+  const v = Number.isFinite(n) ? n : 0;
+  return `KES ${v.toLocaleString("en-KE", { maximumFractionDigits: 0 })}`;
 }
 
 export default function BookingButton({
@@ -256,9 +257,17 @@ export default function BookingButton({
           <p className="font-semibold text-[var(--foreground)]">
             Pay with M-Pesa
           </p>
+          <div className="rounded-lg border border-[var(--border)] bg-[var(--white)] p-3 text-sm text-[var(--foreground)]">
+            <p className="font-medium">Payment instructions</p>
+            <ol className="mt-2 list-decimal space-y-1 pl-4 text-[var(--muted)]">
+              <li>Confirm the amount below matches what you agreed with the host.</li>
+              <li>Enter the Safaricom number that should receive the STK push.</li>
+              <li>Tap &ldquo;Send STK push&rdquo;, then approve the prompt on your phone.</li>
+              <li>Keep this page open until you see confirmation — we update automatically.</li>
+            </ol>
+          </div>
           <p className="text-sm text-[var(--muted)]">
-            Enter the Safaricom number that will receive the STK prompt (format
-            07… or 2547…).
+            Phone format: 07… or 2547…
           </p>
           <input
             type="tel"
@@ -309,10 +318,17 @@ export default function BookingButton({
           <p className="font-semibold text-[var(--foreground)]">
             Reservation recorded
           </p>
-          <p className="mt-2 text-sm text-[var(--muted)]">
-            M-Pesa is not enabled in this environment. Use the demo pay button
-            to simulate confirmation, or set NEXT_PUBLIC_MPESA_ENABLED and
-            Daraja env vars.
+          <div className="mt-3 rounded-lg border border-[var(--border)] bg-[var(--white)] p-3 text-sm">
+            <p className="font-medium text-[var(--foreground)]">Next steps</p>
+            <ol className="mt-2 list-decimal space-y-1 pl-4 text-[var(--muted)]">
+              <li>Your hold uses the price for the period you selected ({duration}).</li>
+              <li>When M-Pesa is enabled, you&apos;ll pay here with STK push.</li>
+              <li>For now, use the demo button below only on test environments.</li>
+            </ol>
+          </div>
+          <p className="mt-3 text-sm text-[var(--muted)]">
+            M-Pesa is not enabled here. In production, set{" "}
+            <span className="font-mono text-xs">NEXT_PUBLIC_MPESA_ENABLED</span> and Daraja env vars.
           </p>
           <p className="mt-3 text-sm font-medium text-[var(--foreground)]">
             Amount due: {formatKes(unitPrice)}

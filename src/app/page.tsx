@@ -4,6 +4,7 @@ import Link from "next/link";
 import HeroCarousel from "./HeroCarousel";
 import HeroSearchForm from "./HeroSearchForm";
 import Logo from "@/components/Logo";
+import SiteHeader from "@/components/SiteHeader";
 import { IMAGES } from "./images";
 
 export const metadata: Metadata = {
@@ -52,6 +53,18 @@ type FocusBox = {
 
 const FOCUS_BOXES: FocusBox[] = [
   {
+    title: "Residential Storage",
+    description:
+      "Spare rooms, garages, and outbuildings in trusted homes where you can keep furniture, boxes, and personal items safely for weeks or months at a time.",
+    href: "/storage?type=residential",
+    tagline: "For individuals and families",
+    highlights: [
+      "Ideal when moving, renovating, or decluttering",
+      "Lockable rooms and garages in trusted homes",
+    ],
+    image: IMAGES.storage.residential,
+  },
+  {
     title: "Commercial Storage",
     description:
       "Dedicated back‑room and off‑site space for shops, SMEs, and offices that need extra room for stock, equipment, or records without paying for a full warehouse.",
@@ -64,16 +77,16 @@ const FOCUS_BOXES: FocusBox[] = [
     image: IMAGES.storage.commercial,
   },
   {
-    title: "Residential Storage",
+    title: "Warehouse Storage",
     description:
-      "Spare rooms, garages, and outbuildings in trusted homes where you can keep furniture, boxes, and personal items safely for weeks or months at a time.",
-    href: "/storage?type=residential",
-    tagline: "For individuals and families",
+      "Larger spaces in industrial and logistics areas with truck and pallet access — ideal for bulk inventory, dispatch, and longer-term business storage.",
+    href: "/storage?type=warehouse",
+    tagline: "For bulk stock and logistics",
     highlights: [
-      "Ideal when moving, renovating, or decluttering",
-      "Lockable rooms and garages in trusted homes",
+      "Industrial locations with loading access",
+      "Suited to pallets and high-volume inventory",
     ],
-    image: IMAGES.storage.residential,
+    image: IMAGES.storage.warehouse,
   },
   {
     title: "Open Yard Storage",
@@ -98,6 +111,18 @@ const FOCUS_BOXES: FocusBox[] = [
       "Perfect for smaller boxes and fast‑moving stock",
     ],
     image: IMAGES.storage.shelf,
+  },
+  {
+    title: "Budget Units",
+    description:
+      "Lower-priced units with essential security for cost-conscious renters — practical when you need dependable space without premium extras.",
+    href: "/storage?type=budget",
+    tagline: "Affordable locked space",
+    highlights: [
+      "Straightforward pricing for everyday storage needs",
+      "Great for students, overflow, and short stays",
+    ],
+    image: IMAGES.storage.budget,
   },
   {
     title: "Pickup & Drop-Off Point Vendor",
@@ -130,7 +155,7 @@ const WHY_CHOOSE = [
     label: "Verified listings",
     value: "Trust",
     detail: "Verified hosts and drivers",
-    desc: "Hosts and drivers are reviewed so storage and deliveries stay safe and transparent.",
+    desc: "Hosts and drivers are reviewed so storage and deliveries stay safe and transparent. Real profiles and clear expectations before you book.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
@@ -141,7 +166,7 @@ const WHY_CHOOSE = [
     label: "Clear pricing",
     value: "KES",
     detail: "Transparent rates before booking",
-    desc: "See storage and parcel fees before you book — no hidden charges on listed rates.",
+    desc: "See storage and parcel fees before you book — no hidden charges on listed rates. Compare day, week, and month options side by side.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m0-12.75H21" />
@@ -152,7 +177,7 @@ const WHY_CHOOSE = [
     label: "All in one place",
     value: "3-in-1",
     detail: "Storage + parcel + delivery",
-    desc: "Storage units, pickup & drop-off points, and driver/rider deliveries on a single platform.",
+    desc: "Storage units, pickup & drop-off points, and driver/rider deliveries on a single platform. One account for renting, hosting, or moving parcels.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
@@ -163,7 +188,7 @@ const WHY_CHOOSE = [
     label: "Built for Kenya",
     value: "24/7",
     detail: "Local logistics ready",
-    desc: "List, book, and track jobs from your phone — ready for M-Pesa and local logistics.",
+    desc: "List, book, and track jobs from your phone — ready for M-Pesa and local logistics. Built for Kenyan cities, towns, and growing e-commerce volumes.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
@@ -266,26 +291,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[var(--background)]">
-      {/* Header - navy with logo and nav */}
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)]">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-4">
-          <Logo variant="header" className="h-10 shrink-0 md:h-12" />
-          <nav className="flex shrink-0 gap-6 text-sm font-medium text-white/90">
-            <Link href="/storage" className="hover:text-white">
-              Find Storage
-            </Link>
-            <Link href="/list-your-space" className="hover:text-white">
-              List Your Space
-            </Link>
-            <Link href="/become-a-driver" className="hover:text-white">
-              Become Driver/Rider
-            </Link>
-            <Link href="/contact" className="hover:text-white">
-              Contact
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader variant="home" />
 
       {/* Hero - 1st Blue Page: big warehouse photo, headline, tagline, then search */}
       <section className="relative overflow-hidden bg-[var(--primary)] px-4 pb-20 pt-12 text-[var(--white)] md:pt-16">
@@ -293,10 +299,10 @@ export default function Home() {
           {/* Category slides — warehouse, commercial, residential, yard, shelf, parcel */}
           <HeroCarousel />
           <div className="mt-8 text-center">
-            <h1 className="text-2xl font-bold tracking-tight md:text-3xl lg:text-4xl">
+            <h1 className="text-lg font-bold tracking-tight md:text-xl lg:text-2xl">
               Smart Storage for Every Need
             </h1>
-            <p className="mt-4 max-w-2xl mx-auto text-lg opacity-95 md:text-xl">
+            <p className="mt-4 max-w-2xl mx-auto text-base opacity-95 md:text-lg">
               Secure storage, parcel pickup and drop-off, and deliveries — all in one Mystore platform.
             </p>
           </div>
@@ -314,12 +320,13 @@ export default function Home() {
                 Welcome to Mystore Storage Network
               </h2>
               <p className="mt-2 max-w-2xl text-[var(--muted)]">
-                Five core services — each clearly structured so renters, hosts, and drivers know
-                exactly what to expect from Mystore before they book or list.
+                Every storage type on Mystore uses the same clear structure — residential, commercial,
+                warehouse, yard, shared shop/shelf space, budget units, parcel points, and deliveries —
+                so renters, hosts, and drivers know what to expect before they book or list.
               </p>
             </div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--background)] px-4 py-2 text-sm font-medium text-[var(--muted)]">
-              <span className="h-2 w-2 rounded-full bg-[var(--accent)]" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--background)] px-4 py-2.5 text-base font-semibold text-[var(--foreground)] md:text-lg">
+              <span className="h-2 w-2 shrink-0 rounded-full bg-[var(--accent)]" />
               <span>Swipe to explore all services</span>
             </div>
           </div>
@@ -411,17 +418,17 @@ export default function Home() {
                 ))}
               </ul>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold text-[var(--primary)]">For Pickup & Deliveries</h3>
+            <div className="rounded-2xl bg-[var(--primary)] px-5 py-8 text-[var(--white)] lg:px-6">
+              <h3 className="text-lg font-semibold text-white">For Pickup & Deliveries</h3>
               <ul className="mt-6 space-y-4">
                 {DRIVER_STEPS.map(({ step, title, desc }) => (
                   <li key={step} className="flex gap-4">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-medium text-white">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/20 text-sm font-medium text-white">
                       {step}
                     </span>
                     <div>
-                      <div className="font-medium text-[var(--foreground)]">{title}</div>
-                      <div className="text-sm text-[var(--muted)]">{desc}</div>
+                      <div className="font-medium text-white">{title}</div>
+                      <div className="text-sm text-white/85">{desc}</div>
                     </div>
                   </li>
                 ))}
@@ -437,8 +444,9 @@ export default function Home() {
           <h2 className="text-center text-2xl font-semibold text-[var(--foreground)]">
             Why Choose Mystore
           </h2>
-          <p className="mt-2 text-center text-lg text-[var(--muted)]">
-            Trust, transparent pricing, and a full logistics network in one place.
+          <p className="mt-3 text-center text-xl text-[var(--muted)] md:text-2xl">
+            Trust, transparent pricing, and a full logistics network in one place — with nationwide
+            reach, flexible rental periods, and support when you need it.
           </p>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {WHY_CHOOSE.map(({ label, value, detail, desc, icon }) => (
@@ -455,10 +463,10 @@ export default function Home() {
                 <div className="mt-1 text-xs font-medium uppercase tracking-[0.16em] text-[var(--muted)]">
                   {label}
                 </div>
-                <p className="mt-2 text-sm font-medium text-[var(--foreground)]">
+                <p className="mt-2 text-base font-medium text-[var(--foreground)]">
                   {detail}
                 </p>
-                <p className="mt-2 text-sm text-[var(--muted)]">
+                <p className="mt-2 text-base text-[var(--muted)]">
                   {desc}
                 </p>
               </div>

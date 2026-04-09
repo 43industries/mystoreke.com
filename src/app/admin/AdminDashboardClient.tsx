@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { supabaseBrowser } from "@/lib/supabaseBrowser";
+import AdminServiceCopyEditor from "./AdminServiceCopyEditor";
 
 type Overview = {
   pendingBookings: number;
@@ -113,6 +114,8 @@ export default function AdminDashboardClient() {
             Updated {new Date(data.generatedAt).toLocaleString()}
           </p>
         )}
+
+        <AdminServiceCopyEditor />
       </main>
     </div>
   );

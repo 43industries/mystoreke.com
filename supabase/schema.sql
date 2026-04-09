@@ -70,3 +70,13 @@ create table if not exists public.delivery_jobs (
 
 create index if not exists delivery_jobs_renter_idx on public.delivery_jobs (renter_id);
 create index if not exists delivery_jobs_status_idx on public.delivery_jobs (status);
+
+-- Optional overrides for public storage-type explainer copy (see /api/storage-type-details, /admin).
+create table if not exists public.storage_service_copy (
+  slug text primary key,
+  description text not null,
+  ideal_use text not null,
+  updated_at timestamptz not null default now()
+);
+
+create index if not exists storage_service_copy_updated_idx on public.storage_service_copy (updated_at desc);

@@ -7,14 +7,16 @@ import { useSearchParams } from "next/navigation";
 import { IMAGES } from "../images";
 import { STORAGE_TYPES, STORAGE_TYPE_DETAILS, type StorageListing } from "./data";
 
+type TypeDetails = (typeof STORAGE_TYPE_DETAILS)[string];
+
 function listingImage(storageType: string): string {
   const map: Record<string, string> = {
     "Residential Storage": IMAGES.storage.residential,
     "Commercial Storage": IMAGES.storage.commercial,
-    "Warehouse Storage": IMAGES.storage.commercial,
+    "Warehouse Storage": IMAGES.storage.warehouse,
     "Open Yard Storage": IMAGES.storage.yard,
     "Shared Shop/Shelf Space": IMAGES.storage.shelf,
-    "Budget Units": IMAGES.storage.residential,
+    "Budget Units": IMAGES.storage.budget,
     "Pickup & Drop-Off Point Vendor": IMAGES.storage.parcel,
   };
   return map[storageType] ?? IMAGES.storage.commercial;
@@ -30,6 +32,28 @@ export default function StorageSearch() {
   const [duration, setDuration] = useState<"day" | "week" | "month">("month");
   const [priceBand, setPriceBand] = useState("");
   const [parcelOnly, setParcelOnly] = useState(false);
+  const [typeDetailsMap, setTypeDetailsMap] = useState<
+    Record<string, TypeDetails>
+  >(() => ({ ...STORAGE_TYPE_DETAILS }));
+
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      try {
+        const res = await fetch("/api/storage-type-details");
+        if (!res.ok) return;
+        const json = (await res.json()) as Record<string, TypeDetails>;
+        if (!cancelled && json && typeof json === "object") {
+          setTypeDetailsMap((prev) => ({ ...prev, ...json }));
+        }
+      } catch {
+        /* keep defaults */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -141,15 +165,14 @@ export default function StorageSearch() {
         : duration === "week"
           ? listing.pricePerWeek
           : listing.pricePerMonth;
-    return `KES ${n.toLocaleString()}${
+    const safe = Number.isFinite(n) ? n : 0;
+    return `KES ${safe.toLocaleString()}${
       duration === "day" ? "/day" : duration === "week" ? "/wk" : "/mo"
     }`;
   };
 
   const activeTypeDetails = storageType
-    ? Object.values(STORAGE_TYPE_DETAILS).find(
-        (d) => d.label === storageType,
-      )
+    ? Object.values(typeDetailsMap).find((d) => d.label === storageType)
     : undefined;
 
   return (
