@@ -1,12 +1,15 @@
 {
-  "name": "myhost",
+  "name": "mystoreke",
   "version": "0.1.0",
   "private": true,
   "engines": {
     "node": ">=20.9.0"
   },
   "scripts": {
-    "dev": "next dev",
+    "copy-logo": "node scripts/copy-logo.mjs",
+    "prebuild": "node scripts/copy-logo.mjs",
+    "dev": "node scripts/copy-logo.mjs && next dev",
+    "drive": "node scripts/copy-logo.mjs && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

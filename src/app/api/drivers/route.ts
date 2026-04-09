@@ -46,8 +46,13 @@ export async function POST(request: Request) {
       );
     }
 
-    const photoUrl =
-      photoDataUrl.length > 500_000 ? photoDataUrl.slice(0, 500_000) : photoDataUrl;
+    const maxDocLen = 500_000;
+    const clip = (s: string) =>
+      s.length > maxDocLen ? s.slice(0, maxDocLen) : s;
+
+    const photoUrl = clip(photoDataUrl);
+    const vehiclePhotoUrl = clip(vehiclePhotoDataUrl);
+    const logbookPhotoUrl = clip(logbookCopyDataUrl);
 
     const application = {
       fullName,
@@ -78,6 +83,8 @@ export async function POST(request: Request) {
         availability: application.availability,
         message: application.message,
         photo_url: photoUrl,
+        vehicle_photo_url: vehiclePhotoUrl,
+        logbook_photo_url: logbookPhotoUrl,
       });
 
       if (error) {

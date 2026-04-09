@@ -1,28 +1,9 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { getBearerUserId } from "@/lib/bearerAuth";
 import { getSupabaseServerClient } from "@/lib/supabaseServer";
 
-async function getAuthenticatedUserId(request: Request): Promise<string | null> {
-  const authHeader = request.headers.get("authorization");
-  if (!authHeader?.startsWith("Bearer ")) return null;
-
-  const token = authHeader.slice("Bearer ".length).trim();
-  if (!token) return null;
-
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url || !anonKey) return null;
-
-  const supabase = createClient(url, anonKey, {
-    auth: { persistSession: false, autoRefreshToken: false },
-  });
-  const { data, error } = await supabase.auth.getUser(token);
-  if (error || !data.user) return null;
-  return data.user.id;
-}
-
 export async function GET(request: Request) {
-  const authUserId = await getAuthenticatedUserId(request);
+  const authUserId = await getBearerUserId(request);
   if (!authUserId) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
@@ -73,7 +54,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    const authUserId = await getAuthenticatedUserId(request);
+    const authUserId = await getBearerUserId(request);
     if (!authUserId) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
@@ -106,16 +87,20 @@ export async function POST(request: Request) {
       );
     }
 
-    const { error } = await supabase.from("bookings").insert({
-      renter_id: authUserId,
-      listing_id: listingId,
-      start_date: startDate,
-      end_date: endDate,
-      duration_unit: durationUnit,
-      total_price: totalPrice,
-      status: "pending",
-      note: note ?? null,
-    });
+    const { data: row, error } = await supabase
+      .from("bookings")
+      .insert({
+        renter_id: authUserId,
+        listing_id: listingId,
+        start_date: startDate,
+        end_date: endDate,
+        duration_unit: durationUnit,
+        total_price: totalPrice,
+        status: "pending",
+        note: note ?? null,
+      })
+      .select("id")
+      .single();
 
     if (error) {
       // eslint-disable-next-line no-console
@@ -130,6 +115,7 @@ export async function POST(request: Request) {
       {
         success: true,
         message: "Booking request submitted.",
+        bookingId: row?.id ?? null,
       },
       { status: 201 },
     );
@@ -143,6 +129,11 @@ export async function POST(request: Request) {
 
 export async function PATCH(request: Request) {
   try {
+    const authUserId = await getBearerUserId(request);
+    if (!authUserId) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+
     const body = await request.json();
     const { bookingId, status } = body;
 
@@ -165,6 +156,42 @@ export async function PATCH(request: Request) {
       return NextResponse.json(
         { message: "Database not configured" },
         { status: 500 },
+      );
+    }
+
+    const { data: booking, error: fetchError } = await supabase
+      .from("bookings")
+      .select("id, renter_id, listings ( host_id )")
+      .eq("id", bookingId)
+      .single();
+
+    if (fetchError || !booking) {
+      return NextResponse.json(
+        { message: "Booking not found" },
+        { status: 404 },
+      );
+    }
+
+    const listing = booking.listings as { host_id: string } | null;
+    const hostId = listing?.host_id ?? null;
+    const isRenter = booking.renter_id === authUserId;
+    const isHost = hostId !== null && hostId === authUserId;
+
+    if (!isRenter && !isHost) {
+      return NextResponse.json({ message: "Forbidden" }, { status: 403 });
+    }
+
+    const renterMaySet = status === "cancelled";
+    const hostMaySet = ["confirmed", "cancelled", "completed"].includes(status);
+    const allowed =
+      (isRenter && renterMaySet) || (isHost && hostMaySet && status !== "pending");
+    if (!allowed) {
+      return NextResponse.json(
+        {
+          message:
+            "You cannot set this status. Renters may cancel; hosts may confirm, cancel, or complete.",
+        },
+        { status: 403 },
       );
     }
 

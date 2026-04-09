@@ -1,24 +1,50 @@
-# MyHost
+# Mystore (mystoreke.com)
 
-Find your perfect stay — discover unique places to stay in the countryside. Connecting countryside homeowners with travelers.
+Smart storage, parcel pickup and drop-off, and driver/rider logistics for Kenya — marketplace UI and APIs built with Next.js.
 
 ## Tech stack
 
 - **Next.js 16** (App Router)
+- **React 19**
 - **TypeScript**
 - **Tailwind CSS**
+- **Supabase** (Auth, Postgres via `@supabase/supabase-js`)
 
 ## Getting started
 
 ```bash
-# Install dependencies (if needed)
 npm install
-
-# Run development server
+npm run copy-logo   # optional: copies logo.png/logo.png → public/logo.png for branding
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+Copy [`.env.example`](./.env.example) to `.env.local` and add your Supabase project values (**Settings → API**).
+
+## Database setup
+
+Run the statements in [`supabase/schema.sql`](./supabase/schema.sql) in the Supabase SQL editor so you have:
+
+- `public.profiles` (synced from the app on sign-up / log-in via `POST /api/profile`)
+- RLS policies for client reads on `profiles`
+- `vehicle_photo_url` and `logbook_photo_url` on `driver_applications` (if that table already exists)
+- `public.mpesa_payments` for STK rows + `public.delivery_jobs` for draft parcel jobs
+
+Adjust table definitions if your project already uses different column names.
+
+## M-Pesa (Daraja STK)
+
+1. Create an app on [Safaricom Daraja](https://developer.safaricom.co.ke/) (sandbox first).
+2. Set **Callback URL** to `https://<your-domain>/api/payments/mpesa/callback` (for local dev, expose HTTPS with e.g. ngrok and paste that URL in Daraja + `MPESA_CALLBACK_URL`).
+3. Copy `.env.example` keys: `MPESA_CONSUMER_KEY`, `MPESA_CONSUMER_SECRET`, `MPESA_SHORTCODE`, `MPESA_PASSKEY`, `MPESA_ENV`, `MPESA_CALLBACK_URL`.
+4. Set `NEXT_PUBLIC_MPESA_ENABLED=true` so listing pages show **Pay with M-Pesa**.
+5. Successful callback marks the payment **paid** and sets the booking to **confirmed** (prepaid flow).
+
+## Admin & delivery (baseline)
+
+- **Admin:** Set `MYSTORE_ADMIN_USER_IDS` to a comma-separated list of Supabase `auth.users` UUIDs. Those users can open `/admin` and call `GET /api/admin/overview` (with Bearer session).
+- **Delivery:** Authenticated renters can `POST /api/delivery-jobs` with `pickupAddress`, `dropoffAddress`, optional `parcelDescription`, `preferredDate`, `notes` — creates a **draft** row for a future driver assignment flow.
 
 ## Scripts
 
@@ -29,30 +55,29 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Deploy on Vercel
 
-Use the correct repository name: **`43industries/mystoreke.com`** ([repo on GitHub](https://github.com/43industries/mystoreke.com)).
+Repository: **`43industries/mystoreke.com`** ([GitHub](https://github.com/43industries/mystoreke.com)).
 
-1. Push the `main` branch to GitHub (this repo).
+1. Push the `main` branch to GitHub.
 2. Sign in at [vercel.com](https://vercel.com) with GitHub.
-3. **Add New** → **Project** → **Import** `43industries/mystoreke.com` (not `myhost`).
-4. **Root Directory** — leave empty (repository root). **Framework Preset** — Next.js (auto-detected).
-5. **Environment Variables** — add the keys from [`.env.example`](./.env.example) for Production (and Preview if you use Supabase there). Values come from your [Supabase](https://supabase.com) project: **Settings → API**.
+3. **Add New** → **Project** → **Import** this repo.
+4. **Root Directory** — repository root. **Framework Preset** — Next.js (auto-detected).
+5. **Environment Variables** — add everything from [`.env.example`](./.env.example) for Production (and Preview if you use Supabase there).
 6. Deploy.
 
-**Node:** this app targets **Node 20.9+** (see `engines` in `package.json`). Vercel will pick that up; you can also set **Settings → General → Node.js Version** to **20.x** if needed.
+**Node:** **20.9+** (see `engines` in `package.json`).
 
 ### If deployments don’t run or builds fail
 
 | Symptom | What to check |
 |--------|----------------|
-| No deploy on `git push` | **Settings → Git** — confirm the repo is connected and the **Production Branch** is `main`. Reconnect GitHub if the Vercel GitHub App lost access (GitHub → **Settings → Applications** → Vercel). |
-| **Import** shows wrong repo | Import **`mystoreke.com`**, not `myhost`. |
-| Build fails with install errors | Use **npm** (this repo has `package-lock.json`). Clear build cache: **Deployments → … → Redeploy** → uncheck “Use existing Build Cache”. |
-| Runtime errors for auth/API | Add all variables from `.env.example` in Vercel for the right environment (Production vs Preview). |
-
-To redeploy after a successful setup, push to `main` or trigger **Redeploy** in the Vercel dashboard.
+| No deploy on `git push` | **Settings → Git** — repo connected; **Production Branch** is `main`. |
+| Build fails with install errors | Use **npm** (`package-lock.json`). Redeploy without build cache if needed. |
+| Runtime errors for auth/API | All variables from `.env.example` set in Vercel; run `supabase/schema.sql` where applicable. |
 
 ## Project structure
 
-- `src/app/page.tsx` — main landing page
+- `src/app/page.tsx` — landing page
 - `src/app/layout.tsx` — root layout and metadata
 - `src/app/globals.css` — global styles and CSS variables
+- `src/app/api/*` — listings, bookings, drivers, profile, M-Pesa, admin overview, delivery jobs
+- `public/logo.png` — raster logo (run `npm run copy-logo` from the repo layout, or commit your own file); `logo-mark.svg` remains available as an extra asset

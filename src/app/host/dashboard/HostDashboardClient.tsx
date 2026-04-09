@@ -9,8 +9,8 @@ type HostListingRow = {
   title: string;
   city: string;
   county: string;
-  price_per_month: number | null;
-  created_at: string;
+  pricePerMonth: number | null;
+  createdAt: string;
 };
 
 export default function HostDashboardClient() {
@@ -128,12 +128,12 @@ export default function HostDashboardClient() {
                   {l.city}, {l.county}
                 </p>
                 <p className="mt-2 text-sm font-semibold text-[var(--primary)]">
-                  {l.price_per_month
-                    ? `KES ${Number(l.price_per_month).toLocaleString()}/month`
+                  {l.pricePerMonth != null
+                    ? `KES ${Number(l.pricePerMonth).toLocaleString()}/month`
                     : "Price not set"}
                 </p>
                 <p className="mt-1 text-xs text-[var(--muted)]">
-                  Created at {new Date(l.created_at).toLocaleDateString()}
+                  Created at {new Date(l.createdAt).toLocaleDateString()}
                 </p>
               </div>
             ))}

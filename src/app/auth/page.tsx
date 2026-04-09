@@ -4,6 +4,25 @@ import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { supabaseBrowser } from "@/lib/supabaseBrowser";
 
+async function syncProfileToServer(
+  accessToken: string,
+  fullName: string,
+  role: "renter" | "host" | "driver",
+) {
+  const res = await fetch("/api/profile", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({ fullName, role }),
+  });
+  if (!res.ok) {
+    // eslint-disable-next-line no-console
+    console.warn("Profile sync failed:", await res.text().catch(() => ""));
+  }
+}
+
 export default function AuthPage() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,7 +46,7 @@ export default function AuthPage() {
     setLoading(true);
     try {
       if (mode === "signup") {
-        const { error: err } = await supabaseBrowser.auth.signUp({
+        const { data: signUpData, error: err } = await supabaseBrowser.auth.signUp({
           email,
           password,
           options: {
@@ -40,15 +59,43 @@ export default function AuthPage() {
         if (err) {
           setError(err.message);
         } else {
-          setMessage("Sign-up successful. Check your email to confirm (if required).");
+          if (signUpData.session?.access_token) {
+            await syncProfileToServer(
+              signUpData.session.access_token,
+              fullName,
+              role,
+            );
+            setMessage(
+              "Sign-up successful. Your profile is saved. Check your email if confirmation is required.",
+            );
+          } else {
+            setMessage(
+              "Sign-up successful. After you confirm your email and log in, your profile will sync automatically.",
+            );
+          }
         }
       } else {
-        const { error: err } = await supabaseBrowser.auth.signInWithPassword({
-          email,
-          password,
-        });
+        const { data: signInData, error: err } =
+          await supabaseBrowser.auth.signInWithPassword({
+            email,
+            password,
+          });
         if (err) {
           setError(err.message);
+        } else if (signInData.session?.access_token && signInData.user) {
+          const meta = signInData.user.user_metadata ?? {};
+          const metaRole = meta.role as string | undefined;
+          const metaName = (meta.full_name as string | undefined) ?? "";
+          const resolvedRole: "renter" | "host" | "driver" =
+            metaRole === "host" || metaRole === "driver" || metaRole === "renter"
+              ? metaRole
+              : "renter";
+          await syncProfileToServer(
+            signInData.session.access_token,
+            metaName,
+            resolvedRole,
+          );
+          setMessage("Logged in successfully.");
         } else {
           setMessage("Logged in successfully.");
         }
@@ -72,7 +119,8 @@ export default function AuthPage() {
           {mode === "signup" ? "Create an account" : "Log in"}
         </h1>
         <p className="mt-2 text-sm text-[var(--muted)]">
-          This simple form uses Supabase Auth and will also create a profile row in the database.
+          Supabase Auth manages your credentials. With an active session we upsert your role and name into
+          the database profiles table (apply supabase/schema.sql in Supabase if you have not already).
         </p>
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           {mode === "signup" && (
