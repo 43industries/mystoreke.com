@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import HeroCarousel from "./HeroCarousel";
 import HeroSearchForm from "./HeroSearchForm";
@@ -87,9 +88,9 @@ const FOCUS_BOXES: FocusBox[] = [
     image: IMAGES.storage.yard,
   },
   {
-    title: "Shelf Storage",
+    title: "Shared Shop/Shelf Space",
     description:
-      "Pay‑per‑shelf and rack space inside shops and warehouses, ideal for cartons, product samples, and fast‑moving e‑commerce inventory.",
+      "Pay-per-shelf and rack space inside active shops and mini-warehouses, ideal for cartons, samples, and fast-moving e-commerce inventory.",
     href: "/storage?type=shelf",
     tagline: "For small merchants and e‑commerce",
     highlights: [
@@ -128,6 +129,7 @@ const WHY_CHOOSE = [
   {
     label: "Verified listings",
     value: "Trust",
+    detail: "Verified hosts and drivers",
     desc: "Hosts and drivers are reviewed so storage and deliveries stay safe and transparent.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -138,6 +140,7 @@ const WHY_CHOOSE = [
   {
     label: "Clear pricing",
     value: "KES",
+    detail: "Transparent rates before booking",
     desc: "See storage and parcel fees before you book — no hidden charges on listed rates.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -148,6 +151,7 @@ const WHY_CHOOSE = [
   {
     label: "All in one place",
     value: "3-in-1",
+    detail: "Storage + parcel + delivery",
     desc: "Storage units, pickup & drop-off points, and driver/rider deliveries on a single platform.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -158,6 +162,7 @@ const WHY_CHOOSE = [
   {
     label: "Built for Kenya",
     value: "24/7",
+    detail: "Local logistics ready",
     desc: "List, book, and track jobs from your phone — ready for M-Pesa and local logistics.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -288,7 +293,7 @@ export default function Home() {
           {/* Category slides — warehouse, commercial, residential, yard, shelf, parcel */}
           <HeroCarousel />
           <div className="mt-8 text-center">
-            <h1 className="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
+            <h1 className="text-2xl font-bold tracking-tight md:text-3xl lg:text-4xl">
               Smart Storage for Every Need
             </h1>
             <p className="mt-4 max-w-2xl mx-auto text-lg opacity-95 md:text-xl">
@@ -305,7 +310,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col items-center gap-3 text-center md:flex-row md:items-end md:justify-between md:text-left">
             <div>
-              <h2 className="text-2xl font-semibold text-[var(--foreground)]">
+              <h2 className="text-3xl font-semibold text-[var(--foreground)]">
                 Welcome to Mystore Storage Network
               </h2>
               <p className="mt-2 max-w-2xl text-[var(--muted)]">
@@ -313,35 +318,38 @@ export default function Home() {
                 exactly what to expect from Mystore before they book or list.
               </p>
             </div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--background)] px-3 py-1 text-xs text-[var(--muted)]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--background)] px-4 py-2 text-sm font-medium text-[var(--muted)]">
               <span className="h-2 w-2 rounded-full bg-[var(--accent)]" />
               <span>Swipe to explore all services</span>
             </div>
           </div>
           <div className="mt-8 flex gap-6 overflow-x-auto pb-3 pt-1 scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {FOCUS_BOXES.map((box) => (
+            {FOCUS_BOXES.map((box, index) => (
               <Link
                 key={box.title}
                 href={box.href}
-                className="group flex min-w-[260px] max-w-xs flex-col rounded-2xl border border-[var(--border)] bg-[var(--background)] p-5 shadow-sm ring-1 ring-transparent transition-all hover:-translate-y-1 hover:shadow-md hover:ring-[var(--accent)]/20 md:min-w-[280px] lg:min-w-[300px]"
+                className={`group flex max-w-sm flex-col rounded-2xl border border-[var(--border)] bg-[var(--background)] p-6 shadow-sm ring-1 ring-transparent transition-all hover:-translate-y-1 hover:shadow-md hover:ring-[var(--accent)]/20 ${
+                  index === 0 ? "min-w-[340px]" : "min-w-[320px]"
+                }`}
               >
-                <div className="relative mb-4 h-40 w-full overflow-hidden rounded-xl bg-[var(--border)] md:h-44 lg:h-48">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                <div className="relative mb-4 h-44 w-full overflow-hidden rounded-xl bg-[var(--border)] md:h-48 lg:h-52">
+                  <Image
                     src={box.image}
                     alt={box.title}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    fill
+                    sizes="320px"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
                 </div>
-                <h3 className="text-lg font-semibold text-[var(--foreground)]">
+                <h3 className="text-xl font-semibold text-[var(--foreground)]">
                   {box.title}
                 </h3>
                 <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-[var(--accent)]">
                   {box.tagline}
                 </p>
-                <p className="mt-3 text-sm text-[var(--muted)]">{box.description}</p>
-                <ul className="mt-3 space-y-1 text-sm text-[var(--muted)]">
+                <p className="mt-3 text-base text-[var(--muted)]">{box.description}</p>
+                <ul className="mt-3 space-y-1.5 text-sm text-[var(--muted)]">
                   {box.highlights.map((item) => (
                     <li key={item} className="flex items-start gap-2">
                       <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
@@ -404,11 +412,11 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-[var(--foreground)]">For Pickup & Deliveries</h3>
+              <h3 className="text-lg font-semibold text-[var(--primary)]">For Pickup & Deliveries</h3>
               <ul className="mt-6 space-y-4">
                 {DRIVER_STEPS.map(({ step, title, desc }) => (
                   <li key={step} className="flex gap-4">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--foreground)] text-sm font-medium text-white">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-medium text-white">
                       {step}
                     </span>
                     <div>
@@ -429,11 +437,11 @@ export default function Home() {
           <h2 className="text-center text-2xl font-semibold text-[var(--foreground)]">
             Why Choose Mystore
           </h2>
-          <p className="mt-2 text-center text-[var(--muted)]">
+          <p className="mt-2 text-center text-lg text-[var(--muted)]">
             Trust, transparent pricing, and a full logistics network in one place.
           </p>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {WHY_CHOOSE.map(({ label, value, desc, icon }) => (
+            {WHY_CHOOSE.map(({ label, value, detail, desc, icon }) => (
               <div
                 key={label}
                 className="rounded-2xl border border-[var(--border)] bg-[#FFF9F5] p-5 text-center shadow-sm"
@@ -447,7 +455,10 @@ export default function Home() {
                 <div className="mt-1 text-xs font-medium uppercase tracking-[0.16em] text-[var(--muted)]">
                   {label}
                 </div>
-                <p className="mt-2 text-xs text-[var(--muted)]">
+                <p className="mt-2 text-sm font-medium text-[var(--foreground)]">
+                  {detail}
+                </p>
+                <p className="mt-2 text-sm text-[var(--muted)]">
                   {desc}
                 </p>
               </div>

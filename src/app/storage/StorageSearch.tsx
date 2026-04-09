@@ -13,7 +13,7 @@ function listingImage(storageType: string): string {
     "Commercial Storage": IMAGES.storage.commercial,
     "Warehouse Storage": IMAGES.storage.commercial,
     "Open Yard Storage": IMAGES.storage.yard,
-    "Shelf Storage": IMAGES.storage.shelf,
+    "Shared Shop/Shelf Space": IMAGES.storage.shelf,
     "Budget Units": IMAGES.storage.residential,
     "Pickup & Drop-Off Point Vendor": IMAGES.storage.parcel,
   };

@@ -31,16 +31,16 @@ export default function HeroSearchForm() {
       className="mx-auto mt-10 max-w-4xl rounded-2xl border border-[var(--border)] bg-[var(--white)] p-4 shadow-2xl shadow-[rgba(15,23,42,0.25)] md:p-6"
     >
       <div className="mb-4 text-center">
-        <p className="text-sm font-medium text-[var(--foreground)] normal-case">
+        <p className="text-base font-bold text-[var(--foreground)] normal-case">
           Search storage near you
         </p>
-        <p className="mt-1 text-xs text-[var(--muted)] normal-case">
+        <p className="mt-1 text-sm font-semibold text-[var(--muted)] normal-case">
           Choose location, type, duration and budget to see matching spaces.
         </p>
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-[2fr,1.5fr,1.5fr,1.5fr,auto]">
         <div>
-          <label htmlFor="hero-location" className="mb-1 block text-xs font-medium text-[var(--muted)]">
+          <label htmlFor="hero-location" className="mb-1 block text-center text-xs font-semibold text-[var(--muted)]">
             Location
           </label>
           <input
@@ -66,7 +66,7 @@ export default function HeroSearchForm() {
           </label>
         </div>
         <div>
-          <label htmlFor="hero-storage-type" className="mb-1 block text-xs font-medium text-[var(--muted)]">
+          <label htmlFor="hero-storage-type" className="mb-1 block text-center text-xs font-semibold text-[var(--muted)]">
             Storage Type
           </label>
           <select
@@ -80,13 +80,13 @@ export default function HeroSearchForm() {
             <option value="commercial">Commercial</option>
             <option value="warehouse">Warehouse</option>
             <option value="yard">Open Yard</option>
-            <option value="shelf">Shelf</option>
+            <option value="shelf">Shared Shop/Shelf Space</option>
             <option value="budget">Budget</option>
             <option value="parcel">Pickup &amp; Drop-Off Point Vendor</option>
           </select>
         </div>
         <div>
-          <label htmlFor="hero-duration" className="mb-1 block text-xs font-medium text-[var(--muted)]">
+          <label htmlFor="hero-duration" className="mb-1 block text-center text-xs font-semibold text-[var(--muted)]">
             Rental Duration
           </label>
           <select
@@ -101,7 +101,7 @@ export default function HeroSearchForm() {
           </select>
         </div>
         <div>
-          <label htmlFor="hero-price-band" className="mb-1 block text-xs font-medium text-[var(--muted)]">
+          <label htmlFor="hero-price-band" className="mb-1 block text-center text-xs font-semibold text-[var(--muted)]">
             Budget (per month)
           </label>
           <select

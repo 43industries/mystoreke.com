@@ -16,6 +16,8 @@ export async function POST(request: Request) {
       availability,
       message,
       photoDataUrl,
+      vehiclePhotoDataUrl,
+      logbookCopyDataUrl,
     } = body;
 
     if (!fullName || !email || !phone || !idNumber || !vehicleType || !licensePlate || !areasServed || !availability) {
@@ -28,6 +30,18 @@ export async function POST(request: Request) {
     if (!photoDataUrl || typeof photoDataUrl !== "string" || photoDataUrl.length < 100) {
       return NextResponse.json(
         { message: "A current photo is required (photoDataUrl)." },
+        { status: 400 }
+      );
+    }
+    if (!vehiclePhotoDataUrl || typeof vehiclePhotoDataUrl !== "string" || vehiclePhotoDataUrl.length < 100) {
+      return NextResponse.json(
+        { message: "A vehicle photo is required (vehiclePhotoDataUrl)." },
+        { status: 400 }
+      );
+    }
+    if (!logbookCopyDataUrl || typeof logbookCopyDataUrl !== "string" || logbookCopyDataUrl.length < 100) {
+      return NextResponse.json(
+        { message: "A logbook copy photo is required (logbookCopyDataUrl)." },
         { status: 400 }
       );
     }
@@ -45,7 +59,7 @@ export async function POST(request: Request) {
       licensePlate,
       areasServed,
       availability,
-      message: message || "",
+      message: `${message || ""}\n[docs] vehiclePhoto:yes, logbookCopy:yes`.trim(),
       submittedAt: new Date().toISOString(),
     };
 

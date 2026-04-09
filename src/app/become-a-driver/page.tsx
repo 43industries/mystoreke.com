@@ -43,6 +43,10 @@ export default function BecomeADriverPage() {
           </li>
           <li className="flex gap-3">
             <span className="text-[var(--accent)]">✓</span>
+            Vehicle photo and logbook copy photo required for faster verification
+          </li>
+          <li className="flex gap-3">
+            <span className="text-[var(--accent)]">✓</span>
             Flexible hours — work when you want
           </li>
           <li className="flex gap-3">

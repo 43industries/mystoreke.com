@@ -21,6 +21,8 @@ export default function DriverApplicationForm() {
     availability: "",
     message: "",
     photoDataUrl: "" as string,
+    vehiclePhotoDataUrl: "" as string,
+    logbookCopyDataUrl: "" as string,
   });
 
   const update = (key: string, value: string) => {
@@ -38,6 +40,14 @@ export default function DriverApplicationForm() {
       setError("Please add a current photo of yourself (use your camera or upload an image).");
       return;
     }
+    if (!formData.vehiclePhotoDataUrl || formData.vehiclePhotoDataUrl.length < 100) {
+      setError("Please upload a clear photo of your vehicle.");
+      return;
+    }
+    if (!formData.logbookCopyDataUrl || formData.logbookCopyDataUrl.length < 100) {
+      setError("Please upload a copy photo of your vehicle logbook.");
+      return;
+    }
     setLoading(true);
     try {
       const res = await fetch("/api/drivers", {
@@ -46,6 +56,8 @@ export default function DriverApplicationForm() {
         body: JSON.stringify({
           ...formData,
           photoDataUrl: formData.photoDataUrl,
+          vehiclePhotoDataUrl: formData.vehiclePhotoDataUrl,
+          logbookCopyDataUrl: formData.logbookCopyDataUrl,
         }),
       });
       const data = await res.json().catch(() => ({}));
@@ -124,6 +136,84 @@ export default function DriverApplicationForm() {
             <img
               src={formData.photoDataUrl}
               alt="Your preview"
+              className="mt-3 h-32 w-32 rounded-lg border border-[var(--border)] object-cover"
+            />
+          ) : null}
+        </div>
+        <div>
+          <label className="mb-1 block text-sm font-medium text-[var(--foreground)]">
+            Vehicle photo (required) *
+          </label>
+          <p className="mb-2 text-xs text-[var(--muted)]">
+            Upload a clear photo showing the full vehicle and plate area.
+          </p>
+          <input
+            type="file"
+            accept="image/*"
+            capture="environment"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (!file) {
+                update("vehiclePhotoDataUrl", "");
+                return;
+              }
+              if (file.size > 700_000) {
+                setError("Vehicle photo must be under 700 KB.");
+                return;
+              }
+              setError("");
+              const reader = new FileReader();
+              reader.onload = () => {
+                const url = typeof reader.result === "string" ? reader.result : "";
+                update("vehiclePhotoDataUrl", url);
+              };
+              reader.readAsDataURL(file);
+            }}
+            className="w-full text-sm text-[var(--foreground)] file:mr-3 file:rounded-lg file:border-0 file:bg-[var(--primary)] file:px-3 file:py-2 file:text-sm file:font-medium file:text-white"
+          />
+          {formData.vehiclePhotoDataUrl ? (
+            <img
+              src={formData.vehiclePhotoDataUrl}
+              alt="Vehicle preview"
+              className="mt-3 h-32 w-32 rounded-lg border border-[var(--border)] object-cover"
+            />
+          ) : null}
+        </div>
+        <div>
+          <label className="mb-1 block text-sm font-medium text-[var(--foreground)]">
+            Logbook copy photo (required) *
+          </label>
+          <p className="mb-2 text-xs text-[var(--muted)]">
+            Upload a readable photo of your logbook copy page for verification.
+          </p>
+          <input
+            type="file"
+            accept="image/*"
+            capture="environment"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (!file) {
+                update("logbookCopyDataUrl", "");
+                return;
+              }
+              if (file.size > 700_000) {
+                setError("Logbook copy photo must be under 700 KB.");
+                return;
+              }
+              setError("");
+              const reader = new FileReader();
+              reader.onload = () => {
+                const url = typeof reader.result === "string" ? reader.result : "";
+                update("logbookCopyDataUrl", url);
+              };
+              reader.readAsDataURL(file);
+            }}
+            className="w-full text-sm text-[var(--foreground)] file:mr-3 file:rounded-lg file:border-0 file:bg-[var(--primary)] file:px-3 file:py-2 file:text-sm file:font-medium file:text-white"
+          />
+          {formData.logbookCopyDataUrl ? (
+            <img
+              src={formData.logbookCopyDataUrl}
+              alt="Logbook copy preview"
               className="mt-3 h-32 w-32 rounded-lg border border-[var(--border)] object-cover"
             />
           ) : null}

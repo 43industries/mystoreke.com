@@ -3,7 +3,7 @@ export const STORAGE_TYPES = [
   "Commercial Storage",
   "Warehouse Storage",
   "Open Yard Storage",
-  "Shelf Storage",
+  "Shared Shop/Shelf Space",
   "Budget Units",
   "Pickup & Drop-Off Point Vendor",
 ] as const;
@@ -44,10 +44,10 @@ export const STORAGE_TYPE_DETAILS: Record<
     idealUse: "Vehicles, containers, machinery, and construction materials.",
   },
   shelf: {
-    label: "Shelf Storage",
+    label: "Shared Shop/Shelf Space",
     description:
-      "Smaller shelf or rack space inside shops or warehouses. Pay only for the shelf or pallet space you need instead of a whole unit. Great for small merchants and e‑commerce sellers.",
-    idealUse: "Small boxes, e‑commerce inventory, documents, light stock.",
+      "Shared shelf, rack, or counter space inside active shops and mini-warehouses. Great for merchants who want affordable storage close to customer foot traffic.",
+    idealUse: "Cartons, product samples, fast-moving stock, and small e-commerce inventory.",
   },
   budget: {
     label: "Budget Units",
@@ -116,7 +116,7 @@ export const MOCK_LISTINGS: StorageListing[] = [
   {
     id: "3",
     title: "Commercial shelf space — Westlands",
-    storageType: "Shelf Storage",
+    storageType: "Shared Shop/Shelf Space",
     city: "Nairobi",
     county: "Nairobi",
     size: 50,

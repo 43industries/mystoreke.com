@@ -49,7 +49,9 @@ export default function ContactPage() {
           <div className="space-y-3 rounded-xl border border-[var(--border)] bg-[var(--white)] p-6">
             <h2 className="text-lg font-semibold text-[var(--foreground)]">Partnerships</h2>
             <p className="text-sm text-[var(--muted)]">
-              For warehouse operators, logistics companies, and technology partners.
+              We partner with commercial storage owners, residential storage owners, open-yard
+              owners, shared shop/shelf-space owners, pickup &amp; drop-off point vendors, drivers,
+              and riders.
             </p>
             <p className="text-sm text-[var(--muted)]">
               <span className="font-medium text-[var(--foreground)]">Email:</span>{" "}

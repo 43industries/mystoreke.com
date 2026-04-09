@@ -9,7 +9,7 @@ const STORAGE_TYPES = [
   "Commercial Storage",
   "Warehouse Storage",
   "Open Yard Storage",
-  "Shelf Storage",
+  "Shared Shop/Shelf Space",
   "Budget Units",
   "Pickup & Drop-Off Point Vendor",
 ];
@@ -48,6 +48,8 @@ export default function HostListingForm() {
     pricePerWeek: "",
     pricePerMonth: "",
     securityDeposit: "",
+    includesServiceCharge: true,
+    serviceCharge: "",
     longTermDiscount: false,
     photos: [] as File[],
     address: "",
@@ -219,6 +221,11 @@ export default function HostListingForm() {
                 pricePerWeek: formData.pricePerWeek || undefined,
                 pricePerMonth: formData.pricePerMonth || undefined,
                 securityDeposit: formData.securityDeposit || undefined,
+                includesServiceCharge: formData.includesServiceCharge,
+                serviceCharge:
+                  !formData.includesServiceCharge && formData.serviceCharge
+                    ? formData.serviceCharge
+                    : undefined,
                 longTermDiscount: formData.longTermDiscount,
                 address: formData.address,
                 city: formData.city,
@@ -444,6 +451,32 @@ export default function HostListingForm() {
             <label className="flex items-center gap-2">
               <input
                 type="checkbox"
+                checked={formData.includesServiceCharge}
+                onChange={(e) => update("includesServiceCharge", e.target.checked)}
+                className="rounded border-[var(--border)] text-[var(--primary)] focus:ring-[var(--primary)]"
+              />
+              <span className="text-sm font-medium text-[var(--foreground)]">
+                Listed prices already include service charge
+              </span>
+            </label>
+            {!formData.includesServiceCharge && (
+              <div>
+                <label className="mb-1 block text-sm font-medium text-[var(--foreground)]">
+                  Service Charge (KES)
+                </label>
+                <input
+                  type="number"
+                  min={0}
+                  value={formData.serviceCharge}
+                  onChange={(e) => update("serviceCharge", e.target.value)}
+                  placeholder="Optional service charge to add"
+                  className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+                />
+              </div>
+            )}
+            <label className="flex items-center gap-2">
+              <input
+                type="checkbox"
                 checked={formData.longTermDiscount}
                 onChange={(e) => update("longTermDiscount", e.target.checked)}
                 className="rounded border-[var(--border)] text-[var(--primary)] focus:ring-[var(--primary)]"
@@ -471,6 +504,7 @@ export default function HostListingForm() {
                 type="file"
                 accept="image/*"
                 multiple
+                capture="environment"
                 className="hidden"
                 id="photo-upload"
                 onChange={(e) => {
