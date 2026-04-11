@@ -7,6 +7,9 @@ const PARCEL_VAN = "/storage-parcel.jpg";
 const RESIDENTIAL_GARAGE = "/storage-residential.jpg";
 const WAREHOUSE_HERO = "/warehouse-hero.png";
 
+/** Door-to-door deliveries card — swap file in public/ if you add a dedicated asset */
+const DELIVERIES = "/storage-yard.jpg";
+
 export const IMAGES = {
   hero: WAREHOUSE_HERO,
 
@@ -18,6 +21,7 @@ export const IMAGES = {
     shelf: "/storage-shelf.jpg",
     budget: RESIDENTIAL_GARAGE,
     parcel: PARCEL_VAN,
+    deliveries: DELIVERIES,
   },
 
   pages: {

@@ -46,10 +46,13 @@ create table if not exists public.driver_applications (
   areas_served text not null,
   availability text not null,
   message text,
-  photo_url text,
-  submitted_at timestamptz not null default now()
+  submitted_at timestamptz not null default now(),
+  id_photo_url text,
+  logbook_url text,
+  vehicle_photo_url text
 );
 
--- If you created driver_applications before photo_url existed:
--- alter table public.driver_applications add column if not exists photo_url text;
-
+-- If you created driver_applications before these columns existed, run:
+-- alter table public.driver_applications add column if not exists id_photo_url text;
+-- alter table public.driver_applications add column if not exists logbook_url text;
+-- alter table public.driver_applications add column if not exists vehicle_photo_url text;

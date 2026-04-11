@@ -37,7 +37,7 @@ export default function HeroSearchForm() {
         <p className="text-xl font-bold text-white normal-case md:text-2xl">
           Search storage near you
         </p>
-        <p className="mt-2 text-base font-medium text-white/90 normal-case md:text-base">
+        <p className="mt-2 text-base font-medium text-white/90 normal-case">
           Choose location, type, duration and budget to see matching spaces.
         </p>
         <label className="mt-3 flex cursor-pointer items-center justify-center gap-2 text-sm font-medium text-white/95">

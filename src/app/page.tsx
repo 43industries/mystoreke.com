@@ -146,7 +146,7 @@ const FOCUS_BOXES: FocusBox[] = [
       "Pick up and drop at: your address, a host point, or the receiver",
       "Book pickup and drop-off in one flow as we roll out deliveries",
     ],
-    image: IMAGES.storage.parcel,
+    image: IMAGES.storage.deliveries,
   },
 ];
 
@@ -361,14 +361,16 @@ export default function Home() {
                     sizes="320px"
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/10" />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col items-center justify-end px-4 pb-4 pt-12 text-center">
+                    <h3 className="text-lg font-semibold text-white drop-shadow-md">
+                      {box.title}
+                    </h3>
+                    <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-white/95">
+                      {box.tagline}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold text-[var(--foreground)]">
-                  {box.title}
-                </h3>
-                <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-[var(--accent)]">
-                  {box.tagline}
-                </p>
                 <p className="mt-3 text-base text-[var(--muted)]">{box.description}</p>
                 <ul className="mt-3 space-y-1.5 text-sm text-[var(--muted)]">
                   {box.highlights.map((item) => (

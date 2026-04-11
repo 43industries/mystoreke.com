@@ -66,7 +66,44 @@ export default async function StorageDetailPage({
   const { id } = await Promise.resolve(params);
   const listing = await fetchListingById(id);
 
-  if (!listing) notFound();
+  if (!listing) {
+    return (
+      <div className="min-h-screen bg-[var(--background)]">
+        <header className="sticky top-0 z-50 border-b border-white/10 bg-[var(--primary)]">
+          <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
+            <Link href="/" className="text-lg font-bold text-[var(--accent)]">
+              MyStoreKE
+            </Link>
+            <nav className="flex gap-4 text-sm font-medium text-white/90">
+              <Link href="/storage" className="hover:text-white">
+                Find Storage
+              </Link>
+              <Link href="/list-your-space" className="hover:text-white">
+                List Your Space
+              </Link>
+            </nav>
+          </div>
+        </header>
+
+        <main className="mx-auto max-w-4xl px-4 py-10">
+          <Link
+            href="/storage"
+            className="text-sm font-medium text-[var(--primary)] hover:underline"
+          >
+            ← Back to search
+          </Link>
+          <div className="mt-6 rounded-xl border border-[var(--border)] bg-[var(--white)] p-6">
+            <h1 className="text-lg font-semibold text-[var(--foreground)]">
+              Listing not found
+            </h1>
+            <p className="mt-2 text-sm text-[var(--muted)]">
+              We couldn&apos;t find a listing with id <span className="font-medium">{id}</span>.
+            </p>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[var(--background)]">

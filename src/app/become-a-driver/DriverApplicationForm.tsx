@@ -5,6 +5,9 @@ import Link from "next/link";
 
 const VEHICLE_TYPES = ["Motorcycle", "Car", "Van", "Pickup"];
 
+const inputClass =
+  "w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]";
+
 export default function DriverApplicationForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -20,10 +23,10 @@ export default function DriverApplicationForm() {
     areasServed: "",
     availability: "",
     message: "",
-    photoDataUrl: "" as string,
-    vehiclePhotoDataUrl: "" as string,
-    logbookCopyDataUrl: "" as string,
   });
+  const [idPhoto, setIdPhoto] = useState<File | null>(null);
+  const [logbook, setLogbook] = useState<File | null>(null);
+  const [vehiclePhoto, setVehiclePhoto] = useState<File | null>(null);
 
   const update = (key: string, value: string) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
@@ -36,33 +39,40 @@ export default function DriverApplicationForm() {
       setError("Please enter a valid phone number (e.g. +254 7XX XXX XXX).");
       return;
     }
-    if (!formData.photoDataUrl || formData.photoDataUrl.length < 100) {
-      setError("Please add a current photo of yourself (use your camera or upload an image).");
-      return;
-    }
-    if (!formData.vehiclePhotoDataUrl || formData.vehiclePhotoDataUrl.length < 100) {
-      setError("Please upload a clear photo of your vehicle.");
-      return;
-    }
-    if (!formData.logbookCopyDataUrl || formData.logbookCopyDataUrl.length < 100) {
-      setError("Please upload a copy photo of your vehicle logbook.");
+    if (!idPhoto || !logbook || !vehiclePhoto) {
+      setError(
+        "Please add a selfie or ID photo, upload your logbook, and a photo of the vehicle showing the number plate.",
+      );
       return;
     }
     setLoading(true);
     try {
+      const fd = new FormData();
+      fd.append("fullName", formData.fullName);
+      fd.append("email", formData.email);
+      fd.append("phone", formData.phone.trim());
+      fd.append("idType", formData.idType);
+      fd.append("idNumber", formData.idNumber);
+      fd.append("vehicleType", formData.vehicleType);
+      fd.append("licensePlate", formData.licensePlate.trim());
+      fd.append("areasServed", formData.areasServed);
+      fd.append("availability", formData.availability);
+      fd.append("message", formData.message);
+      fd.append("idPhoto", idPhoto);
+      fd.append("logbook", logbook);
+      fd.append("vehiclePhoto", vehiclePhoto);
+
       const res = await fetch("/api/drivers", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formData,
-          photoDataUrl: formData.photoDataUrl,
-          vehiclePhotoDataUrl: formData.vehiclePhotoDataUrl,
-          logbookCopyDataUrl: formData.logbookCopyDataUrl,
-        }),
+        body: fd,
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        setError(data.message || "Application failed. Please try again.");
+        setError(
+          typeof data.message === "string"
+            ? data.message
+            : "Application failed. Please try again.",
+        );
         return;
       }
       setSubmitted(true);
@@ -101,123 +111,6 @@ export default function DriverApplicationForm() {
       )}
       <div className="rounded-xl border border-[var(--border)] bg-[var(--white)] p-6 space-y-6">
         <h2 className="text-lg font-semibold text-[var(--foreground)]">Your details</h2>
-        <div>
-          <label className="mb-1 block text-sm font-medium text-[var(--foreground)]">
-            Current photo (required) *
-          </label>
-          <p className="mb-2 text-xs text-[var(--muted)]">
-            Clear face photo for verification. On a phone you can use your camera; on desktop, upload a recent image.
-          </p>
-          <input
-            type="file"
-            accept="image/*"
-            capture="user"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (!file) {
-                update("photoDataUrl", "");
-                return;
-              }
-              if (file.size > 500_000) {
-                setError("Photo must be under 500 KB. Try a smaller image.");
-                return;
-              }
-              setError("");
-              const reader = new FileReader();
-              reader.onload = () => {
-                const url = typeof reader.result === "string" ? reader.result : "";
-                update("photoDataUrl", url);
-              };
-              reader.readAsDataURL(file);
-            }}
-            className="w-full text-sm text-[var(--foreground)] file:mr-3 file:rounded-lg file:border-0 file:bg-[var(--primary)] file:px-3 file:py-2 file:text-sm file:font-medium file:text-white"
-          />
-          {formData.photoDataUrl ? (
-            <img
-              src={formData.photoDataUrl}
-              alt="Your preview"
-              className="mt-3 h-32 w-32 rounded-lg border border-[var(--border)] object-cover"
-            />
-          ) : null}
-        </div>
-        <div>
-          <label className="mb-1 block text-sm font-medium text-[var(--foreground)]">
-            Vehicle photo (required) *
-          </label>
-          <p className="mb-2 text-xs text-[var(--muted)]">
-            Upload a clear photo showing the full vehicle and plate area.
-          </p>
-          <input
-            type="file"
-            accept="image/*"
-            capture="environment"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (!file) {
-                update("vehiclePhotoDataUrl", "");
-                return;
-              }
-              if (file.size > 700_000) {
-                setError("Vehicle photo must be under 700 KB.");
-                return;
-              }
-              setError("");
-              const reader = new FileReader();
-              reader.onload = () => {
-                const url = typeof reader.result === "string" ? reader.result : "";
-                update("vehiclePhotoDataUrl", url);
-              };
-              reader.readAsDataURL(file);
-            }}
-            className="w-full text-sm text-[var(--foreground)] file:mr-3 file:rounded-lg file:border-0 file:bg-[var(--primary)] file:px-3 file:py-2 file:text-sm file:font-medium file:text-white"
-          />
-          {formData.vehiclePhotoDataUrl ? (
-            <img
-              src={formData.vehiclePhotoDataUrl}
-              alt="Vehicle preview"
-              className="mt-3 h-32 w-32 rounded-lg border border-[var(--border)] object-cover"
-            />
-          ) : null}
-        </div>
-        <div>
-          <label className="mb-1 block text-sm font-medium text-[var(--foreground)]">
-            Logbook copy photo (required) *
-          </label>
-          <p className="mb-2 text-xs text-[var(--muted)]">
-            Upload a readable photo of your logbook copy page for verification.
-          </p>
-          <input
-            type="file"
-            accept="image/*"
-            capture="environment"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (!file) {
-                update("logbookCopyDataUrl", "");
-                return;
-              }
-              if (file.size > 700_000) {
-                setError("Logbook copy photo must be under 700 KB.");
-                return;
-              }
-              setError("");
-              const reader = new FileReader();
-              reader.onload = () => {
-                const url = typeof reader.result === "string" ? reader.result : "";
-                update("logbookCopyDataUrl", url);
-              };
-              reader.readAsDataURL(file);
-            }}
-            className="w-full text-sm text-[var(--foreground)] file:mr-3 file:rounded-lg file:border-0 file:bg-[var(--primary)] file:px-3 file:py-2 file:text-sm file:font-medium file:text-white"
-          />
-          {formData.logbookCopyDataUrl ? (
-            <img
-              src={formData.logbookCopyDataUrl}
-              alt="Logbook copy preview"
-              className="mt-3 h-32 w-32 rounded-lg border border-[var(--border)] object-cover"
-            />
-          ) : null}
-        </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="sm:col-span-2">
             <label className="mb-1 block text-sm font-medium text-[var(--foreground)]">Full name *</label>
@@ -226,7 +119,7 @@ export default function DriverApplicationForm() {
               value={formData.fullName}
               onChange={(e) => update("fullName", e.target.value)}
               required
-              className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+              className={inputClass}
             />
           </div>
           <div>
@@ -236,7 +129,7 @@ export default function DriverApplicationForm() {
               value={formData.email}
               onChange={(e) => update("email", e.target.value)}
               required
-              className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+              className={inputClass}
             />
           </div>
           <div>
@@ -247,7 +140,7 @@ export default function DriverApplicationForm() {
               onChange={(e) => update("phone", e.target.value)}
               required
               placeholder="e.g. +254 7XX XXX XXX"
-              className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+              className={inputClass}
             />
           </div>
           <div>
@@ -255,7 +148,7 @@ export default function DriverApplicationForm() {
             <select
               value={formData.idType}
               onChange={(e) => update("idType", e.target.value)}
-              className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+              className={inputClass}
             >
               <option value="National ID">National ID</option>
               <option value="Passport">Passport</option>
@@ -268,7 +161,7 @@ export default function DriverApplicationForm() {
               value={formData.idNumber}
               onChange={(e) => update("idNumber", e.target.value)}
               required
-              className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+              className={inputClass}
             />
           </div>
         </div>
@@ -283,7 +176,7 @@ export default function DriverApplicationForm() {
               value={formData.vehicleType}
               onChange={(e) => update("vehicleType", e.target.value)}
               required
-              className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+              className={inputClass}
             >
               <option value="">Select</option>
               {VEHICLE_TYPES.map((v) => (
@@ -299,7 +192,7 @@ export default function DriverApplicationForm() {
               onChange={(e) => update("licensePlate", e.target.value)}
               required
               placeholder="e.g. KCA 123A"
-              className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+              className={inputClass}
             />
           </div>
           <div className="sm:col-span-2">
@@ -310,7 +203,7 @@ export default function DriverApplicationForm() {
               onChange={(e) => update("areasServed", e.target.value)}
               required
               placeholder="e.g. Nairobi, Kiambu, Thika"
-              className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+              className={inputClass}
             />
           </div>
           <div className="sm:col-span-2">
@@ -321,7 +214,7 @@ export default function DriverApplicationForm() {
               onChange={(e) => update("availability", e.target.value)}
               required
               placeholder="e.g. Weekdays 9am - 5pm"
-              className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+              className={inputClass}
             />
           </div>
           <div className="sm:col-span-2">
@@ -331,14 +224,67 @@ export default function DriverApplicationForm() {
               onChange={(e) => update("message", e.target.value)}
               rows={3}
               placeholder="Any other details for our team"
-              className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
+              className={inputClass}
             />
           </div>
         </div>
       </div>
 
+      <div className="rounded-xl border border-[var(--border)] bg-[var(--white)] p-6 space-y-5">
+        <h2 className="text-lg font-semibold text-[var(--foreground)]">Photos & documents *</h2>
+        <p className="text-sm text-[var(--muted)]">
+          Take or upload a clear selfie or ID photo, a copy of your vehicle logbook (PDF or photo), and a photo of the vehicle with the number plate visible.
+        </p>
+        <div className="grid gap-5 sm:grid-cols-1 md:grid-cols-3">
+          <div>
+            <label className="mb-1 block text-sm font-medium text-[var(--foreground)]">
+              Selfie / ID photo
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              capture="user"
+              onChange={(e) => setIdPhoto(e.target.files?.[0] ?? null)}
+              className="block w-full text-sm text-[var(--muted)] file:mr-3 file:rounded-md file:border-0 file:bg-[var(--primary)] file:px-3 file:py-2 file:text-xs file:font-medium file:text-white"
+            />
+            {idPhoto && (
+              <p className="mt-1 text-xs text-[var(--muted)]">{idPhoto.name}</p>
+            )}
+          </div>
+          <div>
+            <label className="mb-1 block text-sm font-medium text-[var(--foreground)]">
+              Logbook (photo or PDF)
+            </label>
+            <input
+              type="file"
+              accept="image/*,.pdf,application/pdf"
+              onChange={(e) => setLogbook(e.target.files?.[0] ?? null)}
+              className="block w-full text-sm text-[var(--muted)] file:mr-3 file:rounded-md file:border-0 file:bg-[var(--primary)] file:px-3 file:py-2 file:text-xs file:font-medium file:text-white"
+            />
+            {logbook && (
+              <p className="mt-1 text-xs text-[var(--muted)]">{logbook.name}</p>
+            )}
+          </div>
+          <div>
+            <label className="mb-1 block text-sm font-medium text-[var(--foreground)]">
+              Vehicle with number plate
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              capture="environment"
+              onChange={(e) => setVehiclePhoto(e.target.files?.[0] ?? null)}
+              className="block w-full text-sm text-[var(--muted)] file:mr-3 file:rounded-md file:border-0 file:bg-[var(--primary)] file:px-3 file:py-2 file:text-xs file:font-medium file:text-white"
+            />
+            {vehiclePhoto && (
+              <p className="mt-1 text-xs text-[var(--muted)]">{vehiclePhoto.name}</p>
+            )}
+          </div>
+        </div>
+      </div>
+
       <p className="text-xs text-[var(--muted)]">
-        By applying you agree to our Terms and that we may verify your ID and license. Document upload for verification will be requested after initial review.
+        By applying you agree to our Terms and that we may verify your ID, vehicle, and documents.
       </p>
 
       <div className="flex gap-4">
