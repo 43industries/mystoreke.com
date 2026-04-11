@@ -76,10 +76,11 @@ export default function HostListingForm() {
 
   useEffect(() => {
     if (!supabaseBrowser || submitted) return;
+    const client = supabaseBrowser;
 
     let active = true;
     const checkRole = async () => {
-      const { data } = await supabaseBrowser.auth.getUser();
+      const { data } = await client.auth.getUser();
       const userId = data.user?.id;
       if (!active) return;
 
@@ -87,7 +88,7 @@ export default function HostListingForm() {
         setRoleError("Please log in as a host to list your space.");
         return;
       }
-      const { data: profile } = await supabaseBrowser
+      const { data: profile } = await client
         .from("profiles")
         .select("role")
         .eq("id", userId)
@@ -694,8 +695,7 @@ export default function HostListingForm() {
           </button>
           {canNext ? (
             <button
-              type="button"
-              onClick={() => setStep(step + 1)}
+              type="submit"
               className="rounded-lg bg-[var(--primary)] px-5 py-2.5 text-sm font-medium text-white hover:bg-[var(--primary-hover)]"
             >
               Next

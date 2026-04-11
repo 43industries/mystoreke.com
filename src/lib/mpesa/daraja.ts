@@ -165,7 +165,7 @@ export async function initiateStkPush(
   const json = (await res.json()) as {
     MerchantRequestID?: string;
     CheckoutRequestID?: string;
-    ResponseCode?: string;
+    ResponseCode?: string | number;
     ResponseDescription?: string;
     CustomerMessage?: string;
     errorMessage?: string;
@@ -176,7 +176,8 @@ export async function initiateStkPush(
     return {
       ok: false,
       error: json.errorMessage ?? json.ResponseDescription ?? `HTTP ${res.status}`,
-      responseCode: json.ResponseCode,
+      responseCode:
+        json.ResponseCode == null ? undefined : String(json.ResponseCode),
     };
   }
 
