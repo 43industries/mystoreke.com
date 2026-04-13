@@ -55,7 +55,7 @@ export async function POST(request: Request) {
       .single();
 
     if (error) {
-      // eslint-disable-next-line no-console
+       
       console.error("delivery_jobs insert", error);
       return NextResponse.json(
         {

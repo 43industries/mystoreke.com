@@ -64,7 +64,7 @@ export async function POST(request: Request) {
         .eq("id", payment.booking_id);
     }
   } catch (err) {
-    // eslint-disable-next-line no-console
+     
     console.error("M-Pesa callback handler", err);
   }
 

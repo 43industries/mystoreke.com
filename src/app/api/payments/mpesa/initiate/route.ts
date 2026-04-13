@@ -117,7 +117,7 @@ export async function POST(request: Request) {
     });
 
     if (insErr) {
-      // eslint-disable-next-line no-console
+       
       console.error("mpesa_payments insert", insErr);
       return NextResponse.json(
         {
@@ -137,7 +137,7 @@ export async function POST(request: Request) {
       { status: 200 },
     );
   } catch (e) {
-    // eslint-disable-next-line no-console
+     
     console.error("M-Pesa initiate", e);
     return NextResponse.json(
       { message: "Could not start M-Pesa payment." },

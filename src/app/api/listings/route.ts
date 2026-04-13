@@ -79,7 +79,7 @@ export async function GET(request: Request) {
     const { data, error } = await query;
 
     if (error) {
-      // eslint-disable-next-line no-console
+       
       console.error("Error loading listings from Supabase", error);
       if (hostId) {
         return NextResponse.json(
@@ -342,7 +342,7 @@ export async function POST(request: Request) {
         .single();
 
       if (error) {
-        // eslint-disable-next-line no-console
+         
         console.error("Error saving listing to Supabase, falling back to memory", error);
       } else if (data?.id) {
         id = data.id as string;
@@ -351,7 +351,7 @@ export async function POST(request: Request) {
 
     if (!supabase) {
       HOST_LISTINGS.push(listing);
-      // eslint-disable-next-line no-console
+       
       console.log("Listing stored in memory (no Supabase configured):", listing);
     }
 

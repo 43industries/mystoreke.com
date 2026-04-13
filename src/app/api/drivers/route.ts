@@ -36,7 +36,7 @@ async function uploadDriverFile(
     upsert: false,
   });
   if (error) {
-    // eslint-disable-next-line no-console
+     
     console.error("Driver document upload failed", error);
     return null;
   }
@@ -188,7 +188,7 @@ export async function POST(request: Request) {
       const { error } = await supabase.from("driver_applications").insert(row);
 
       if (error) {
-        // eslint-disable-next-line no-console
+         
         console.error("Error saving driver application to Supabase", error);
         return NextResponse.json(
           {
@@ -199,7 +199,7 @@ export async function POST(request: Request) {
         );
       }
     } else {
-      // eslint-disable-next-line no-console
+       
       console.log("Driver application received (no Supabase configured):", {
         ...application,
         idPhotoUrl,

@@ -44,7 +44,7 @@ export async function POST(request: Request) {
     );
 
     if (error) {
-      // eslint-disable-next-line no-console
+       
       console.error("profile upsert error", error);
       return NextResponse.json(
         { message: "Failed to save profile" },

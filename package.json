@@ -12,7 +12,7 @@
     "drive": "node scripts/copy-logo.mjs && next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint src scripts --max-warnings 0",
     "deploy": "vercel --prod",
     "mvp-setup": "node scripts/mvp-setup.mjs",
     "mvp-smoke": "node scripts/mvp-smoke.mjs"

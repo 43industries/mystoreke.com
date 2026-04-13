@@ -18,7 +18,7 @@ async function syncProfileToServer(
     body: JSON.stringify({ fullName, role }),
   });
   if (!res.ok) {
-    // eslint-disable-next-line no-console
+     
     console.warn("Profile sync failed:", await res.text().catch(() => ""));
   }
 }

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import { fetchListingById } from "@/lib/fetchListingById";
 import { IMAGES } from "../../images";

@@ -6,7 +6,7 @@
  *
  * Usage: npm run mvp-setup
  */
-import { copyFileSync, existsSync, readFileSync } from "node:fs";
+import { copyFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
 import { loadEnvLocal, root } from "./load-env-local.mjs";

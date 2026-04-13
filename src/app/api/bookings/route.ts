@@ -49,7 +49,7 @@ export async function GET(request: Request) {
     .order("created_at", { ascending: false });
 
   if (error) {
-    // eslint-disable-next-line no-console
+     
     console.error("Error loading bookings", error);
     return NextResponse.json(
       { message: "Failed to load bookings" },
@@ -111,7 +111,7 @@ export async function POST(request: Request) {
       .single();
 
     if (error) {
-      // eslint-disable-next-line no-console
+       
       console.error("Error creating booking", error);
       return NextResponse.json(
         { message: "Failed to create booking" },
@@ -208,7 +208,7 @@ export async function PATCH(request: Request) {
       .eq("id", bookingId);
 
     if (error) {
-      // eslint-disable-next-line no-console
+       
       console.error("Error updating booking", error);
       return NextResponse.json(
         { message: "Failed to update booking" },
