@@ -1,0 +1,44 @@
+Mystore (mystoreke.com) — handoff after local verification
+==========================================================
+
+Already done in repo (you pull from GitHub main)
+-------------------------------------------------
+- next build and eslint src scripts pass in CI/local when deps installed.
+- npm run smoke:public — checks GET /api/listings and GET /api/storage-type-details (listings work without Supabase via mock fallback).
+- npm run mvp-setup — after you fill .env.local: creates Storage bucket driver-uploads, optional psql apply of supabase/mvp_marketplace.sql, verifies tables via PostgREST.
+- npm run mvp-smoke — with dev server + optional MVP_TEST_EMAIL / MVP_TEST_PASSWORD.
+
+Your checklist (order)
+----------------------
+1) Copy .env.example to .env.local and set at least:
+   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY,
+   NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+2) Supabase → SQL Editor → run file: supabase/mvp_marketplace.sql
+   (or set DATABASE_URL and install psql, then: npm run mvp-setup)
+
+3) npm install
+4) npm run lint
+5) npm run build
+6) npm run dev   (terminal A)
+7) npm run smoke:public   (terminal B, same machine)
+8) npm run mvp-setup      (once keys are in .env.local)
+9) Optional: MVP_TEST_EMAIL + MVP_TEST_PASSWORD in .env.local, then npm run mvp-smoke
+
+Manual UI smoke (browser)
+-------------------------
+- /auth sign up / log in
+- /list-your-space create listing (host)
+- /storage browse and open a listing
+- Reserve flow + host dashboard
+- /become-a-driver with three uploads (needs driver-uploads bucket from mvp-setup)
+
+Deploy
+------
+- Vercel: import repo, set same env vars as .env.example for Production.
+
+Questions
+---------
+- If lint fails: use Node 20.9+ and npm ci from package-lock.json.
+- If smoke:public fails with connection refused: start dev or production server first.
+- If next.config has output standalone: next start may warn; use node .next/standalone/server.js for true standalone, or remove output standalone for plain next start.

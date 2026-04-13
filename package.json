@@ -15,7 +15,8 @@
     "lint": "eslint src scripts --max-warnings 0",
     "deploy": "vercel --prod",
     "mvp-setup": "node scripts/mvp-setup.mjs",
-    "mvp-smoke": "node scripts/mvp-smoke.mjs"
+    "mvp-smoke": "node scripts/mvp-smoke.mjs",
+    "smoke:public": "node scripts/smoke-public-api.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.97.0",
