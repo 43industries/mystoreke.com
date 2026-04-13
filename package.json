@@ -13,7 +13,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "vercel --prod"
+    "deploy": "vercel --prod",
+    "mvp-setup": "node scripts/mvp-setup.mjs",
+    "mvp-smoke": "node scripts/mvp-smoke.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.97.0",
