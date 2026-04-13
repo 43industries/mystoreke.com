@@ -69,9 +69,12 @@ async function checkSupabaseAuth() {
     return;
   }
   const supabase = createClient(url, anon);
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error || !data.session) {
-    fail(`Supabase sign-in failed: ${error?.message || "no session"}`);
+  const { data, error: signInErr } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+  if (signInErr || !data.session) {
+    fail(`Supabase sign-in failed: ${signInErr?.message || "no session"}`);
     return;
   }
   console.log("OK: Supabase sign-in with MVP_TEST_EMAIL");
