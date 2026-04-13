@@ -27,12 +27,13 @@ if (!existsSync(envPath)) {
 
 const env = { ...process.env, ...loadEnvLocal() };
 const url = (env.SUPABASE_URL || "").replace(/\/$/, "");
-const serviceKey = env.SUPABASE_SERVICE_ROLE_KEY || "";
+const serviceKey =
+  env.SUPABASE_SERVICE_ROLE_KEY || env.SUPABASE_SECRET_KEY || "";
 const databaseUrl = env.DATABASE_URL || "";
 
 if (!url || !serviceKey) {
   console.error(
-    "Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in .env.local, then run again.",
+    "Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY or SUPABASE_SECRET_KEY in .env.local, then run again.",
   );
   process.exit(1);
 }

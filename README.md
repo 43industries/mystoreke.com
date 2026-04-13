@@ -20,7 +20,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Copy [`.env.example`](./.env.example) to `.env.local` and add your Supabase project values (**Settings → API**).
+Copy [`.env.example`](./.env.example) to `.env.local` and add your Supabase project values (**Settings → API**). You can use either legacy JWT keys (`anon` / `service_role`) or newer **`sb_publishable_…` / `sb_secret_…`** keys via `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` / `SUPABASE_SECRET_KEY` (see `.env.example`).
 
 ## Database setup
 

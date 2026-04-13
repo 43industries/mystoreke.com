@@ -57,11 +57,15 @@ async function checkLocalApi() {
 
 async function checkSupabaseAuth() {
   const url = env.NEXT_PUBLIC_SUPABASE_URL || env.SUPABASE_URL;
-  const anon = env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const anon =
+    env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   const email = env.MVP_TEST_EMAIL;
   const password = env.MVP_TEST_PASSWORD;
   if (!url || !anon) {
-    console.log("Skip auth smoke: set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY");
+    console.log(
+      "Skip auth smoke: set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY or NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY",
+    );
     return;
   }
   if (!email || !password) {
