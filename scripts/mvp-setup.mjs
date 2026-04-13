@@ -133,6 +133,7 @@ async function main() {
     "mpesa_payments",
     "delivery_jobs",
     "storage_service_copy",
+    "contact_messages",
   ];
   console.log("\nVerifying PostgREST visibility (service role)…");
   let bad = 0;

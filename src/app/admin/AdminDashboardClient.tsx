@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { supabaseBrowser } from "@/lib/supabaseBrowser";
+import AdminDeliveryJobsPanel from "./AdminDeliveryJobsPanel";
 import AdminServiceCopyEditor from "./AdminServiceCopyEditor";
 
 type Overview = {
@@ -114,6 +115,8 @@ export default function AdminDashboardClient() {
             Updated {new Date(data.generatedAt).toLocaleString()}
           </p>
         )}
+
+        <AdminDeliveryJobsPanel />
 
         <AdminServiceCopyEditor />
       </main>

@@ -16,6 +16,8 @@ Your checklist (order)
 
 2) Supabase → SQL Editor → run file: supabase/mvp_marketplace.sql
    (or set DATABASE_URL and install psql, then: npm run mvp-setup)
+   If you already ran an older mvp_marketplace.sql, append only the new
+   contact_messages block from the bottom of that file (or re-run the full file on a dev project).
 
 3) npm install
 4) npm run lint

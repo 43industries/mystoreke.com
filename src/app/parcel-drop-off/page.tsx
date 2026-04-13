@@ -1,6 +1,7 @@
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import PageHero from "@/components/PageHero";
+import DeliveryRequestForm from "./DeliveryRequestForm";
 import { IMAGES } from "../images";
 
 export const metadata = {
@@ -64,6 +65,8 @@ export default function ParcelDropOffPage() {
             </ul>
           </div>
         </section>
+
+        <DeliveryRequestForm />
 
         <div className="mt-10 flex flex-wrap gap-4">
           <Link

@@ -24,12 +24,12 @@ Copy [`.env.example`](./.env.example) to `.env.local` and add your Supabase proj
 
 ## Database setup
 
-Run the statements in [`supabase/schema.sql`](./supabase/schema.sql) in the Supabase SQL editor so you have:
+Run [`supabase/mvp_marketplace.sql`](./supabase/mvp_marketplace.sql) in the Supabase SQL editor once. It creates the core marketplace tables, including:
 
-- `public.profiles` (synced from the app on sign-up / log-in via `POST /api/profile`)
-- RLS policies for client reads on `profiles`
-- `vehicle_photo_url` and `logbook_photo_url` on `driver_applications` (if that table already exists)
-- `public.mpesa_payments` for STK rows + `public.delivery_jobs` for draft parcel jobs
+- `public.profiles`, `public.listings` (with `host_id`), `public.bookings`, `public.driver_applications`
+- `public.mpesa_payments`, `public.delivery_jobs`, `public.storage_service_copy`, `public.contact_messages`
+
+The smaller [`supabase/schema.sql`](./supabase/schema.sql) file is an older partial reference; prefer the consolidated script for new projects.
 
 Adjust table definitions if your project already uses different column names.
 
@@ -44,7 +44,8 @@ Adjust table definitions if your project already uses different column names.
 ## Admin & delivery (baseline)
 
 - **Admin:** Set `MYSTORE_ADMIN_USER_IDS` to a comma-separated list of Supabase `auth.users` UUIDs. Those users can open `/admin` and call `GET /api/admin/overview` (with Bearer session).
-- **Delivery:** Authenticated renters can `POST /api/delivery-jobs` with `pickupAddress`, `dropoffAddress`, optional `parcelDescription`, `preferredDate`, `notes` — creates a **draft** row for a future driver assignment flow.
+- **Delivery jobs:** Authenticated renters can `POST /api/delivery-jobs` (draft). They can `GET /api/delivery-jobs` for their own jobs and `PATCH` to cancel while still **draft**. Admins can `GET /api/delivery-jobs?scope=all` and `PATCH` to move jobs through **quoted → assigned → in_transit → delivered** (or cancel). The `/admin` dashboard includes a delivery jobs table.
+- **Contact:** `POST /api/contact` saves to `contact_messages` (public form on `/contact`; honeypot field `company` must stay empty).
 
 ## Scripts
 
@@ -52,6 +53,8 @@ Adjust table definitions if your project already uses different column names.
 - `npm run build` — build for production
 - `npm run start` — run production build locally
 - `npm run lint` — run ESLint
+- `npm run smoke:public` — smoke-test public JSON APIs (requires dev or `next start` on port 3000, or set `SMOKE_BASE_URL`)
+- `npm run mvp-setup` / `npm run mvp-smoke` — see `MVP_HANDOFF.txt`
 
 ## Deploy on Vercel
 
@@ -79,5 +82,5 @@ Repository: **`43industries/mystoreke.com`** ([GitHub](https://github.com/43indu
 - `src/app/page.tsx` — landing page
 - `src/app/layout.tsx` — root layout and metadata
 - `src/app/globals.css` — global styles and CSS variables
-- `src/app/api/*` — listings, bookings, drivers, profile, M-Pesa, admin overview, delivery jobs
+- `src/app/api/*` — listings, bookings, drivers, profile, M-Pesa, admin overview, delivery jobs, contact
 - `public/logo.png` — raster logo (run `npm run copy-logo` from the repo layout, or commit your own file); `logo-mark.svg` remains available as an extra asset

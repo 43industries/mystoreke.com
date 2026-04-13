@@ -170,3 +170,16 @@ create table if not exists public.storage_service_copy (
 );
 
 create index if not exists storage_service_copy_updated_idx on public.storage_service_copy (updated_at desc);
+
+-- ---------------------------------------------------------------------------
+-- 8. Contact form (POST /api/contact — server uses service role only)
+-- ---------------------------------------------------------------------------
+create table if not exists public.contact_messages (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  contact text not null,
+  message text not null,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists contact_messages_created_idx on public.contact_messages (created_at desc);

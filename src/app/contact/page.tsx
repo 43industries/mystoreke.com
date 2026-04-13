@@ -1,5 +1,6 @@
 import PageHero from "@/components/PageHero";
 import SiteHeader from "@/components/SiteHeader";
+import ContactForm from "./ContactForm";
 import { IMAGES } from "../images";
 
 export const metadata = {
@@ -61,55 +62,7 @@ export default function ContactPage() {
           <p className="mt-2 text-sm text-[var(--muted)]">
             Share a short message and how we can reach you. We’ll follow up with more details.
           </p>
-          <form className="mt-4 space-y-4 rounded-xl border border-[var(--border)] bg-[var(--white)] p-6">
-            <div className="grid gap-4 md:grid-cols-2">
-              <div>
-                <label htmlFor="contact-name" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
-                  Name
-                </label>
-                <input
-                  id="contact-name"
-                  type="text"
-                  placeholder="Your name"
-                  autoComplete="name"
-                  className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
-                />
-              </div>
-              <div>
-                <label htmlFor="contact-reach" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
-                  Email or phone
-                </label>
-                <input
-                  id="contact-reach"
-                  type="text"
-                  placeholder="How we can reach you"
-                  autoComplete="email"
-                  className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
-                />
-              </div>
-            </div>
-            <div>
-              <label htmlFor="contact-message" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
-                Message
-              </label>
-              <textarea
-                id="contact-message"
-                rows={4}
-                placeholder="Tell us how we can help"
-                className="w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--primary)]"
-              />
-            </div>
-            <p className="text-xs text-[var(--muted)]">
-              This form is for demonstration only. For production, connect it to your preferred
-              support inbox or CRM.
-            </p>
-            <button
-              type="button"
-              className="rounded-lg bg-[var(--primary)] px-5 py-2.5 text-sm font-medium text-white hover:bg-[var(--primary-hover)]"
-            >
-              Send message
-            </button>
-          </form>
+          <ContactForm />
         </section>
       </main>
     </div>
