@@ -266,6 +266,37 @@ const DRIVER_STEPS: Step[] = [
   },
 ];
 
+const HOW_IT_WORKS_GROUPS = [
+  {
+    title: "For Hosts",
+    subtitle: "Turn unused space into monthly income",
+    accentClass: "text-[var(--accent)]",
+    badgeClass: "bg-[var(--accent)] text-[var(--accent-foreground)]",
+    ctaHref: "/list-your-space",
+    ctaLabel: "Start listing",
+    steps: HOST_STEPS,
+  },
+  {
+    title: "For Renters",
+    subtitle: "Find and reserve trusted space quickly",
+    accentClass: "text-[var(--primary)]",
+    badgeClass: "bg-[var(--primary)] text-white",
+    ctaHref: "/storage",
+    ctaLabel: "Find storage",
+    steps: RENTER_STEPS,
+  },
+  {
+    title: "For Pickup & Deliveries",
+    subtitle: "Drive or ride with flexible parcel jobs",
+    accentClass: "text-[var(--white)]",
+    badgeClass: "bg-white/20 text-white",
+    ctaHref: "/become-a-driver",
+    ctaLabel: "Apply as driver/rider",
+    steps: DRIVER_STEPS,
+    dark: true,
+  },
+] as const;
+
 const TESTIMONIALS = [
   {
     quote:
@@ -395,61 +426,86 @@ export default function Home() {
       {/* How It Works - Renters / Hosts / Drivers */}
       <section className="border-t border-[var(--border)] bg-[var(--white)] px-4 py-16">
         <div className="mx-auto max-w-6xl">
-          <h2 className="text-center text-2xl font-semibold text-[var(--foreground)]">
+          <h2 className="text-center text-2xl font-semibold text-[var(--foreground)] md:text-3xl">
             How It Works
           </h2>
-          <p className="mt-2 text-center text-[var(--muted)]">
-            Whether you need storage, have storage space to rent out, or want a parcel delivered — we’ve got you.
+          <p className="mx-auto mt-3 max-w-3xl text-center text-[var(--muted)]">
+            One platform, three clear journeys: list your space, book trusted storage, or handle
+            pickup and deliveries with verified partners.
           </p>
-          <div className="mt-14 grid gap-12 lg:grid-cols-3">
-            <div>
-              <h3 className="text-lg font-semibold text-[var(--accent)]">For Hosts</h3>
-              <ul className="mt-6 space-y-4">
-                {HOST_STEPS.map(({ step, title, desc }) => (
+          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+            {HOW_IT_WORKS_GROUPS.map(
+              ({
+                title,
+                subtitle,
+                accentClass,
+                badgeClass,
+                ctaHref,
+                ctaLabel,
+                steps,
+                dark,
+              }) => (
+                <article
+                  key={title}
+                  className={`rounded-2xl border p-6 shadow-sm ${
+                    dark
+                      ? "border-[var(--primary)] bg-[var(--primary)] text-[var(--white)]"
+                      : "border-[var(--border)] bg-[var(--background)]"
+                  }`}
+                >
+                  <h3
+                    className={`text-lg font-semibold ${
+                      dark ? "text-white" : accentClass
+                    }`}
+                  >
+                    {title}
+                  </h3>
+                  <p
+                    className={`mt-1 text-sm ${
+                      dark ? "text-white/85" : "text-[var(--muted)]"
+                    }`}
+                  >
+                    {subtitle}
+                  </p>
+                  <ul className="mt-6 space-y-4">
+                    {steps.map(({ step, title: stepTitle, desc }) => (
                   <li key={step} className="flex gap-4">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--accent)] text-sm font-medium text-[var(--accent-foreground)]">
+                    <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-medium ${badgeClass}`}>
                       {step}
                     </span>
                     <div>
-                      <div className="font-medium text-[var(--foreground)]">{title}</div>
-                      <div className="text-sm text-[var(--muted)]">{desc}</div>
+                      <div
+                        className={`font-medium ${
+                          dark ? "text-white" : "text-[var(--foreground)]"
+                        }`}
+                      >
+                        {stepTitle}
+                      </div>
+                      <div
+                        className={`text-sm ${
+                          dark ? "text-white/85" : "text-[var(--muted)]"
+                        }`}
+                      >
+                        {desc}
+                      </div>
                     </div>
                   </li>
                 ))}
               </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-[var(--primary)]">For Renters</h3>
-              <ul className="mt-6 space-y-4">
-                {RENTER_STEPS.map(({ step, title, desc }) => (
-                  <li key={step} className="flex gap-4">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-medium text-white">
-                      {step}
-                    </span>
-                    <div>
-                      <div className="font-medium text-[var(--foreground)]">{title}</div>
-                      <div className="text-sm text-[var(--muted)]">{desc}</div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="rounded-2xl bg-[var(--primary)] px-5 py-8 text-[var(--white)] lg:px-6">
-              <h3 className="text-lg font-semibold text-white">For Pickup & Deliveries</h3>
-              <ul className="mt-6 space-y-4">
-                {DRIVER_STEPS.map(({ step, title, desc }) => (
-                  <li key={step} className="flex gap-4">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/20 text-sm font-medium text-white">
-                      {step}
-                    </span>
-                    <div>
-                      <div className="font-medium text-white">{title}</div>
-                      <div className="text-sm text-white/85">{desc}</div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                  <Link
+                    href={ctaHref}
+                    className={`mt-6 inline-flex items-center text-sm font-medium ${
+                      dark
+                        ? "text-white hover:text-white/90"
+                        : "text-[var(--primary)] hover:text-[var(--accent)]"
+                    }`}
+                  >
+                    {ctaLabel}
+                    <span className="ml-1">→</span>
+                  </Link>
+                </article>
+              ),
+            )}
           </div>
         </div>
       </section>
