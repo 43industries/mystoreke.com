@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useLayoutEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
@@ -92,27 +92,27 @@ export default function StorageSearch() {
     };
   }, []);
 
-  // Initialize filters from query string (e.g. /storage?type=residential&location=Nairobi)
-  useEffect(() => {
-    const slug = searchParams.get("type");
-    const initialLocation = searchParams.get("location");
-    const initialDuration = searchParams.get("duration") as
+  // Sync filters from URL whenever the query string changes (stable `searchParams` ref can miss updates)
+  const querySignature = searchParams.toString();
+
+  useLayoutEffect(() => {
+    const params = new URLSearchParams(querySignature);
+    const slug = params.get("type");
+    const initialLocation = params.get("location");
+    const initialDuration = params.get("duration") as
       | "day"
       | "week"
       | "month"
       | null;
-    const initialPriceBand = searchParams.get("priceBand");
-    const initialParcelOnly = searchParams.get("parcelOnly");
+    const initialPriceBand = params.get("priceBand");
+    const initialParcelOnly = params.get("parcelOnly");
 
-    if (initialLocation) {
-      setLocation(initialLocation);
-    }
+    setLocation(initialLocation ?? "");
 
-    if (slug) {
-      const details = STORAGE_TYPE_DETAILS[slug];
-      if (details) {
-        setStorageType(details.label);
-      }
+    if (slug && STORAGE_TYPE_DETAILS[slug]) {
+      setStorageType(STORAGE_TYPE_DETAILS[slug].label);
+    } else {
+      setStorageType("");
     }
 
     if (initialDuration && ["day", "week", "month"].includes(initialDuration)) {
@@ -126,7 +126,7 @@ export default function StorageSearch() {
     if (initialParcelOnly === "true") {
       setParcelOnly(true);
     }
-  }, [searchParams]);
+  }, [querySignature]);
 
   const filtered = useMemo(() => {
     let list = [...allListings];

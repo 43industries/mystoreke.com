@@ -152,10 +152,10 @@ const FOCUS_BOXES: FocusBox[] = [
 
 const WHY_CHOOSE = [
   {
-    label: "Verified network",
-    value: "Vetted partners",
-    detail: "Know who you’re working with",
-    desc: "Hosts and drivers are checked before they’re active on Mystore. Profiles and listing details are surfaced up front so you can book storage or hand off a parcel with fewer unknowns.",
+    label: "Trust",
+    qualifier: "Verified people & listings",
+    detail: "Know who you’re dealing with before you book",
+    desc: "Hosts and drivers are vetted before they can operate on Mystore. Profiles and listing details are shown up front so you can choose storage or parcel handoffs with confidence.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
@@ -163,10 +163,10 @@ const WHY_CHOOSE = [
     ),
   },
   {
-    label: "No surprises",
-    value: "Up-front in KES",
-    detail: "Pricing before you commit",
-    desc: "See listed rates for storage and parcel-related fees before you book. Compare day, week, and month options in one view — what’s shown is what you’re choosing, without mystery add-ons.",
+    label: "Pricing",
+    qualifier: "Rates shown before you pay",
+    detail: "No guesswork on what you’ll owe",
+    desc: "Listed prices for storage and parcel-related fees appear before you confirm. Compare by day, week, or month in one place — what you see is what you’re choosing, without surprise add-ons.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m0-12.75H21" />
@@ -174,10 +174,10 @@ const WHY_CHOOSE = [
     ),
   },
   {
-    label: "One place",
-    value: "Fewer handoffs",
-    detail: "Storage, points, and moves together",
-    desc: "Rent space, use pickup and drop-off points, and line up drivers or riders on a single platform. Everyone works from the same booking context — clearer accountability when something needs to move.",
+    label: "One network",
+    qualifier: "Space + parcel points + delivery",
+    detail: "Everything connected in one flow",
+    desc: "Book storage, use pickup and drop-off points, and arrange drivers or riders without juggling separate apps. Shared context means clearer handoffs when something needs to move.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
@@ -185,10 +185,10 @@ const WHY_CHOOSE = [
     ),
   },
   {
-    label: "Built here",
-    value: "Kenya-first",
-    detail: "Logistics that fit local life",
-    desc: "Manage listings and jobs from your phone, with flows tuned for Kenyan cities and towns — including M-Pesa where it’s enabled, and support when you need a human.",
+    label: "Local",
+    qualifier: "Built for Kenya",
+    detail: "Tools that match how you work",
+    desc: "List and manage jobs from your phone, with flows tuned for Kenyan towns and cities — including M-Pesa where enabled — and real support when something goes wrong.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
@@ -270,7 +270,7 @@ const HOW_IT_WORKS_GROUPS = [
   {
     title: "For Hosts",
     subtitle: "Turn unused space into monthly income",
-    accentClass: "text-[var(--accent)]",
+    accentClass: "text-[var(--primary)]",
     badgeClass: "bg-[var(--accent)] text-[var(--accent-foreground)]",
     ctaHref: "/list-your-space",
     ctaLabel: "Start listing",
@@ -370,8 +370,8 @@ export default function Home() {
                 so renters, hosts, and drivers know what to expect before they book or list.
               </p>
             </div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--background)] px-4 py-2.5 text-base font-semibold text-[var(--foreground)] md:text-lg">
-              <span className="h-2 w-2 shrink-0 rounded-full bg-[var(--accent)]" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--white)] px-4 py-2.5 text-sm font-semibold text-[var(--foreground)] shadow-sm md:text-base">
+              <span className="h-2 w-2 shrink-0 rounded-full bg-[var(--primary)]" />
               <span>Swipe to explore all services</span>
             </div>
           </div>
@@ -380,7 +380,7 @@ export default function Home() {
               <Link
                 key={box.title}
                 href={box.href}
-                className={`group flex max-w-sm flex-col rounded-2xl border border-[var(--border)] bg-[var(--background)] p-6 shadow-sm ring-1 ring-transparent transition-all hover:-translate-y-1 hover:shadow-md hover:ring-[var(--accent)]/20 ${
+                className={`group flex max-w-sm flex-col rounded-2xl border border-[var(--border)] bg-[var(--white)] p-6 shadow-md shadow-slate-900/5 ring-1 ring-transparent transition-all hover:-translate-y-0.5 hover:shadow-lg hover:ring-[var(--primary)]/10 ${
                   index === 0 ? "min-w-[340px]" : "min-w-[320px]"
                 }`}
               >
@@ -402,16 +402,18 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-                <p className="mt-3 text-base text-[var(--muted)]">{box.description}</p>
-                <ul className="mt-3 space-y-1.5 text-sm text-[var(--muted)]">
+                <p className="mt-3 text-sm leading-relaxed text-[var(--foreground)] md:text-base">
+                  {box.description}
+                </p>
+                <ul className="mt-3 space-y-1.5 text-sm leading-snug text-neutral-600">
                   {box.highlights.map((item) => (
                     <li key={item} className="flex items-start gap-2">
-                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--primary)]" />
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
-                <span className="mt-4 inline-flex items-center text-sm font-medium text-[var(--accent)] group-hover:text-[var(--accent-hover)]">
+                <span className="mt-4 inline-flex items-center text-sm font-semibold text-[var(--primary)] group-hover:text-[var(--primary-hover)]">
                   View {box.title.toLowerCase()} options
                   <span className="ml-1 transition-transform group-hover:translate-x-0.5">
                     →
@@ -450,7 +452,7 @@ export default function Home() {
                   className={`rounded-2xl border p-6 shadow-sm ${
                     dark
                       ? "border-[var(--primary)] bg-[var(--primary)] text-[var(--white)]"
-                      : "border-[var(--border)] bg-[var(--background)]"
+                      : "border-[var(--border)] bg-[var(--white)]"
                   }`}
                 >
                   <h3
@@ -497,7 +499,7 @@ export default function Home() {
                     className={`mt-6 inline-flex items-center text-sm font-medium ${
                       dark
                         ? "text-white hover:text-white/90"
-                        : "text-[var(--primary)] hover:text-[var(--accent)]"
+                        : "text-[var(--primary)] hover:text-[var(--primary-hover)]"
                     }`}
                   >
                     {ctaLabel}
@@ -521,22 +523,26 @@ export default function Home() {
             spend less time guessing and more time getting things stored or delivered safely.
           </p>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {WHY_CHOOSE.map(({ label, value, detail, desc, icon }) => (
+            {WHY_CHOOSE.map(({ label, qualifier, detail, desc, icon }) => (
               <div
                 key={label}
-                className="flex h-full flex-col rounded-2xl border border-[var(--border)] bg-[#FFF9F5] p-6 shadow-sm"
+                className="flex h-full flex-col rounded-2xl border border-[var(--border)] bg-[var(--white)] p-6 shadow-md shadow-slate-900/5"
               >
-                <div className="mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--accent)]/10 text-[var(--accent)]">
+                <div className="mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--primary)]/10 text-[var(--primary)]">
                   {icon}
                 </div>
-                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[var(--muted)]">
+                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-neutral-500">
                   {label}
                 </p>
                 <p className="mt-2 text-lg font-semibold leading-snug text-[var(--foreground)]">
                   {detail}
                 </p>
-                <p className="mt-1 text-sm font-medium text-[var(--accent)]">{value}</p>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--muted)]">{desc}</p>
+                <p className="mt-1.5 text-sm font-medium text-[var(--primary)]">
+                  {qualifier}
+                </p>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-neutral-600">
+                  {desc}
+                </p>
               </div>
             ))}
           </div>
