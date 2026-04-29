@@ -7,9 +7,11 @@ const src = join(root, "logo.png", "logo.png");
 const dest = join(root, "public", "logo.png");
 
 if (!existsSync(src)) {
-  console.warn(
-    "copy-logo: skipped (no source at logo.png/logo.png). Brand uses SVG or add your PNG there.",
-  );
+  if (process.env.COPY_LOGO_VERBOSE === "1") {
+    console.warn(
+      "copy-logo: skipped (no source at logo.png/logo.png). Brand uses SVG or add your PNG there.",
+    );
+  }
   process.exit(0);
 }
 
