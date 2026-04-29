@@ -152,10 +152,10 @@ const FOCUS_BOXES: FocusBox[] = [
 
 const WHY_CHOOSE = [
   {
-    label: "Verified listings",
-    value: "Trust",
-    detail: "Verified hosts and drivers",
-    desc: "Hosts and drivers are reviewed so storage and deliveries stay safe and transparent. Real profiles and clear expectations before you book.",
+    label: "Verified network",
+    value: "Vetted partners",
+    detail: "Know who you’re working with",
+    desc: "Hosts and drivers are checked before they’re active on Mystore. Profiles and listing details are surfaced up front so you can book storage or hand off a parcel with fewer unknowns.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
@@ -163,10 +163,10 @@ const WHY_CHOOSE = [
     ),
   },
   {
-    label: "Clear pricing",
-    value: "KES",
-    detail: "Transparent rates before booking",
-    desc: "See storage and parcel fees before you book — no hidden charges on listed rates. Compare day, week, and month options side by side.",
+    label: "No surprises",
+    value: "Up-front in KES",
+    detail: "Pricing before you commit",
+    desc: "See listed rates for storage and parcel-related fees before you book. Compare day, week, and month options in one view — what’s shown is what you’re choosing, without mystery add-ons.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m0-12.75H21" />
@@ -174,10 +174,10 @@ const WHY_CHOOSE = [
     ),
   },
   {
-    label: "All in one place",
-    value: "3-in-1",
-    detail: "Storage + parcel + delivery",
-    desc: "Storage units, pickup & drop-off points, and driver/rider deliveries on a single platform. One account for renting, hosting, or moving parcels.",
+    label: "One place",
+    value: "Fewer handoffs",
+    detail: "Storage, points, and moves together",
+    desc: "Rent space, use pickup and drop-off points, and line up drivers or riders on a single platform. Everyone works from the same booking context — clearer accountability when something needs to move.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
@@ -185,10 +185,10 @@ const WHY_CHOOSE = [
     ),
   },
   {
-    label: "Built for Kenya",
-    value: "24/7",
-    detail: "Local logistics ready",
-    desc: "List, book, and track jobs from your phone — ready for M-Pesa and local logistics. Built for Kenyan cities, towns, and growing e-commerce volumes.",
+    label: "Built here",
+    value: "Kenya-first",
+    detail: "Logistics that fit local life",
+    desc: "Manage listings and jobs from your phone, with flows tuned for Kenyan cities and towns — including M-Pesa where it’s enabled, and support when you need a human.",
     icon: (
       <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
@@ -510,37 +510,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose Mystore - metrics row */}
+      {/* Why Choose Mystore - trust & clarity */}
       <section className="border-t border-[var(--border)] bg-[var(--white)] px-4 py-16">
         <div className="mx-auto max-w-6xl">
-          <h2 className="text-center text-2xl font-semibold text-[var(--foreground)]">
+          <h2 className="text-center text-2xl font-semibold text-[var(--foreground)] md:text-3xl">
             Why Choose Mystore
           </h2>
-          <p className="mt-3 text-center text-xl text-[var(--muted)] md:text-2xl">
-            Trust, transparent pricing, and a full logistics network in one place — with nationwide
-            reach, flexible rental periods, and support when you need it.
+          <p className="mx-auto mt-3 max-w-3xl text-center text-base leading-relaxed text-[var(--muted)] md:text-lg">
+            Verification, clear pricing, and one connected network — so renters, hosts, and drivers
+            spend less time guessing and more time getting things stored or delivered safely.
           </p>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {WHY_CHOOSE.map(({ label, value, detail, desc, icon }) => (
               <div
                 key={label}
-                className="rounded-2xl border border-[var(--border)] bg-[#FFF9F5] p-5 text-center shadow-sm"
+                className="flex h-full flex-col rounded-2xl border border-[var(--border)] bg-[#FFF9F5] p-6 shadow-sm"
               >
-                <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent)]/10 text-[var(--accent)]">
+                <div className="mb-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--accent)]/10 text-[var(--accent)]">
                   {icon}
                 </div>
-                <div className="text-xl font-semibold text-[var(--foreground)]">
-                  {value}
-                </div>
-                <div className="mt-1 text-xs font-medium uppercase tracking-[0.16em] text-[var(--muted)]">
+                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[var(--muted)]">
                   {label}
-                </div>
-                <p className="mt-2 text-base font-medium text-[var(--foreground)]">
+                </p>
+                <p className="mt-2 text-lg font-semibold leading-snug text-[var(--foreground)]">
                   {detail}
                 </p>
-                <p className="mt-2 text-base text-[var(--muted)]">
-                  {desc}
-                </p>
+                <p className="mt-1 text-sm font-medium text-[var(--accent)]">{value}</p>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--muted)]">{desc}</p>
               </div>
             ))}
           </div>
@@ -565,14 +561,42 @@ export default function Home() {
             </div>
             <div className="rounded-2xl bg-[var(--primary)] px-8 py-12 text-[var(--white)] md:px-12">
               <h2 className="text-2xl font-semibold">Pickup & Deliveries</h2>
-              <p className="mt-3 max-w-xl opacity-95">
-                Become a verified driver or rider: handle parcel pickup and drop-off on your schedule, with fair pay per trip. Every applicant submits a current photo — you can take one live from your phone when you apply.
+              <p className="mt-2 text-sm font-medium text-white/90">
+                Verified drivers and riders, clear handoffs, reliable pay.
               </p>
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-white/95">
+                Move parcels between addresses, hosts, and parcel points on the Mystore network.
+                We verify identity and profile details before someone can accept paid runs — so senders
+                and hosts know who is at the door.
+              </p>
+              <ul className="mt-5 max-w-xl space-y-2.5 text-sm text-white/90">
+                <li className="flex gap-2">
+                  <span
+                    className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"
+                    aria-hidden
+                  />
+                  <span>ID and profile checks before you can take jobs</span>
+                </li>
+                <li className="flex gap-2">
+                  <span
+                    className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"
+                    aria-hidden
+                  />
+                  <span>Coordinate with hosts and pickup points — fewer unclear handoffs</span>
+                </li>
+                <li className="flex gap-2">
+                  <span
+                    className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]"
+                    aria-hidden
+                  />
+                  <span>Fair per-trip earnings; apply with a live photo from your phone</span>
+                </li>
+              </ul>
               <Link
                 href="/become-a-driver"
-                className="mt-6 inline-block rounded-lg bg-[var(--white)] px-6 py-3 font-medium text-[var(--primary)] transition-opacity hover:opacity-90"
+                className="mt-8 inline-block rounded-lg bg-[var(--white)] px-6 py-3 text-sm font-semibold text-[var(--primary)] transition-opacity hover:opacity-90"
               >
-                Become Driver/Rider
+                Apply as a verified driver or rider
               </Link>
             </div>
           </div>
