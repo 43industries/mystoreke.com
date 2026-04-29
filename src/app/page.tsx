@@ -275,6 +275,7 @@ const HOW_IT_WORKS_GROUPS = [
     ctaHref: "/list-your-space",
     ctaLabel: "Start listing",
     steps: HOST_STEPS,
+    dark: false,
   },
   {
     title: "For Renters",
@@ -284,6 +285,7 @@ const HOW_IT_WORKS_GROUPS = [
     ctaHref: "/storage",
     ctaLabel: "Find storage",
     steps: RENTER_STEPS,
+    dark: false,
   },
   {
     title: "For Pickup & Deliveries",
