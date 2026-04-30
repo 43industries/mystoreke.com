@@ -21,6 +21,13 @@ export default function Logo({
       ? "h-8 w-auto md:h-10"
       : "h-14 w-auto md:h-16";
 
+  // Header & footer sit on --primary (navy). Raster logo often uses the same navy + gold — navy
+  // details disappear on that background. Invert to a light mark so it reads as one with the bar.
+  const onPrimaryBar =
+    variant === "header" || variant === "footer"
+      ? "brightness-0 invert"
+      : "";
+
   return (
     <Link
       href="/"
@@ -33,7 +40,7 @@ export default function Logo({
         width={_w}
         height={_h}
         priority
-        className={`${markClass} shrink-0 object-contain`}
+        className={`${markClass} shrink-0 object-contain ${onPrimaryBar}`}
       />
     </Link>
   );
